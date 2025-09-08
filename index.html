@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalite Kontrol ve Paketleme Sistemi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #34495e;
+            overflow-x: auto;
+            padding: 0 20px;
+        }
+        
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.7);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        
+        .tab:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .tab.active {
+            color: #3498db;
+            border-bottom-color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+        
+        .form-group input,
+        .form-group select {
+            padding: 12px 15px;
+            border: 2px solid #e0e6ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .hata-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #e9ecef;
+        }
+        
+        .hata-container h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .hata-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .hata-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .hata-item input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .hata-item label {
+            flex: 1;
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .hata-adet {
+            width: 60px;
+            margin-left: 10px;
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #219a52);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+        
+        .kayit-item {
+            background: white;
+            border: 1px solid #e0e6ed;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .kayit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .kayit-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+        
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .diger-hata {
+            margin-top: 15px;
+            padding: 10px;
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 6px;
+        }
+        
+        .diger-hata input {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .responsive-table {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e6ed;
+        }
+
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hata-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .tabs {
+                padding: 0 10px;
+            }
+            
+            .tab {
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+            
+            .container {
+                margin: 5px;
+                border-radius: 10px;
+            }
+            
+            .tab-content {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 Kalite Kontrol ve Paketleme Sistemi</h1>
+            <p>Ürün kalitesini takip edin, paketleme süreçlerini yönetin</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('kalite-kontrol')">📝 Kalite Kontrol</div>
+            <div class="tab" onclick="showTab('paketleme')">📦 Paketleme</div>
+            <div class="tab" onclick="showTab('raporlar')">📊 Raporlar</div>
+            <div class="tab" onclick="showTab('kayitlar')">📋 Kayıtlar</div>
+            <div class="tab" onclick="showTab('ayarlar')">⚙️ Ayarlar</div>
+        </div>
+
+        <!-- Kalite Kontrol Tab -->
+        <div id="kalite-kontrol" class="tab-content active">
+            <h2>🔍 Kalite Kontrol Formu</h2>
+            <form id="kaliteForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tarih">📅 Tarih/Saat</label>
+                        <input type="datetime-local" id="tarih" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="operator">👤 Operatörün Adı</label>
+                        <select id="operator" required>
+                            <option value="">Operatör Seçin</option>
+                            <option value="Ahmet Yılmaz">Ahmet Yılmaz</option>
+                            <option value="Mehmet Demir">Mehmet Demir</option>
+                            <option value="Ayşe Kaya">Ayşe Kaya</option>
+                            <option value="Fatma Öz">Fatma Öz</option>
+                            <option value="Ali Çelik">Ali Çelik</option>
+                            <option value="Zeynep Arslan">Zeynep Arslan</option>
+                            <option value="Mustafa Şahin">Mustafa Şahin</option>
+                            <option value="Emine Doğan">Emine Doğan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="urunKodu">📦 Ürün Kodu</label>
+                        <input type="text" id="urunKodu" placeholder="Ürün kodunu girin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="siparisNo">🏷️ Sipariş Numarası</label>
+                        <input type="text" id="siparisNo" placeholder="Sipariş numarasını girin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="geriGidenMiktar">↩️ Geri Giden Ürün Miktarı</label>
+                        <input type="number" id="geriGidenMiktar" min="1" placeholder="Adet" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="iskartaMiktar">❌ Iskarta Ürün Miktarı</label>
+                        <input type="number" id="iskartaMiktar" min="0" placeholder="Adet" value="0">
+                    </div>
+                </div>
+
+                <div class="hata-container">
+                    <h3>🚫 Tespit Edilen Hatalar ve Adetleri</h3>
+                    <div class="hata-grid">
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata1" name="hatalar" value="Ağız yamukluğu">
+                            <label for="hata1">Ağız yamukluğu</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Ağız yamukluğu">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata2" name="hatalar" value="Yetersiz kaynak">
+                            <label for="hata2">Yetersiz kaynak</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Yetersiz kaynak">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata3" name="hatalar" value="Fazla kaynak">
+                            <label for="hata3">Fazla kaynak</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Fazla kaynak">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata4" name="hatalar" value="Bakır erimesi">
+                            <label for="hata4">Kaynak esnasında bakır erimesi</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Bakır erimesi">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata5" name="hatalar" value="Dışa kaynak akması">
+                            <label for="hata5">Dışa kaynak akması</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Dışa kaynak akması">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata6" name="hatalar" value="Boğum uzunluğu farklılığı">
+                            <label for="hata6">Boğum uzunluğu farklılığı</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Boğum uzunluğu farklılığı">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata7" name="hatalar" value="Boğum yamukluğu">
+                            <label for="hata7">Boğum yamukluğu</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Boğum yamukluğu">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata8" name="hatalar" value="Çizik ürün">
+                            <label for="hata8">Çizik ürün</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Çizik ürün">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata9" name="hatalar" value="Temizlenememiş ürün">
+                            <label for="hata9">Temizlenememiş ürün</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Temizlenememiş ürün">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata10" name="hatalar" value="Vuruk">
+                            <label for="hata10">Vuruk</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Vuruk">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hata11" name="hatalar" value="Bilyeli ürün">
+                            <label for="hata11">Bilyeli ürün</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Bilyeli ürün">
+                        </div>
+                        
+                        <div class="hata-item">
+                            <input type="checkbox" id="hataDiger" name="hatalar" value="Diğer">
+                            <label for="hataDiger">Diğer</label>
+                            <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="Diğer">
+                        </div>
+                    </div>
+                    
+                    <div class="diger-hata" id="digerHataDetay" style="display: none;">
+                        <label for="digerAciklama"><strong>Diğer Hata Açıklaması:</strong></label>
+                        <input type="text" id="digerAciklama" placeholder="Hata detayını yazın...">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">💾 Kalite Kontrol Kaydını Kaydet</button>
+            </form>
+            <div id="kaliteAlert"></div>
+        </div>
+
+        <!-- Paketleme Tab -->
+        <div id="paketleme" class="tab-content">
+            <h2>📦 Paketleme İşlemleri</h2>
+            <form id="paketlemeForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="paketTarih">📅 Tarih/Saat</label>
+                        <input type="datetime-local" id="paketTarih" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paketOperator">👤 Operatörün Adı</label>
+                        <select id="paketOperator" required>
+                            <option value="">Operatör Seçin</option>
+                            <option value="Ahmet Yılmaz">Ahmet Yılmaz</option>
+                            <option value="Mehmet Demir">Mehmet Demir</option>
+                            <option value="Ayşe Kaya">Ayşe Kaya</option>
+                            <option value="Fatma Öz">Fatma Öz</option>
+                            <option value="Ali Çelik">Ali Çelik</option>
+                            <option value="Zeynep Arslan">Zeynep Arslan</option>
+                            <option value="Mustafa Şahin">Mustafa Şahin</option>
+                            <option value="Emine Doğan">Emine Doğan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paketUrunKodu">📦 Ürün Kodu</label>
+                        <input type="text" id="paketUrunKodu" placeholder="Ürün kodunu girin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paketSiparisNo">🏷️ Sipariş Numarası</label>
+                        <input type="text" id="paketSiparisNo" placeholder="Sipariş numarasını girin" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paketAdedi">📊 Paketlenen Adet</label>
+                        <input type="number" id="paketAdedi" min="1" placeholder="Adet" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paketTuru">📦 Paket Türü</label>
+                        <select id="paketTuru" required>
+                            <option value="">Paket türü seçin</option>
+                            <option value="Karton kutu">Karton kutu</option>
+                            <option value="Plastik kasa">Plastik kasa</option>
+                            <option value="Palet">Palet</option>
+                            <option value="Shrink">Shrink</option>
+                            <option value="Diğer">Diğer</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="paketNotlar">📝 Notlar</label>
+                        <input type="text" id="paketNotlar" placeholder="Ek notlar (opsiyonel)">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success">📦 Paketleme Kaydını Kaydet</button>
+            </form>
+            <div id="paketAlert"></div>
+        </div>
+
+        <!-- Raporlar Tab -->
+        <div id="raporlar" class="tab-content">
+            <h2>📊 Raporlar ve İstatistikler</h2>
+            
+            <div class="stats-grid" id="statsContainer">
+                <div class="stat-card">
+                    <h3 id="toplamKayit">0</h3>
+                    <p>Toplam Kalite Kontrol Kaydı</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamPaketleme">0</h3>
+                    <p>Toplam Paketleme Kaydı</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamGeriGiden">0</h3>
+                    <p>Toplam Geri Giden Ürün</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamIskarta">0</h3>
+                    <p>Toplam Iskarta Ürün</p>
+                </div>
+            </div>
+
+            <div class="responsive-table">
+                <h3>📈 Hata Türü Analizi</h3>
+                <table id="hataAnalizi">
+                    <thead>
+                        <tr>
+                            <th>Hata Türü</th>
+                            <th>Toplam Adet</th>
+                            <th>Görülme Sıklığı</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hataAnaliziBody">
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <button class="btn" onclick="exportToCSV('kalite')">📥 Kalite Verilerini CSV'ye Aktar</button>
+                <button class="btn btn-success" onclick="exportToCSV('paketleme')">📥 Paketleme Verilerini CSV'ye Aktar</button>
+            </div>
+        </div>
+
+        <!-- Kayıtlar Tab -->
+        <div id="kayitlar" class="tab-content">
+            <h2>📋 Tüm Kayıtlar</h2>
+            
+            <div class="form-grid" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <label for="kayitFiltre">🔍 Kayıt Türü Filtresi</label>
+                    <select id="kayitFiltre" onchange="filterKayitlar()">
+                        <option value="hepsi">Tüm Kayıtlar</option>
+                        <option value="kalite">Kalite Kontrol</option>
+                        <option value="paketleme">Paketleme</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="kayitlarContainer">
+                <!-- Kayıtlar buraya yüklenecek -->
+            </div>
+        </div>
+
+        <!-- Ayarlar Tab -->
+        <div id="ayarlar" class="tab-content">
+            <h2>⚙️ Sistem Ayarları</h2>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>💾 Veri Yedekleme</label>
+                    <button class="btn" onclick="exportAllData()">Tüm Verileri Yedekle (JSON)</button>
+                </div>
+                
+                <div class="form-group">
+                    <label>📤 Veri Geri Yükleme</label>
+                    <input type="file" id="importFile" accept=".json" onchange="importData()">
+                </div>
+                
+                <div class="form-group">
+                    <label>🗑️ Veri Temizleme</label>
+                    <button class="btn btn-danger" onclick="clearAllData()">Tüm Verileri Temizle</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <h3>📊 Sistem Bilgileri</h3>
+                <p><strong>Toplam Veri Boyutu:</strong> <span id="dataSizeInfo">Hesaplanıyor...</span></p>
+                <p><strong>Son Güncelleme:</strong> <span id="lastUpdateInfo">-</span></p>
+                <p><strong>Tarayıcı Depolama:</strong> <span id="storageInfo">Aktif</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global değişkenler
+        let kaliteKayitlari = JSON.parse(localStorage.getItem('kaliteKayitlari') || '[]');
+        let paketlemeKayitlari = JSON.parse(localStorage.getItem('paketlemeKayitlari') || '[]');
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date().toISOString().slice(0, 16);
+            document.getElementById('tarih').value = now;
+            document.getElementById('paketTarih').value = now;
+            
+            loadStats();
+            loadKayitlar();
+            updateSystemInfo();
+            
+            // Diğer hata checkbox'ı için listener
+            document.getElementById('hataDiger').addEventListener('change', function() {
+                const digerDetay = document.getElementById('digerHataDetay');
+                digerDetay.style.display = this.checked ? 'block' : 'none';
+            });
+
+            // Hata checkbox'larına adet alanı kontrolü ekle
+            document.querySelectorAll('.hata-item input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const adetInput = this.parentElement.querySelector('.hata-adet');
+                    if (this.checked) {
+                        adetInput.required = true;
+                        adetInput.focus();
+                    } else {
+                        adetInput.required = false;
+                        adetInput.value = '';
+                    }
+                });
+            });
+        });
+
+        // Tab gösterme fonksiyonu
+        function showTab(tabName) {
+            // Tüm tab içeriklerini gizle
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Tüm tab'lardan active class'ını kaldır
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Seçilen tab'ı göster
+            document.getElementById(tabName).classList.add('active');
+            
+            // Tıklanan tab'a active class ekle
+            event.target.classList.add('active');
+            
+            // Raporlar tab'ı açıldığında istatistikleri güncelle
+            if (tabName === 'raporlar') {
+                loadStats();
+            }
+        }
+
+        // Kalite kontrol form gönderimi
+        document.getElementById('kaliteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                id: Date.now(),
+                tip: 'kalite',
+                tarih: document.getElementById('tarih').value,
+                operator: document.getElementById('operator').value,
+                urunKodu: document.getElementById('urunKodu').value,
+                siparisNo: document.getElementById('siparisNo').value,
+                geriGidenMiktar: parseInt(document.getElementById('geriGidenMiktar').value),
+                iskartaMiktar: parseInt(document.getElementById('iskartaMiktar').value),
+                hatalar: []
+            };
+
+            // Seçili hataları ve adetlerini topla
+            document.querySelectorAll('.hata-item input[type="checkbox"]:checked').forEach(checkbox => {
+                const adetInput = checkbox.parentElement.querySelector('.hata-adet');
+                const adet = parseInt(adetInput.value) || 0;
+                const hataAdi = checkbox.value;
+                
+                if (adet > 0) {
+                    if (hataAdi === 'Diğer') {
+                        const aciklama = document.getElementById('digerAciklama').value;
+                        formData.hatalar.push({
+                            tur: hataAdi + ': ' + aciklama,
+                            adet: adet
+                        });
+                    } else {
+                        formData.hatalar.push({
+                            tur: hataAdi,
+                            adet: adet
+                        });
+                    }
+                }
+            });
+
+            // Kaydet
+            kaliteKayitlari.push(formData);
+            localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
+
+            // Form temizle
+            document.getElementById('kaliteForm').reset();
+            document.getElementById('tarih').value = new Date().toISOString().slice(0, 16);
+            document.getElementById('digerHataDetay').style.display = 'none';
+            document.querySelectorAll('.hata-adet').forEach(input => input.required = false);
+
+            // Başarı mesajı
+            showAlert('kaliteAlert', 'Kalite kontrol kaydı başarıyla kaydedildi!', 'success');
+            
+            loadStats();
+            loadKayitlar();
+        });
+
+        // Paketleme form gönderimi
+        document.getElementById('paketlemeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                id: Date.now(),
+                tip: 'paketleme',
+                tarih: document.getElementById('paketTarih').value,
+                operator: document.getElementById('paketOperator').value,
+                urunKodu: document.getElementById('paketUrunKodu').value,
+                siparisNo: document.getElementById('paketSiparisNo').value,
+                paketAdedi: parseInt(document.getElementById('paketAdedi').value),
+                paketTuru: document.getElementById('paketTuru').value,
+                notlar: document.getElementById('paketNotlar').value
+            };
+
+            // Kaydet
+            paketlemeKayitlari.push(formData);
+            localStorage.setItem('paketlemeKayitlari', JSON.stringify(paketlemeKayitlari));
+
+            // Form temizle
+            document.getElementById('paketlemeForm').reset();
+            document.getElementById('paketTarih').value = new Date().toISOString().slice(0, 16);
+
+            // Başarı mesajı
+            showAlert('paketAlert', 'Paketleme kaydı başarıyla kaydedildi!', 'success');
+            
+            loadStats();
+            loadKayitlar();
+        });
+
+        // Alert gösterme
+        function showAlert(containerId, message, type) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = `<div class="alert alert-${type === 'success' ? 'success' : 'error'}">${message}</div>`;
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 3000);
+        }
+
+        // İstatistikleri yükle
+        function loadStats() {
+            document.getElementById('toplamKayit').textContent = kaliteKayitlari.length;
+            document.getElementById('toplamPaketleme').textContent = paketlemeKayitlari.length;
+            
+            const toplamGeriGiden = kaliteKayitlari.reduce((sum, kayit) => sum + kayit.geriGidenMiktar, 0);
+            const toplamIskarta = kaliteKayitlari.reduce((sum, kayit) => sum + kayit.iskartaMiktar, 0);
+            
+            document.getElementById('toplamGeriGiden').textContent = toplamGeriGiden;
+            document.getElementById('toplamIskarta').textContent = toplamIskarta;
+
+            // Hata analizi tablosu
+            loadHataAnalizi();
+        }
+
+        // Hata analizi tablosu
+        function loadHataAnalizi() {
+            const hataStats = {};
+            
+            kaliteKayitlari.forEach(kayit => {
+                kayit.hatalar.forEach(hata => {
+                    if (hataStats[hata.tur]) {
+                        hataStats[hata.tur] += hata.adet;
+                    } else {
+                        hataStats[hata.tur] = hata.adet;
+                    }
+                });
+            });
+
+            const tbody = document.getElementById('hataAnaliziBody');
+            tbody.innerHTML = '';
+
+            const sortedHatalar = Object.entries(hataStats)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 10);
+
+            sortedHatalar.forEach(([hata, adet]) => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${hata}</td>
+                    <td>${adet}</td>
+                    <td>%${((adet / Object.values(hataStats).reduce((a, b) => a + b, 0)) * 100).toFixed(1)}</td>
+                `;
+            });
+        }
+
+        // Kayıtları yükle
+        function loadKayitlar() {
+            const container = document.getElementById('kayitlarContainer');
+            const allKayitlar = [...kaliteKayitlari, ...paketlemeKayitlari]
+                .sort((a, b) => new Date(b.tarih) - new Date(a.tarih));
+
+            container.innerHTML = '';
+
+            allKayitlar.forEach(kayit => {
+                const kayitDiv = document.createElement('div');
+                kayitDiv.className = 'kayit-item';
+                
+                if (kayit.tip === 'kalite') {
+                    kayitDiv.innerHTML = `
+                        <div class="kayit-header">
+                            <span>🔍 Kalite Kontrol - ${new Date(kayit.tarih).toLocaleString('tr-TR')}</span>
+                            <span style="color: #e74c3c;">${kayit.operator}</span>
+                        </div>
+                        <div class="kayit-details">
+                            <div><strong>Ürün Kodu:</strong> ${kayit.urunKodu}</div>
+                            <div><strong>Sipariş No:</strong> ${kayit.siparisNo}</div>
+                            <div><strong>Geri Giden:</strong> ${kayit.geriGidenMiktar} adet</div>
+                            <div><strong>Iskarta:</strong> ${kayit.iskartaMiktar} adet</div>
+                            <div><strong>Hatalar:</strong> ${kayit.hatalar.map(h => `${h.tur} (${h.adet})`).join(', ')}</div>
+                        </div>
+                    `;
+                } else {
+                    kayitDiv.innerHTML = `
+                        <div class="kayit-header">
+                            <span>📦 Paketleme - ${new Date(kayit.tarih).toLocaleString('tr-TR')}</span>
+                            <span style="color: #27ae60;">${kayit.operator}</span>
+                        </div>
+                        <div class="kayit-details">
+                            <div><strong>Ürün Kodu:</strong> ${kayit.urunKodu}</div>
+                            <div><strong>Sipariş No:</strong> ${kayit.siparisNo}</div>
+                            <div><strong>Paketlenen:</strong> ${kayit.paketAdedi} adet</div>
+                            <div><strong>Paket Türü:</strong> ${kayit.paketTuru}</div>
+                            ${kayit.notlar ? `<div><strong>Notlar:</strong> ${kayit.notlar}</div>` : ''}
+                        </div>
+                    `;
+                }
+                
+                container.appendChild(kayitDiv);
+            });
+        }
+
+        // Kayıt filtrele
+        function filterKayitlar() {
+            const filtre = document.getElementById('kayitFiltre').value;
+            const container = document.getElementById('kayitlarContainer');
+            
+            let filteredKayitlar = [];
+            
+            if (filtre === 'hepsi') {
+                filteredKayitlar = [...kaliteKayitlari, ...paketlemeKayitlari];
+            } else if (filtre === 'kalite') {
+                filteredKayitlar = kaliteKayitlari;
+            } else if (filtre === 'paketleme') {
+                filteredKayitlar = paketlemeKayitlari;
+            }
+            
+            filteredKayitlar.sort((a, b) => new Date(b.tarih) - new Date(a.tarih));
+
+            container.innerHTML = '';
+
+            filteredKayitlar.forEach(kayit => {
+                const kayitDiv = document.createElement('div');
+                kayitDiv.className = 'kayit-item';
+                
+                if (kayit.tip === 'kalite') {
+                    kayitDiv.innerHTML = `
+                        <div class="kayit-header">
+                            <span>🔍 Kalite Kontrol - ${new Date(kayit.tarih).toLocaleString('tr-TR')}</span>
+                            <span style="color: #e74c3c;">${kayit.operator}</span>
+                        </div>
+                        <div class="kayit-details">
+                            <div><strong>Ürün Kodu:</strong> ${kayit.urunKodu}</div>
+                            <div><strong>Sipariş No:</strong> ${kayit.siparisNo}</div>
+                            <div><strong>Geri Giden:</strong> ${kayit.geriGidenMiktar} adet</div>
+                            <div><strong>Iskarta:</strong> ${kayit.iskartaMiktar} adet</div>
+                            <div><strong>Hatalar:</strong> ${kayit.hatalar.map(h => `${h.tur} (${h.adet})`).join(', ')}</div>
+                        </div>
+                    `;
+                } else {
+                    kayitDiv.innerHTML = `
+                        <div class="kayit-header">
+                            <span>📦 Paketleme - ${new Date(kayit.tarih).toLocaleString('tr-TR')}</span>
+                            <span style="color: #27ae60;">${kayit.operator}</span>
+                        </div>
+                        <div class="kayit-details">
+                            <div><strong>Ürün Kodu:</strong> ${kayit.urunKodu}</div>
+                            <div><strong>Sipariş No:</strong> ${kayit.siparisNo}</div>
+                            <div><strong>Paketlenen:</strong> ${kayit.paketAdedi} adet</div>
+                            <div><strong>Paket Türü:</strong> ${kayit.paketTuru}</div>
+                            ${kayit.notlar ? `<div><strong>Notlar:</strong> ${kayit.notlar}</div>` : ''}
+                        </div>
+                    `;
+                }
+                
+                container.appendChild(kayitDiv);
+            });
+        }
+
+        // CSV'ye aktar
+        function exportToCSV(type) {
+            let data = [];
+            let filename = '';
+
+            if (type === 'kalite') {
+                data = kaliteKayitlari;
+                filename = 'kalite_kontrol_verileri.csv';
+            } else if (type === 'paketleme') {
+                data = paketlemeKayitlari;
+                filename = 'paketleme_verileri.csv';
+            }
+
+            if (data.length === 0) {
+                alert('Aktarılacak veri bulunamadı!');
+                return;
+            }
+
+            let csv = '';
+
+            if (type === 'kalite') {
+                csv = 'Tarih,Operatör,Ürün Kodu,Sipariş No,Geri Giden Miktar,Iskarta Miktar,Hatalar\n';
+                data.forEach(kayit => {
+                    const hatalarStr = kayit.hatalar.map(h => `${h.tur}(${h.adet})`).join(';');
+                    csv += `"${kayit.tarih}","${kayit.operator}","${kayit.urunKodu}","${kayit.siparisNo}",${kayit.geriGidenMiktar},${kayit.iskartaMiktar},"${hatalarStr}"\n`;
+                });
+            } else {
+                csv = 'Tarih,Operatör,Ürün Kodu,Sipariş No,Paket Adedi,Paket Türü,Notlar\n';
+                data.forEach(kayit => {
+                    csv += `"${kayit.tarih}","${kayit.operator}","${kayit.urunKodu}","${kayit.siparisNo}",${kayit.paketAdedi},"${kayit.paketTuru}","${kayit.notlar || ''}"\n`;
+                });
+            }
+
+            downloadCSV(csv, filename);
+        }
+
+        // CSV indirme
+        function downloadCSV(csv, filename) {
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', filename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Tüm verileri yedekle
+        function exportAllData() {
+            const allData = {
+                kaliteKayitlari: kaliteKayitlari,
+                paketlemeKayitlari: paketlemeKayitlari,
+                exportDate: new Date().toISOString()
+            };
+
+            const dataStr = JSON.stringify(allData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `kalite_kontrol_yedek_${new Date().toISOString().slice(0, 10)}.json`;
+            link.click();
+        }
+
+        // Veri geri yükle
+        function importData() {
+            const file = document.getElementById('importFile').files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    if (data.kaliteKayitlari && data.paketlemeKayitlari) {
+                        kaliteKayitlari = data.kaliteKayitlari;
+                        paketlemeKayitlari = data.paketlemeKayitlari;
+                        
+                        localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
+                        localStorage.setItem('paketlemeKayitlari', JSON.stringify(paketlemeKayitlari));
+                        
+                        loadStats();
+                        loadKayitlar();
+                        updateSystemInfo();
+                        
+                        alert('Veriler başarıyla geri yüklendi!');
+                    } else {
+                        alert('Geçersiz dosya formatı!');
+                    }
+                } catch (error) {
+                    alert('Dosya okunamadı: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Tüm verileri temizle
+        function clearAllData() {
+            if (confirm('Tüm veriler silinecek! Bu işlem geri alınamaz. Emin misiniz?')) {
+                localStorage.removeItem('kaliteKayitlari');
+                localStorage.removeItem('paketlemeKayitlari');
+                
+                kaliteKayitlari = [];
+                paketlemeKayitlari = [];
+                
+                loadStats();
+                loadKayitlar();
+                updateSystemInfo();
+                
+                alert('Tüm veriler temizlendi!');
+            }
+        }
+
+        // Sistem bilgilerini güncelle
+        function updateSystemInfo() {
+            const dataSize = (JSON.stringify(kaliteKayitlari).length + JSON.stringify(paketlemeKayitlari).length) / 1024;
+            document.getElementById('dataSizeInfo').textContent = dataSize.toFixed(2) + ' KB';
+            
+            const lastUpdate = kaliteKayitlari.length > 0 || paketlemeKayitlari.length > 0 
+                ? new Date(Math.max(
+                    ...kaliteKayitlari.map(k => new Date(k.tarih)),
+                    ...paketlemeKayitlari.map(k => new Date(k.tarih))
+                )).toLocaleString('tr-TR')
+                : 'Henüz kayıt yok';
+            
+            document.getElementById('lastUpdateInfo').textContent = lastUpdate;
+        }
+    </script>
+</body>
+</html>
