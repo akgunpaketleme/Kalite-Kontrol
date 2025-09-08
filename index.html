@@ -421,7 +421,7 @@
             
             <div id="stokAlert"></div>
         </div>
-<script>
+        <script>
 // Global değişkenler
 let kaliteKayitlari = JSON.parse(localStorage.getItem('kaliteKayitlari') || '[]');
 let siparisHazirlikKayitlari = JSON.parse(localStorage.getItem('siparisHazirlikKayitlari') || '[]');
@@ -765,7 +765,7 @@ function showAlert(containerId, message, type) {
         }, 5000);
     }
 }
-// Kalite kontrol form gönderimi
+            // Kalite kontrol form gönderimi
 document.getElementById('kaliteForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -1104,4 +1104,104 @@ function clearAllData() {
             // Tüm formları temizle
             document.querySelectorAll('form').forEach(form => form.reset());
             
-            //
+            // Tarih alanlarını bugüne ayarla
+            const now = new Date();
+            document.getElementById('tarih').value = now.toISOString().slice(0, 16);
+            document.getElementById('hazirlikTarih').value = now.toISOString().slice(0, 10);
+            document.getElementById('performansTarih').value = now.toISOString().slice(0, 10);
+            
+            // Tüm verileri yeniden yükle
+            loadStats();
+            loadStokListesi();
+            loadKaliteKayitlari();
+            loadSiparislerListesi();
+            loadIstatistikler();
+            loadVeriTablosu();
+            tumStoklariOzetGoster();
+            
+            alert('Tüm veriler başarıyla temizlendi!');
+        }
+    }
+}
+
+// Bu fonksiyonlar eksik olduğu için basit implementasyonlarını ekliyorum
+function getSiparisStatus(siparis) {
+    const tamamlanan = Object.values(siparis.malzemeler).filter(m => m.hazir).length;
+    const toplam = Object.keys(siparis.malzemeler).length;
+    
+    if (tamamlanan === toplam) {
+        return 'background: #d4edda; color: #155724; border: 1px solid #c3e6cb;';
+    } else if (tamamlanan > 0) {
+        return 'background: #fff3cd; color: #856404; border: 1px solid #ffeaa7;';
+    } else {
+        return 'background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;';
+    }
+}
+
+function getSiparisStatusText(siparis) {
+    const tamamlanan = Object.values(siparis.malzemeler).filter(m => m.hazir).length;
+    const toplam = Object.keys(siparis.malzemeler).length;
+    
+    if (tamamlanan === toplam) {
+        return '✅ Tamamlandı';
+    } else if (tamamlanan > 0) {
+        return `🔄 Devam Ediyor (${tamamlanan}/${toplam})`;
+    } else {
+        return '⏳ Beklemede';
+    }
+}
+
+function getMalzemeAd(malzeme) {
+    return getMalzemeAdi(malzeme);
+}
+
+// Sipariş güncelleme fonksiyonları (basitleştirilmiş)
+function updateMalzemeAdet(id, malzeme, adet) {
+    const siparisIndex = siparisHazirlikKayitlari.findIndex(s => s.id === id);
+    if (siparisIndex !== -1) {
+        siparisHazirlikKayitlari[siparisIndex].malzemeler[malzeme].yapildi = parseInt(adet) || 0;
+        localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
+    }
+}
+
+function updateSiparis(id, malzeme, durum, deger) {
+    const siparisIndex = siparisHazirlikKayitlari.findIndex(s => s.id === id);
+    if (siparisIndex !== -1) {
+        siparisHazirlikKayitlari[siparisIndex].malzemeler[malzeme][durum] = deger;
+        localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
+        setTimeout(() => loadSiparislerListesi(), 100);
+    }
+}
+
+// Diğer eksik fonksiyonlar için placeholder'lar
+function editSiparis(id) {
+    alert('Düzenleme özelliği yapım aşamasında...');
+}
+
+function deleteSiparis(id) {
+    if (confirm('Bu siparişi silmek istediğinizden emin misiniz?')) {
+        siparisHazirlikKayitlari = siparisHazirlikKayitlari.filter(s => s.id !== id);
+        localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
+        loadSiparislerListesi();
+        loadStats();
+        showAlert('siparisEkleAlert', 'Sipariş başarıyla silindi!', 'success');
+    }
+}
+
+function loadPerformansKayitlari() {
+    // Performans kayıtları yükleme fonksiyonu placeholder
+    console.log('Performans kayıtları yükleniyor...');
+}
+
+function loadIstatistikler() {
+    // İstatistikler yükleme fonksiyonu placeholder
+    console.log('İstatistikler yükleniyor...');
+}
+
+function loadVeriTablosu() {
+    // Veri tablosu yükleme fonksiyonu placeholder
+    console.log('Veri tablosu yükleniyor...');
+}
+</script>
+</body>
+</html>
