@@ -186,6 +186,7 @@
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin: 5px;
         }
         .btn:hover {
             transform: translateY(-2px);
@@ -444,32 +445,32 @@
                                 <div class="hata-item">
                                     <input type="checkbox" id="iskarta1" name="iskartaHatalari" value="Ağız yamukluğu">
                                     <label for="iskarta1">Ağız yamukluğu</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="iskarta">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="iskarta2" name="iskartaHatalari" value="Yetersiz kaynak">
                                     <label for="iskarta2">Yetersiz kaynak</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="iskarta">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="iskarta3" name="iskartaHatalari" value="Fazla kaynak">
                                     <label for="iskarta3">Fazla kaynak</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="iskarta">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="iskarta4" name="iskartaHatalari" value="Bakır erimesi">
                                     <label for="iskarta4">Bakır erimesi</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="iskarta">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="iskarta5" name="iskartaHatalari" value="Dışa kaynak akması">
                                     <label for="iskarta5">Dışa kaynak akması</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="iskarta">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="iskarta6" name="iskartaHatalari" value="Vuruk">
                                     <label for="iskarta6">Vuruk</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="iskarta">
                                 </div>
                             </div>
                         </div>
@@ -481,32 +482,32 @@
                                 <div class="hata-item">
                                     <input type="checkbox" id="geri1" name="geriGidenHatalari" value="Boğum uzunluğu farklılığı">
                                     <label for="geri1">Boğum uzunluğu farklılığı</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="geri">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="geri2" name="geriGidenHatalari" value="Boğum yamukluğu">
                                     <label for="geri2">Boğum yamukluğu</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="geri">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="geri3" name="geriGidenHatalari" value="Çizik ürün">
                                     <label for="geri3">Çizik ürün</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="geri">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="geri4" name="geriGidenHatalari" value="Temizlenememiş ürün">
                                     <label for="geri4">Temizlenememiş ürün</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="geri">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="geri5" name="geriGidenHatalari" value="Bilyeli ürün">
                                     <label for="geri5">Bilyeli ürün</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="geri">
                                 </div>
                                 <div class="hata-item">
                                     <input type="checkbox" id="geriDiger" name="geriGidenHatalari" value="Diğer">
                                     <label for="geriDiger">Diğer</label>
-                                    <input type="number" class="hata-adet" placeholder="Adet" min="0">
+                                    <input type="number" class="hata-adet" placeholder="Adet" min="0" data-hata="geri">
                                 </div>
                             </div>
                             <div class="diger-hata" id="geriDigerDetay" style="display: none;">
@@ -685,6 +686,56 @@
             <div id="hazirlikAlert"></div>
         </div>
 
+        <!-- Raporlar Tab -->
+        <div id="raporlar" class="tab-content">
+            <h2>📊 Raporlar ve İstatistikler</h2>
+            <div class="stats-grid" id="statsContainer">
+                <div class="stat-card">
+                    <h3 id="toplamKayit">0</h3>
+                    <p>Toplam Kalite Kontrol Kaydı</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamPaketleme">0</h3>
+                    <p>Toplam Paketleme Kaydı</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamGeriGiden">0</h3>
+                    <p>Toplam Geri Giden Ürün</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamIskarta">0</h3>
+                    <p>Toplam İskarta Ürün</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamSiparis">0</h3>
+                    <p>Sipariş Hazırlık Kaydı</p>
+                </div>
+                <div class="stat-card">
+                    <h3 id="toplamPerformans">0</h3>
+                    <p>Performans Kaydı</p>
+                </div>
+            </div>
+            <div class="responsive-table">
+                <h3>📈 Hata Türü Analizi</h3>
+                <table id="hataAnalizi">
+                    <thead>
+                        <tr>
+                            <th>Hata Türü</th>
+                            <th>Toplam Adet</th>
+                            <th>Görülme Sıklığı</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hataAnaliziBody">
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 30px;">
+                <button class="btn" onclick="exportToCSV('kalite')">📥 Kalite Verilerini CSV'ye Aktar</button>
+                <button class="btn btn-success" onclick="exportToCSV('paketleme')">📥 Paketleme Verilerini CSV'ye Aktar</button>
+                <button class="btn" onclick="exportToCSV('performans')">📥 Performans Verilerini CSV'ye Aktar</button>
+            </div>
+        </div>
+
         <!-- Stok Tab -->
         <div id="stok" class="tab-content">
             <h2>📦 Stok Takibi</h2>
@@ -722,6 +773,24 @@
             <div id="stokAlert"></div>
         </div>
 
+        <!-- Kayıtlar Tab -->
+        <div id="kayitlar" class="tab-content">
+            <h2>📋 Tüm Kayıtlar</h2>
+            <div class="form-grid" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <label for="kayitFiltre">🔍 Kayıt Türü Filtresi</label>
+                    <select id="kayitFiltre" onchange="filterKayitlar()">
+                        <option value="hepsi">Tüm Kayıtlar</option>
+                        <option value="kalite">Kalite Kontrol</option>
+                        <option value="paketleme">Paketleme</option>
+                        <option value="siparis-hazirlik">Sipariş Hazırlığı</option>
+                        <option value="performans">Performans</option>
+                    </select>
+                </div>
+            </div>
+            <div id="kayitlarContainer"></div>
+        </div>
+
         <!-- Günlük Performans Tab -->
         <div id="gunluk-performans" class="tab-content">
             <h2>⏱️ Günlük Çalışan Performansı</h2>
@@ -746,7 +815,7 @@
                         </div>
                         <div class="form-group">
                             <label>Süre (dakika):</label>
-                            <input type="number" id="kutulamamSure" min="0" placeholder="0">
+                            <input type="number" id="kutulamaSure" min="0" placeholder="0">
                         </div>
                     </div>
 
@@ -821,36 +890,6 @@
             </div>
         </div>
 
-        <!-- Diğer tablar önceki kodla aynı kalacak -->
-        <!-- Raporlar Tab -->
-        <div id="raporlar" class="tab-content">
-            <h2>📊 Raporlar ve İstatistikler</h2>
-            <div class="stats-grid" id="statsContainer">
-                <div class="stat-card">
-                    <h3 id="toplamKayit">0</h3>
-                    <p>Toplam Kalite Kontrol Kaydı</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="toplamPaketleme">0</h3>
-                    <p>Toplam Paketleme Kaydı</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="toplamGeriGiden">0</h3>
-                    <p>Toplam Geri Giden Ürün</p>
-                </div>
-                <div class="stat-card">
-                    <h3 id="toplamIskarta">0</h3>
-                    <p>Toplam Iskarta Ürün</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Kayıtlar Tab -->
-        <div id="kayitlar" class="tab-content">
-            <h2>📋 Tüm Kayıtlar</h2>
-            <div id="kayitlarContainer"></div>
-        </div>
-
         <!-- Ayarlar Tab -->
         <div id="ayarlar" class="tab-content">
             <h2>⚙️ Sistem Ayarları</h2>
@@ -867,6 +906,12 @@
                     <label>🗑️ Veri Temizleme</label>
                     <button class="btn btn-danger" onclick="clearAllData()">Tüm Verileri Temizle</button>
                 </div>
+            </div>
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                <h3>📊 Sistem Bilgileri</h3>
+                <p><strong>Toplam Veri Boyutu:</strong> <span id="dataSizeInfo">Hesaplanıyor...</span></p>
+                <p><strong>Son Güncelleme:</strong> <span id="lastUpdateInfo">-</span></p>
+                <p><strong>Tarayıcı Depolama:</strong> <span id="storageInfo">Aktif</span></p>
             </div>
         </div>
     </div>
@@ -893,6 +938,7 @@
             loadStats();
             loadKayitlar();
             loadStok();
+            updateSystemInfo();
 
             // Diğer hata checkbox'ı için listener
             document.getElementById('geriDiger').addEventListener('change', function() {
@@ -926,6 +972,7 @@
 
             if (tabName === 'raporlar') {
                 loadStats();
+                loadHataAnalizi();
             } else if (tabName === 'gunluk-performans') {
                 loadPerformansOzet();
             }
@@ -986,6 +1033,7 @@
             showAlert('kaliteAlert', 'Kalite kontrol kaydı başarıyla kaydedildi!', 'success');
             loadStats();
             loadKayitlar();
+            updateSystemInfo();
         });
 
         // Paketleme form gönderimi
@@ -1019,6 +1067,7 @@
             showAlert('paketAlert', 'Paketleme kaydı başarıyla kaydedildi!', 'success');
             loadStats();
             loadKayitlar();
+            updateSystemInfo();
         });
 
         // Sipariş hazırlık form gönderimi
@@ -1064,6 +1113,7 @@
             document.getElementById('hazirlikTarih').value = new Date().toISOString().slice(0, 10);
 
             showAlert('hazirlikAlert', 'Sipariş hazırlık kaydı başarıyla kaydedildi!', 'success');
+            updateSystemInfo();
         });
 
         // Performans form gönderimi
@@ -1077,7 +1127,7 @@
                 calisan: document.getElementById('performansCalisan').value,
                 kutulama: {
                     adet: parseInt(document.getElementById('kutulamaAdet').value) || 0,
-                    sure: parseInt(document.getElementById('kutulamamSure').value) || 0
+                    sure: parseInt(document.getElementById('kutulamaSure').value) || 0
                 },
                 izolasyon: {
                     adet: parseInt(document.getElementById('izolasyonAdetPerf').value) || 0,
@@ -1109,6 +1159,7 @@
 
             showAlert('performansAlert', 'Performans kaydı başarıyla kaydedildi!', 'success');
             loadPerformansOzet();
+            updateSystemInfo();
         });
 
         // Stok kaydetme
@@ -1123,6 +1174,7 @@
             };
             localStorage.setItem('stokBilgileri', JSON.stringify(stokBilgileri));
             showAlert('stokAlert', 'Stok bilgileri başarıyla kaydedildi!', 'success');
+            updateSystemInfo();
         }
 
         // Stok yükleme
@@ -1150,6 +1202,10 @@
             }
 
             bugunPerformans.forEach(performans => {
+                const toplamSure = performans.kutulama.sure + performans.izolasyon.sure + 
+                                 performans.kaliteKontrol.sure + performans.posetleme.sure + 
+                                 performans.urunKutulama.sure + performans.ekParca.sure;
+                
                 const performansDiv = document.createElement('div');
                 performansDiv.className = 'kayit-item';
                 performansDiv.innerHTML = `
@@ -1164,261 +1220,3 @@
                         <div>Poşetleme: ${performans.posetleme.adet} adet (${performans.posetleme.sure} dk)</div>
                         <div>Ürün Kutulama: ${performans.urunKutulama.adet} adet (${performans.urunKutulama.sure} dk)</div>
                         <div>Ek Parça: ${performans.ekParca.adet} adet (${performans.ekParca.sure} dk)</div>
-                    </div>
-                `;
-                ozetContainer.appendChild(performansDiv);
-            });
-        }
-
-        // Alert gösterme
-        function showAlert(containerId, message, type) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = `<div class="alert alert-${type === 'success' ? 'success' : 'error'}">${message}</div>`;
-            setTimeout(() => {
-                container.innerHTML = '';
-            }, 3000);
-        }
-
-        // İstatistikleri yükle
-        function loadStats() {
-            document.getElementById('toplamKayit').textContent = kaliteKayitlari.length;
-            document.getElementById('toplamPaketleme').textContent = paketlemeKayitlari.length;
-            
-            const toplamGeriGiden = kaliteKayitlari.reduce((sum, kayit) => {
-                return sum + kayit.geriGidenHatalari.reduce((hatSum, hata) => hatSum + hata.adet, 0);
-            }, 0);
-            
-            const toplamIskarta = kaliteKayitlari.reduce((sum, kayit) => {
-                return sum + kayit.iskartaHatalari.reduce((hatSum, hata) => hatSum + hata.adet, 0);
-            }, 0);
-            
-            document.getElementById('toplamGeriGiden').textContent = toplamGeriGiden;
-            document.getElementById('toplamIskarta').textContent = toplamIskarta;
-        }
-
-        // Kayıtları yükle
-        function loadKayitlar() {
-            const container = document.getElementById('kayitlarContainer');
-            const allKayitlar = [...kaliteKayitlari, ...paketlemeKayitlari, ...siparisHazirlikKayitlari, ...performansKayitlari]
-                .sort((a, b) => new Date(b.tarih) - new Date(a.tarih));
-            
-            container.innerHTML = '';
-            
-            allKayitlar.forEach(kayit => {
-                const kayitDiv = document.createElement('div');
-                kayitDiv.className = 'kayit-item';
-                
-                if (kayit.tip === 'kalite') {
-                    const iskartaStr = kayit.iskartaHatalari.map(h => `${h.tur}(${h.adet})`).join(', ');
-                    const geriGidenStr = kayit.geriGidenHatalari.map(h => `${h.tur}(${h.adet})`).join(', ');
-                    
-                    kayitDiv.innerHTML = `
-                        <div class="kayit-header">
-                            <span>🔍 Kalite Kontrol - ${new Date(kayit.tarih).toLocaleString('tr-TR')}</span>
-                            <span style="color: #e74c3c;">${kayit.operator}</span>
-                        </div>
-                        <div class="kayit-details">
-                            <div><strong>Ürün Kodu:</strong> ${kayit.urunKodu}</div>
-                            <div><strong>Sipariş No:</strong> ${kayit.siparisNo}</div>
-                            <div><strong>Toplam Adet:</strong> ${kayit.toplamAdet}</div>
-                            <div><strong>İskarta Hataları:</strong> ${iskartaStr || 'Yok'}</div>
-                            <div><strong>Geri Giden Hataları:</strong> ${geriGidenStr || 'Yok'}</div>
-                        </div>
-                    `;
-                } else if (kayit.tip === 'paketleme') {
-                    kayitDiv.innerHTML = `
-                        <div class="kayit-header">
-                            <span>📦 Paketleme - ${kayit.tarih} (${kayit.baslangicSaati} - ${kayit.bitisSaati})</span>
-                            <span style="color: #27ae60;">${kayit.operator}</span>
-                        </div>
-                        <div class="kayit-details">
-                            <div><strong>Ürün Kodu:</strong> ${kayit.urunKodu}</div>
-                            <div><strong>Sipariş No:</strong> ${kayit.siparisNo}</div>
-                            <div><strong>Büyük Koli:</strong> ${kayit.buyukKoliAdet} adet</div>
-                            <div><strong>Küçük Kutu:</strong> ${kayit.kucukKutuAdet} adet</div>
-                            <div><strong>İzolasyon:</strong> ${kayit.izolasyonAdet} adet</div>
-                            <div><strong>Poşetleme:</strong> ${kayit.posetlemeAdet} adet</div>
-                            <div><strong>Ek Parça:</strong> ${kayit.ekParcaAdet} adet</div>
-                            <div><strong>Tapa Takma:</strong> ${kayit.tapaTakmaAdet} adet</div>
-                            ${kayit.notlar ? `<div><strong>Notlar:</strong> ${kayit.notlar}</div>` : ''}
-                        </div>
-                    `;
-                } else if (kayit.tip === 'siparis-hazirlik') {
-                    kayitDiv.innerHTML = `
-                        <div class="kayit-header">
-                            <span>📋 Sipariş Hazırlığı - ${kayit.tarih}</span>
-                            <span style="color: #3498db;">${kayit.operator}</span>
-                        </div>
-                        <div class="kayit-details">
-                            <div><strong>Sipariş No:</strong> ${kayit.siparisNo}</div>
-                            <div><strong>Koli:</strong> ${kayit.koli.gerekli} adet - ${kayit.koli.hazir ? '✅ Hazır' : '❌ Hazır değil'}</div>
-                            <div><strong>Kutu:</strong> ${kayit.kutu.gerekli} adet - ${kayit.kutu.hazir ? '✅ Hazır' : '❌ Hazır değil'}</div>
-                            <div><strong>Etiket:</strong> ${kayit.etiket.gerekli} adet - ${kayit.etiket.hazir ? '✅ Hazır' : '❌ Hazır değil'}</div>
-                            <div><strong>Poşet:</strong> ${kayit.poset.gerekli} adet - ${kayit.poset.hazir ? '✅ Hazır' : '❌ Hazır değil'}</div>
-                            <div><strong>Tapa:</strong> ${kayit.tapa.gerekli} adet - ${kayit.tapa.hazir ? '✅ Hazır' : '❌ Hazır değil'}</div>
-                            <div><strong>İzolasyon:</strong> ${kayit.izolasyon.gerekli} adet - ${kayit.izolasyon.hazir ? '✅ Hazır' : '❌ Hazır değil'}</div>
-                        </div>
-                    `;
-                } else if (kayit.tip === 'performans') {
-                    const toplamSure = kayit.kutulama.sure + kayit.izolasyon.sure + kayit.kaliteKontrol.sure + 
-                                     kayit.posetleme.sure + kayit.urunKutulama.sure + kayit.ekParca.sure;
-                    
-                    kayitDiv.innerHTML = `
-                        <div class="kayit-header">
-                            <span>⏱️ Performans - ${kayit.tarih}</span>
-                            <span style="color: #9b59b6;">${kayit.calisan}</span>
-                        </div>
-                        <div class="kayit-details">
-                            <div><strong>Kutulama:</strong> ${kayit.kutulama.adet} adet (${kayit.kutulama.sure} dk)</div>
-                            <div><strong>İzolasyon:</strong> ${kayit.izolasyon.adet} adet (${kayit.izolasyon.sure} dk)</div>
-                            <div><strong>Kalite Kontrol:</strong> ${kayit.kaliteKontrol.adet} adet (${kayit.kaliteKontrol.sure} dk)</div>
-                            <div><strong>Poşetleme:</strong> ${kayit.posetleme.adet} adet (${kayit.posetleme.sure} dk)</div>
-                            <div><strong>Ürün Kutulama:</strong> ${kayit.urunKutulama.adet} adet (${kayit.urunKutulama.sure} dk)</div>
-                            <div><strong>Ek Parça:</strong> ${kayit.ekParca.adet} adet (${kayit.ekParca.sure} dk)</div>
-                            <div><strong>Toplam Çalışma:</strong> ${toplamSure} dakika (${(toplamSure/60).toFixed(1)} saat)</div>
-                        </div>
-                    `;
-                }
-                
-                container.appendChild(kayitDiv);
-            });
-        }
-
-        // Tüm verileri yedekle
-        function exportAllData() {
-            const allData = {
-                kaliteKayitlari: kaliteKayitlari,
-                paketlemeKayitlari: paketlemeKayitlari,
-                siparisHazirlikKayitlari: siparisHazirlikKayitlari,
-                performansKayitlari: performansKayitlari,
-                stokBilgileri: stokBilgileri,
-                exportDate: new Date().toISOString()
-            };
-            
-            const dataStr = JSON.stringify(allData, null, 2);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `akg_sistem_yedek_${new Date().toISOString().slice(0, 10)}.json`;
-            link.click();
-        }
-
-        // Veri geri yükle
-        function importData() {
-            const file = document.getElementById('importFile').files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const data = JSON.parse(e.target.result);
-                    
-                    if (data.kaliteKayitlari) kaliteKayitlari = data.kaliteKayitlari;
-                    if (data.paketlemeKayitlari) paketlemeKayitlari = data.paketlemeKayitlari;
-                    if (data.siparisHazirlikKayitlari) siparisHazirlikKayitlari = data.siparisHazirlikKayitlari;
-                    if (data.performansKayitlari) performansKayitlari = data.performansKayitlari;
-                    if (data.stokBilgileri) stokBilgileri = data.stokBilgileri;
-                    
-                    localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
-                    localStorage.setItem('paketlemeKayitlari', JSON.stringify(paketlemeKayitlari));
-                    localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
-                    localStorage.setItem('performansKayitlari', JSON.stringify(performansKayitlari));
-                    localStorage.setItem('stokBilgileri', JSON.stringify(stokBilgileri));
-                    
-                    loadStats();
-                    loadKayitlar();
-                    loadStok();
-                    loadPerformansOzet();
-                    
-                    alert('Veriler başarıyla geri yüklendi!');
-                } catch (error) {
-                    alert('Dosya okunamadı: ' + error.message);
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        // Tüm verileri temizle
-        function clearAllData() {
-            if (confirm('Tüm veriler silinecek! Bu işlem geri alınamaz. Emin misiniz?')) {
-                localStorage.removeItem('kaliteKayitlari');
-                localStorage.removeItem('paketlemeKayitlari');
-                localStorage.removeItem('siparisHazirlikKayitlari');
-                localStorage.removeItem('performansKayitlari');
-                localStorage.removeItem('stokBilgileri');
-                
-                kaliteKayitlari = [];
-                paketlemeKayitlari = [];
-                siparisHazirlikKayitlari = [];
-                performansKayitlari = [];
-                stokBilgileri = {};
-                
-                loadStats();
-                loadKayitlar();
-                loadStok();
-                loadPerformansOzet();
-                
-                alert('Tüm veriler temizlendi!');
-            }
-        }
-
-        // CSV'ye aktar fonksiyonları
-        function exportToCSV(type) {
-            let data = [];
-            let filename = '';
-            let csv = '';
-
-            if (type === 'kalite') {
-                data = kaliteKayitlari;
-                filename = 'kalite_kontrol_verileri.csv';
-                csv = 'Tarih,Operatör,Ürün Kodu,Toplam Adet,Sipariş No,İskarta Hataları,Geri Giden Hataları\n';
-                
-                data.forEach(kayit => {
-                    const iskartaStr = kayit.iskartaHatalari.map(h => `${h.tur}(${h.adet})`).join(';');
-                    const geriGidenStr = kayit.geriGidenHatalari.map(h => `${h.tur}(${h.adet})`).join(';');
-                    csv += `"${kayit.tarih}","${kayit.operator}","${kayit.urunKodu}",${kayit.toplamAdet},"${kayit.siparisNo}","${iskartaStr}","${geriGidenStr}"\n`;
-                });
-            } else if (type === 'paketleme') {
-                data = paketlemeKayitlari;
-                filename = 'paketleme_verileri.csv';
-                csv = 'Tarih,Operatör,Başlangıç Saati,Bitiş Saati,Ürün Kodu,Sipariş No,Büyük Koli,Küçük Kutu,İzolasyon,Poşetleme,Ek Parça,Tapa Takma,Notlar\n';
-                
-                data.forEach(kayit => {
-                    csv += `"${kayit.tarih}","${kayit.operator}","${kayit.baslangicSaati}","${kayit.bitisSaati}","${kayit.urunKodu}","${kayit.siparisNo}",${kayit.buyukKoliAdet},${kayit.kucukKutuAdet},${kayit.izolasyonAdet},${kayit.posetlemeAdet},${kayit.ekParcaAdet},${kayit.tapaTakmaAdet},"${kayit.notlar || ''}"\n`;
-                });
-            } else if (type === 'performans') {
-                data = performansKayitlari;
-                filename = 'performans_verileri.csv';
-                csv = 'Tarih,Çalışan,Kutulama Adet,Kutulama Süre,İzolasyon Adet,İzolasyon Süre,Kalite Kontrol Adet,Kalite Kontrol Süre,Poşetleme Adet,Poşetleme Süre,Ürün Kutulama Adet,Ürün Kutulama Süre,Ek Parça Adet,Ek Parça Süre\n';
-                
-                data.forEach(kayit => {
-                    csv += `"${kayit.tarih}","${kayit.calisan}",${kayit.kutulama.adet},${kayit.kutulama.sure},${kayit.izolasyon.adet},${kayit.izolasyon.sure},${kayit.kaliteKontrol.adet},${kayit.kaliteKontrol.sure},${kayit.posetleme.adet},${kayit.posetleme.sure},${kayit.urunKutulama.adet},${kayit.urunKutulama.sure},${kayit.ekParca.adet},${kayit.ekParca.sure}\n`;
-                });
-            }
-
-            if (data.length === 0) {
-                alert('Aktarılacak veri bulunamadı!');
-                return;
-            }
-
-            downloadCSV(csv, filename);
-        }
-
-        // CSV indirme
-        function downloadCSV(csv, filename) {
-            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            if (link.download !== undefined) {
-                const url = URL.createObjectURL(blob);
-                link.setAttribute('href', url);
-                link.setAttribute('download', filename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
-    </script>
-</body>
-</html>
