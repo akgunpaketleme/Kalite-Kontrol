@@ -1175,6 +1175,23 @@
                         <option value="bu-ay">Bu Ay</option>
                     </select>
                 </div>
+                                <div class="form-group">
+                    <label for="operatorFilter">👤 Operatör/Çalışan Filtresi</label>
+                    <select id="operatorFilter" onchange="loadVeriTablosu()">
+                        <option value="hepsi">Tüm Operatörler</option>
+                        <option value="Esat">Esat</option>
+                        <option value="Ahmet">Ahmet</option>
+                        <option value="Emre">Emre</option>
+                        <option value="Gökay">Gökay</option>
+                        <option value="Berke">Berke</option>
+                        <option value="Melisa">Melisa</option>
+                        <option value="Evrim">Evrim</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productFilter">📦 Ürün Kodu Filtresi</label>
+                    <input type="text" id="productFilter" placeholder="Ürün kodu ara..." oninput="loadVeriTablosu()">
+                </div>
             </div>
             <div id="veriTablosuContainer"></div>
             <div style="margin-top: 20px; text-align: center;">
@@ -2754,6 +2771,23 @@
                     }
                 });
             }
+                        // Operatör/Çalışan filtresi
+            let operatorFilter = document.getElementById('operatorFilter')?.value || 'hepsi';
+            if (operatorFilter !== 'hepsi') {
+                veri = veri.filter(kayit => {
+                    const operator = kayit.operator || kayit.calisan || kayit.ekleyen;
+                    return operator === operatorFilter;
+                });
+            }
+
+            // Ürün kodu filtresi
+            let productFilter = document.getElementById('productFilter')?.value?.trim() || '';
+            if (productFilter !== '') {
+                veri = veri.filter(kayit => {
+                    const productCode = kayit.urunKodu || kayit.urunAdi || kayit.urunNo || kayit.urunTuru || '';
+                    return productCode.toLowerCase().includes(productFilter.toLowerCase());
+                });
+            }
 
             if (veri.length === 0) {
                 container.innerHTML = `
@@ -3181,7 +3215,201 @@
             
             showAlert('exportAlert', `${filename} başarıyla indirildi!`, 'success');
         }
+                // Görüntülenen verileri Excel'e aktar
+        function exportCurrentData() {
+            const veriTuru = document.getElementById('veriTuru').value;
+            const tarihFiltre = document.getElementById('tarihFiltre').value;
+            
+            let veri = [];
+            let filename = '';
+            
+            switch (veriTuru) {
+                case 'kalite':
+                    veri = kaliteKayitlari;
+                    filename = 'kalite_kontrol_verileri';
+                    break;
+                case 'siparis':
+                    veri = siparisHazirlikKayitlari;
+                    filename = 'siparis_hazirlik_verileri';
+                    break;
+                case 'performans':
+                    veri = performansKayitlari;
+                    filename = 'performans_verileri';
+                    break;
+                case 'stok':
+                    veri = stokKayitlari;
+                    filename = 'stok_verileri';
+                    break;
+                case 'temizleme':
+                    veri = temizlemeKayitlari;
+                    filename = 'temizleme_verileri';
+                    break;
+                case 'sevkeHazir':
+                    veri = sevkeHazirKayitlari;
+                    filename = 'sevke_hazir_verileri';
+                    break;
+                case 'sevkEdilen':
+                    veri = sevkEdilenKayitlari;
+                    filename = 'sevk_edilen_verileri';
+                    break;
+                case 'yariMamul':
+                    veri = yariMamulKayitlari;
+                    filename = 'yari_mamul_verileri';
+                    break;
+            }
+            
+            // Tarih filtresi uygula
+            if (tarihFiltre !== 'hepsi') {
+                const bugün = new Date();
+                veri = veri.filter(kayit => {
+                    const kayitTarihi = new Date(kayit.tarih || kayit.sonGuncelleme || kayit.olusturmaTarihi);
+                    switch (tarihFiltre) {
+                        case 'bugun':
+                            return kayitTarihi.toDateString() === bugün.toDateString();
+                        case 'bu-hafta':
+                            const haftaOnce = new Date(bugün.getTime() - 7 * 24 * 60 * 60 * 1000);
+                            return kayitTarihi >= haftaOnce;
+                        case 'bu-ay':
+                            return kayitTarihi.getMonth() === bugün.getMonth() && kayitTarihi.getFullYear() === bugün.getFullYear();
+                        default:
+                            return true;
+                    }
+                });
+            }
 
+            // Tarih filtresi uygula
+            if (tarihFiltre !== 'hepsi') {
+                const bugün = new Date();
+                veri = veri.filter(kayit => {
+                    const kayitTarihi = new Date(kayit.tarih || kayit.sonGuncelleme || kayit.olusturmaTarihi);
+                    switch (tarihFiltre) {
+                        case 'bugun':
+                            return kayitTarihi.toDateString() === bugün.toDateString();
+                        case 'bu-hafta':
+                            const haftaOnce = new Date(bugün.getTime() - 7 * 24 * 60 * 60 * 1000);
+                            return kayitTarihi >= haftaOnce;
+                        case 'bu-ay':
+                            return kayitTarihi.getMonth() === bugün.getMonth() && kayitTarihi.getFullYear() === bugün.getFullYear();
+                        default:
+                            return true;
+                    }
+                });
+            }
+
+(BU SATIRDAN HEMEN SONRA EKLEYİN:)
+            
+            if (veri.length === 0) {
+                alert('Aktarılacak veri bulunamadı!');
+                return;
+            }
+            
+            let data = [];
+            
+            // Veri türüne göre CSV formatına dönüştür
+            switch (veriTuru) {
+                case 'kalite':
+                    data = veri.map(kayit => ({
+                        'Tarih': new Date(kayit.tarih).toLocaleString('tr-TR'),
+                        'Operatör': kayit.operator,
+                        'Ürün Kodu': kayit.urunKodu,
+                        'Toplam Adet': kayit.toplamAdet,
+                        'Sipariş No': kayit.siparisNo,
+                        'Toplam İskarta': kayit.hatalar.reduce((total, hata) => total + hata.iskartaAdet, 0),
+                        'Toplam Geri Dönen': kayit.hatalar.reduce((total, hata) => total + hata.geriGidenAdet, 0),
+                        'Hata Detayları': kayit.hatalar.map(hata => `${hata.tur}: İ:${hata.iskartaAdet} G:${hata.geriGidenAdet}`).join(' | ')
+                    }));
+                    break;
+                case 'siparis':
+                    data = veri.map(kayit => ({
+                        'Tarih': new Date(kayit.tarih).toLocaleDateString('tr-TR'),
+                        'Operatör': kayit.operator,
+                        'Sipariş No': kayit.siparisNo,
+                        'Ürün Kodu': kayit.urunKodu,
+                        'Sipariş Adedi': kayit.siparisAdet,
+                        'Durum': kayit.durum,
+                        'Oluşturma Tarihi': new Date(kayit.olusturmaTarihi).toLocaleString('tr-TR'),
+                        'Koli': kayit.checkboxDurum?.koli ? 'Evet' : 'Hayır',
+                        'Kutu': kayit.checkboxDurum?.kutu ? 'Evet' : 'Hayır',
+                        'İzolasyon': kayit.checkboxDurum?.izolasyon ? 'Evet' : 'Hayır',
+                        'Etiket': kayit.checkboxDurum?.etiket ? 'Evet' : 'Hayır',
+                        'Poşet Mevcut': kayit.checkboxDurum?.posetMevcut ? 'Evet' : 'Hayır',
+                        'Tapa Mevcut': kayit.checkboxDurum?.tapaMevcut ? 'Evet' : 'Hayır'
+                    }));
+                    break;
+                case 'performans':
+                    data = veri.map(kayit => ({
+                        'Tarih': new Date(kayit.tarih).toLocaleDateString('tr-TR'),
+                        'Çalışan': kayit.calisan,
+                        'Ekleyen': kayit.ekleyen,
+                        'İşlem Sayısı': kayit.islemler.length,
+                        'Toplam Adet': kayit.islemler.reduce((total, islem) => total + islem.adet, 0),
+                        'Toplam Süre (dk)': kayit.islemler.reduce((total, islem) => total + islem.sure, 0),
+                        'Ortalama Hız (adet/saat)': Math.round((kayit.islemler.reduce((total, islem) => total + islem.hiz, 0) / kayit.islemler.length) * 100) / 100,
+                        'İşlem Detayları': kayit.islemler.map(islem => `${islem.ad}: ${islem.adet} adet (${islem.sure} dk)`).join(' | ')
+                    }));
+                    break;
+                case 'stok':
+                    data = veri.map(kayit => ({
+                        'Malzeme Türü': kayit.malzemeTuru,
+                        'Ürün Adı': kayit.urunAdi,
+                        'Ölçüler': kayit.olculeri || '-',
+                        'Mevcut Adet': kayit.mevcutAdet,
+                        'Durum': kayit.mevcutAdet > 0 ? 'Mevcut' : 'Tükendi',
+                        'Ekleyen': kayit.ekleyen,
+                        'Son Güncelleme': new Date(kayit.sonGuncelleme).toLocaleString('tr-TR')
+                    }));
+                    break;
+                case 'temizleme':
+                    data = veri.map(kayit => ({
+                        'Sipariş No': kayit.siparisNo,
+                        'Ürün Kodu': kayit.urunKodu,
+                        'Sipariş Adeti': kayit.siparisAdet,
+                        'Gelen Adet': kayit.gelenAdet,
+                        'Adet KG': kayit.adetKg,
+                        'Toplam KG': kayit.toplamKg,
+                        'Ekleyen': kayit.ekleyen,
+                        'Tarih': new Date(kayit.tarih).toLocaleString('tr-TR')
+                    }));
+                    break;
+                case 'sevkeHazir':
+                    data = veri.map(kayit => ({
+                        'Sipariş No': kayit.siparisNo,
+                        'Ürün No': kayit.urunNo,
+                        'Sevke Hazır Adet': kayit.sevkeHazirAdet,
+                        'Koli Adeti': kayit.koliAdet,
+                        'Ekleyen': kayit.ekleyen,
+                        'Tarih': new Date(kayit.tarih).toLocaleString('tr-TR')
+                    }));
+                    break;
+                case 'sevkEdilen':
+                    data = veri.map(kayit => ({
+                        'Sipariş No': kayit.siparisNo,
+                        'Ürün Türü': kayit.urunTuru,
+                        'Ürün No': kayit.urunNo,
+                        'Teslim Tarihi': new Date(kayit.teslimTarih).toLocaleDateString('tr-TR'),
+                        'Teslim Edilen Adet': kayit.teslimAdet,
+                        'Teslim Alan': kayit.teslimAlan,
+                        'Depo Giriş İrsaliyesi': kayit.depoIrsaliye,
+                        'Ekleyen': kayit.ekleyen,
+                        'Kayıt Tarihi': new Date(kayit.tarih).toLocaleString('tr-TR')
+                    }));
+                    break;
+                case 'yariMamul':
+                    data = veri.map(kayit => ({
+                        'Ürün Adı': kayit.urunAdi,
+                        'Adet': kayit.adet,
+                        'Hangi Parça': kayit.hangiParca,
+                        'Not': kayit.not || '-',
+                        'Ekleyen': kayit.ekleyen,
+                        'Tarih': new Date(kayit.tarih).toLocaleString('tr-TR')
+                    }));
+                    break;
+            }
+            
+            const csvContent = convertToCSV(data);
+            const tarihEkiStr = tarihFiltre !== 'hepsi' ? `_${tarihFiltre}` : '';
+            downloadCSV(csvContent, `${filename}${tarihEkiStr}_${new Date().toISOString().split('T')[0]}.csv`);
+        }
         // Tüm verileri yedekle (JSON formatında)
         function exportAllData() {
             const allData = {
