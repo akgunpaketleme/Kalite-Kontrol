@@ -1241,26 +1241,7 @@
         </div>
     </div>
 
-    <script type="module">
-        // Firebase Configuration
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDJYEEnWdlfzCVFg-w_IIWE5QbNFzN9hqA",
-            authDomain: "akgkalitekontrol.firebaseapp.com",
-            projectId: "akgkalitekontrol",
-            storageBucket: "akgkalitekontrol.firebasestorage.app",
-            messagingSenderId: "315960243910",
-            appId: "1:315960243910:web:bb97b559d7d6648e5fc9c7"
-            measurementId: "G-BX4HH38KHE"
-        };
-        // Initialize Firebase const app = initializeApp(firebaseConfig); const analytics = getAnalytics(app);
-
-        // Firebase'i başlat
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
+    <script>
         // Global değişkenler
         let kaliteKayitlari = JSON.parse(localStorage.getItem('kaliteKayitlari') || '[]');
         let siparisHazirlikKayitlari = JSON.parse(localStorage.getItem('siparisHazirlikKayitlari') || '[]');
