@@ -1365,7 +1365,7 @@
                 console.error("Senkronizasyon hatası: ", error);
             }
         }
-        // Kolay sync fonksiyonu
+         // Kolay sync fonksiyonu
         async function kolaySyncYap() {
             let toplamGonderilen = 0;
             
@@ -1377,6 +1377,29 @@
                         toplamGonderilen++;
                     }
                 }
+                
+                // Sipariş verileri
+                for (let veri of siparisHazirlikKayitlari) {
+                    if (!veri.firebaseId) {
+                        await saveToFirebase('siparisHazirlik', veri);
+                        toplamGonderilen++;
+                    }
+                }
+                
+                // Performans verileri
+                for (let veri of performansKayitlari) {
+                    if (!veri.firebaseId) {
+                        await saveToFirebase('performans', veri);
+                        toplamGonderilen++;
+                    }
+                }
+                
+                alert(`✅ Firebase'e ${toplamGonderilen} yeni veri gönderildi!`);
+                
+            } catch (error) {
+                alert("❌ Hata: " + error.message);
+            }
+        }
                 
                 // Sipariş verileri
                 for (let veri of siparisHazirlikKayitlari) {
