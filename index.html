@@ -1276,7 +1276,22 @@
     </div>
 
     <script>
-        // Firebase fonksiyonları
+                const originalSetItem = localStorage.setItem;
+        localStorage.setItem = function(key, value) {
+            // Normal localStorage kaydet
+            originalSetItem.call(this, key, value);
+            
+            // Firebase'e otomatik kaydet
+            if (key.includes('Kayitlari')) {
+                const collectionName = key.replace('Kayitlari', '').toLowerCase();
+                const data = JSON.parse(value);
+                const lastItem = data[data.length - 1]; // En son eklenen
+                
+                if (lastItem && !lastItem.firebaseId) {
+                    saveToFirebase(collectionName, lastItem);
+                }
+            }
+        };
         async function saveToFirebase(collectionName, data) {
             try {
                 const docRef = await window.firebaseUtils.addDoc(
