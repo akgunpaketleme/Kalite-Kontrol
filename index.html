@@ -508,32 +508,6 @@
             }
         }
     </style>
-    <!-- Firebase SDK -->
-    <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
-        import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, orderBy, query } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js';
-        
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyDJYEEnWdlfzCVFg-w_IIWE5QbNFzN9hqA",
-            authDomain: "akgkalitekontrol.firebaseapp.com",
-            projectId: "akgkalitekontrol",
-            storageBucket: "akgkalitekontrol.firebasestorage.app",
-            messagingSenderId: "315960243910",
-            appId: "1:315960243910:web:bb97b559d7d6648e5fc9c7",
-            measurementId: "G-BX4HH38KHE"
-        };
-
-        // Firebase başlat
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
-        // Global değişken olarak kullanabilmek için window'a ekle
-        window.firebaseDB = db;
-        window.firebaseUtils = {
-            collection, addDoc, getDocs, doc, updateDoc, deleteDoc, orderBy, query
-        };
-    </script>
 </head>
 <body>
     <div class="container">
@@ -1256,16 +1230,7 @@
                 </div>
             </div>
         </div>
-                                <div class="form-group">
-                                    <div class="form-group">
-                    <label>🔥 Kolay Firebase Sync</label>
-                    <button class="btn" onclick="kolaySyncYap()">Tüm Yeni Verileri Firebase'e Gönder</button>
-                </div>
-                <div class="form-group">
-                    <label>📥 Firebase'den Yükleme</label>
-                    <button class="btn btn-success" onclick="loadAllFromFirebase()">Firebase'den Verileri Getir</button>
-                </div>
-        
+
         <!-- Modal for Editing -->
         <div id="editModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
             <div style="background-color: white; margin: 5% auto; padding: 20px; border-radius: 10px; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto;">
@@ -1277,172 +1242,6 @@
     </div>
 
     <script>
-                const originalSetItem = localStorage.setItem;
-        localStorage.setItem = function(key, value) {
-            // Normal localStorage kaydet
-            originalSetItem.call(this, key, value);
-            
-            // Firebase'e otomatik kaydet
-            if (key.includes('Kayitlari')) {
-                const collectionName = key.replace('Kayitlari', '').toLowerCase();
-                const data = JSON.parse(value);
-                const lastItem = data[data.length - 1]; // En son eklenen
-                
-                if (lastItem && !lastItem.firebaseId) {
-                    saveToFirebase(collectionName, lastItem);
-                }
-            }
-        };
-        async function saveToFirebase(collectionName, data) {
-            try {
-                const docRef = await window.firebaseUtils.addDoc(
-                    window.firebaseUtils.collection(window.firebaseDB, collectionName), 
-                    {
-                        ...data,
-                        firebaseTimestamp: new Date().toISOString()
-                    }
-                );
-                console.log("Firebase'e kaydedildi, ID: ", docRef.id);
-                return docRef.id;
-            } catch (error) {
-                console.error("Firebase kaydetme hatası: ", error);
-                alert("Firebase bağlantı hatası! Veriler sadece yerel olarak kaydedildi.");
-                return null;
-            }
-        }
-
-        async function loadFromFirebase(collectionName) {
-            try {
-                const q = window.firebaseUtils.query(
-                    window.firebaseUtils.collection(window.firebaseDB, collectionName)
-                );
-                const querySnapshot = await window.firebaseUtils.getDocs(q);
-                const data = [];
-                querySnapshot.forEach((doc) => {
-                    data.push({
-                        firebaseId: doc.id,
-                        ...doc.data()
-                    });
-                });
-                return data;
-            } catch (error) {
-                console.error("Firebase okuma hatası: ", error);
-                return [];
-            }
-        }
-
-        async function syncWithFirebase() {
-            try {
-                // Kalite verilerini Firebase'e gönder
-                for (let kayit of kaliteKayitlari) {
-                    if (!kayit.firebaseId) {
-                        const firebaseId = await saveToFirebase('kaliteKontrol', kayit);
-                        kayit.firebaseId = firebaseId;
-                    }
-                }
-                
-                // Diğer verileri de sync et
-                for (let kayit of siparisHazirlikKayitlari) {
-                    if (!kayit.firebaseId) {
-                        kayit.firebaseId = await saveToFirebase('siparisHazirlik', kayit);
-                    }
-                }
-
-                for (let kayit of performansKayitlari) {
-                    if (!kayit.firebaseId) {
-                        kayit.firebaseId = await saveToFirebase('performans', kayit);
-                    }
-                }
-
-                // LocalStorage'ı güncelle
-                localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
-                localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
-                localStorage.setItem('performansKayitlari', JSON.stringify(performansKayitlari));
-
-                console.log("Firebase senkronizasyonu tamamlandı!");
-                
-            } catch (error) {
-                console.error("Senkronizasyon hatası: ", error);
-            }
-        }
-         // Kolay sync fonksiyonu
-        async function kolaySyncYap() {
-            let toplamGonderilen = 0;
-            
-            try {
-                // Kalite verileri
-                for (let veri of kaliteKayitlari) {
-                    if (!veri.firebaseId) {
-                        await saveToFirebase('kaliteKontrol', veri);
-                        toplamGonderilen++;
-                    }
-                }
-                
-                // Sipariş verileri
-                for (let veri of siparisHazirlikKayitlari) {
-                    if (!veri.firebaseId) {
-                        await saveToFirebase('siparisHazirlik', veri);
-                        toplamGonderilen++;
-                    }
-                }
-                
-                // Performans verileri
-                for (let veri of performansKayitlari) {
-                    if (!veri.firebaseId) {
-                        await saveToFirebase('performans', veri);
-                        toplamGonderilen++;
-                    }
-                }
-                
-                alert(`✅ Firebase'e ${toplamGonderilen} yeni veri gönderildi!`);
-                
-            } catch (error) {
-                alert("❌ Hata: " + error.message);
-            }
-        }
-                
-                // Sipariş verileri
-                for (let veri of siparisHazirlikKayitlari) {
-                    if (!veri.firebaseId) {
-                        await saveToFirebase('siparisHazirlik', veri);
-                        toplamGonderilen++;
-                    }
-                }
-                
-                // Performans verileri
-                for (let veri of performansKayitlari) {
-                    if (!veri.firebaseId) {
-                        await saveToFirebase('performans', veri);
-                        toplamGonderilen++;
-                    }
-                }
-                
-                alert(`✅ Firebase'e ${toplamGonderilen} yeni veri gönderildi!`);
-                
-            } catch (error) {
-                alert("❌ Hata: " + error.message);
-            }
-        }
-        // Sayfa yüklendiğinde Firebase'den verileri çek
-        async function loadAllFromFirebase() {
-            try {
-                const kaliteData = await loadFromFirebase('kaliteKontrol');
-                const siparisData = await loadFromFirebase('siparisHazirlik'); 
-                const performansData = await loadFromFirebase('performans');
-
-                if (kaliteData.length > 0) kaliteKayitlari = kaliteData;
-                if (siparisData.length > 0) siparisHazirlikKayitlari = siparisData;
-                if (performansData.length > 0) performansKayitlari = performansData;
-
-                // UI'ı güncelle
-                loadKaliteKayitlari();
-                loadSiparislerListesi();
-                loadStats();
-                
-            } catch (error) {
-                console.error("Firebase'den yükleme hatası: ", error);
-            }
-        }
         // Global değişkenler
         let kaliteKayitlari = JSON.parse(localStorage.getItem('kaliteKayitlari') || '[]');
         let siparisHazirlikKayitlari = JSON.parse(localStorage.getItem('siparisHazirlikKayitlari') || '[]');
@@ -2456,8 +2255,6 @@
             // Kaydet
             kaliteKayitlari.push(formData);
             localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
-            // Firebase'e kaydet
-            saveToFirebase('kaliteKontrol', formData);
 
             // Form temizle
             document.getElementById('kaliteForm').reset();
