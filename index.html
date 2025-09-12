@@ -10,20 +10,17 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             color: #333;
         }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .header {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             color: white;
@@ -33,13 +30,30 @@
             margin-bottom: 30px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
-
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-
+        .sync-status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #27ae60;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .sync-status.syncing {
+            background: #f39c12;
+        }
+        .sync-status.error {
+            background: #e74c3c;
+        }
         .tabs {
             display: flex;
             flex-wrap: wrap;
@@ -47,7 +61,6 @@
             margin-bottom: 25px;
             justify-content: center;
         }
-
         .tab {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
@@ -60,17 +73,14 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
         }
-
         .tab:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
         }
-
         .tab.active {
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
         }
-
         .tab-content {
             display: none;
             background: white;
@@ -79,11 +89,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
-
         .tab-content.active {
             display: block;
         }
-
         .tab-content h2 {
             color: #2c3e50;
             margin-bottom: 25px;
@@ -94,26 +102,22 @@
             padding: 15px;
             border-radius: 10px;
         }
-
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 25px;
         }
-
         .form-group {
             display: flex;
             flex-direction: column;
         }
-
         .form-group label {
             font-weight: 600;
             margin-bottom: 8px;
             color: #2c3e50;
             font-size: 1.1em;
         }
-
         .form-group input, .form-group select, .form-group textarea {
             padding: 12px;
             border: 2px solid #bdc3c7;
@@ -121,13 +125,11 @@
             font-size: 16px;
             transition: all 0.3s ease;
         }
-
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: #3498db;
             box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
         }
-
         .btn {
             background: linear-gradient(135deg, #27ae60, #2ecc71);
             color: white;
@@ -141,20 +143,16 @@
             box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
             margin: 5px;
         }
-
         .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
         }
-
         .btn-success {
             background: linear-gradient(135deg, #f39c12, #e67e22);
         }
-
         .btn-danger {
             background: linear-gradient(135deg, #e74c3c, #c0392b);
         }
-
         .hata-container {
             background: #f8f9fa;
             padding: 25px;
@@ -162,7 +160,6 @@
             margin-bottom: 25px;
             border: 2px solid #e9ecef;
         }
-
         .hata-container h3 {
             color: #2c3e50;
             margin-bottom: 20px;
@@ -172,13 +169,11 @@
             padding: 12px;
             border-radius: 8px;
         }
-
         .hata-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 15px;
         }
-
         .hata-item {
             background: white;
             padding: 20px;
@@ -189,28 +184,23 @@
             justify-content: space-between;
             transition: all 0.3s ease;
         }
-
         .hata-item:hover {
             border-color: #3498db;
             box-shadow: 0 4px 12px rgba(52, 152, 219, 0.1);
         }
-
         .hata-item input[type="checkbox"] {
             margin-right: 12px;
             transform: scale(1.3);
         }
-
         .hata-item label {
             flex-grow: 1;
             font-weight: 600;
             color: #2c3e50;
         }
-
         .hata-adet-container {
             display: flex;
             gap: 8px;
         }
-
         .hata-adet {
             width: 70px;
             padding: 8px;
@@ -219,24 +209,20 @@
             border-radius: 6px;
             font-weight: bold;
         }
-
         .hata-adet:first-child {
             border-color: #e74c3c;
             color: #e74c3c;
         }
-
         .hata-adet:last-child {
             border-color: #f39c12;
             color: #f39c12;
         }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
-
         .stat-card {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
@@ -245,36 +231,30 @@
             text-align: center;
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
         }
-
         .stat-card h3 {
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-
         .stat-card p {
             font-size: 1.1em;
             opacity: 0.9;
         }
-
         .alert {
             padding: 15px;
             margin: 15px 0;
             border-radius: 8px;
             font-weight: 600;
         }
-
         .alert-success {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-
         .alert-error {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-
         .kayit-item {
             background: white;
             border: 2px solid #e9ecef;
@@ -283,7 +263,6 @@
             margin-bottom: 15px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
-
         .kayit-header {
             background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
@@ -295,14 +274,12 @@
             align-items: center;
             font-weight: 600;
         }
-
         .kayit-details {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             color: #2c3e50;
         }
-
         .stok-kayit-item {
             background: white;
             border: 2px solid #e9ecef;
@@ -312,12 +289,10 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
-
         .stok-kayit-item:hover {
             border-color: #3498db;
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.2);
         }
-
         .stok-header {
             display: flex;
             justify-content: space-between;
@@ -326,19 +301,16 @@
             padding-bottom: 10px;
             border-bottom: 2px solid #ecf0f1;
         }
-
         .stok-header h4 {
             color: #2c3e50;
             font-size: 1.3em;
         }
-
         .stok-bilgi {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin-bottom: 20px;
         }
-
         .stok-bilgi-item {
             display: flex;
             justify-content: space-between;
@@ -347,7 +319,6 @@
             border-radius: 6px;
             border-left: 4px solid #3498db;
         }
-
         .stok-kontrol {
             display: flex;
             align-items: center;
@@ -358,7 +329,6 @@
             background: #ecf0f1;
             border-radius: 8px;
         }
-
         .stok-btn-small {
             background: linear-gradient(135deg, #27ae60, #2ecc71);
             color: white;
@@ -371,15 +341,12 @@
             font-weight: bold;
             transition: all 0.3s ease;
         }
-
         .stok-btn-small.minus {
             background: linear-gradient(135deg, #e74c3c, #c0392b);
         }
-
         .stok-btn-small:hover {
             transform: scale(1.1);
         }
-
         .stok-adet-display {
             background: white;
             padding: 8px 15px;
@@ -391,7 +358,6 @@
             min-width: 60px;
             text-align: center;
         }
-
         .stok-adet-input {
             width: 80px;
             padding: 8px;
@@ -400,13 +366,11 @@
             border-radius: 6px;
             font-weight: bold;
         }
-
         .stok-actions {
             display: flex;
             gap: 10px;
             justify-content: center;
         }
-
         .btn-edit {
             background: linear-gradient(135deg, #f39c12, #e67e22);
             color: white;
@@ -417,7 +381,6 @@
             font-size: 12px;
             transition: all 0.3s ease;
         }
-
         .btn-delete {
             background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
@@ -428,11 +391,9 @@
             font-size: 12px;
             transition: all 0.3s ease;
         }
-
         .btn-edit:hover, .btn-delete:hover {
             transform: translateY(-2px);
         }
-
         .kaydedilmis-stoklar {
             background: #f8f9fa;
             padding: 25px;
@@ -440,7 +401,6 @@
             margin: 25px 0;
             border: 2px solid #e9ecef;
         }
-
         .kaydedilmis-stoklar h3 {
             color: #2c3e50;
             margin-bottom: 20px;
@@ -450,7 +410,6 @@
             padding: 12px;
             border-radius: 8px;
         }
-
         .siparis-checkbox-container {
             background: #f8f9fa;
             padding: 15px;
@@ -458,14 +417,12 @@
             margin-top: 10px;
             border: 2px solid #e9ecef;
         }
-
         .siparis-checkboxes {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 10px;
             margin-top: 10px;
         }
-
         .checkbox-item {
             display: flex;
             align-items: center;
@@ -477,15 +434,12 @@
             border-radius: 4px;
             transition: background-color 0.2s ease;
         }
-
         .checkbox-item:hover {
             background-color: #e9ecef;
         }
-
         .checkbox-item input[type="checkbox"] {
             transform: scale(1.1);
         }
-
         @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
@@ -510,11 +464,14 @@
     </style>
 </head>
 <body>
+    <!-- Sync Status -->
+    <div id="syncStatus" class="sync-status">🔄 Bağlanıyor...</div>
+    
     <div class="container">
         <div class="header">
             <h1>🏭 AKG Kalite Kontrol ve Paketleme Takip Sistemi</h1>
+            <p>📡 Gerçek Zamanlı Senkronizasyon Aktif</p>
         </div>
-
         <!-- Tabs -->
         <div class="tabs">
             <button class="tab active" onclick="showTab('kalite-kontrol')">🔍 Kalite Kontrol</button>
@@ -530,7 +487,6 @@
             <button class="tab" onclick="showTab('raporlar')">📋 Raporlar</button>
             <button class="tab" onclick="showTab('ayarlar')">⚙️ Ayarlar</button>
         </div>
-
         <!-- Kalite Kontrol Tab -->
         <div id="kalite-kontrol" class="tab-content active">
             <h2>🔍 Kalite Kontrol Formu</h2>
@@ -552,7 +508,6 @@
                             <option value="Melisa">Melisa</option>
                             <option value="Evrim">Evrim</option>
                             <option value="Koray">Koray</option>
-
                         </select>
                     </div>
                     <div class="form-group">
@@ -568,7 +523,6 @@
                         <input type="text" id="siparisNo" placeholder="Sipariş numarasını girin" required>
                     </div>
                 </div>
-
                 <div class="hata-container">
                     <h3>🚫 Hata Türleri ve Adetleri</h3>
                     <div style="display: flex; justify-content: flex-end; margin-bottom: 15px; gap: 8px; font-size: 12px; color: #666; font-weight: bold;">
@@ -678,18 +632,15 @@
                         <input type="text" id="digerHataAciklama" placeholder="Hata detayını yazın..." style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 6px;">
                     </div>
                 </div>
-
                 <button type="submit" class="btn">💾 Kalite Kontrol Kaydını Kaydet</button>
             </form>
             <div id="kaliteAlert"></div>
-
             <!-- Kalite Kontrol Kayıtları Tablosu -->
             <div id="kaliteKayitlari">
                 <h3>📋 Kalite Kontrol Kayıtları</h3>
                 <div id="kaliteKayitlariListesi"></div>
             </div>
         </div>
-
         <!-- Sipariş Hazırlığı Tab -->
         <div id="siparis-hazirlik" class="tab-content">
             <h2>📋 Sipariş Hazırlığı</h2>
@@ -731,14 +682,12 @@
                 <button type="submit" class="btn">➕ Sipariş Ekle</button>
             </form>
             <div id="siparisEkleAlert"></div>
-
             <!-- Siparişler Listesi -->
             <div id="siparislerContainer">
                 <h3>📋 Mevcut Siparişler</h3>
                 <div id="siparislerListesi"></div>
             </div>
         </div>
-
         <!-- Stok Yönetimi Tab -->
         <div id="stok" class="tab-content">
             <h2>📦 Stok Yönetimi</h2>
@@ -791,26 +740,22 @@
                 </div>
             </form>
             <div id="stokAlert"></div>
-
             <!-- Stok Yönetim Butonları -->
             <div style="text-align: center; margin: 25px 0;">
                 <button class="btn btn-success" onclick="tumStoklariYukle()">🔄 Stokları Yenile</button>
                 <button class="btn btn-danger" onclick="tumStoklariSifirla()">🗑️ Tüm Stokları Sil</button>
             </div>
-
             <!-- Tüm Stoklar Özeti -->
             <div class="kaydedilmis-stoklar">
                 <h3>📦 Tüm Stoklar Özeti</h3>
                 <div id="stokOzeti"></div>
             </div>
-
             <!-- Stoklar Listesi -->
             <div id="stokListesiContainer">
                 <h3>📋 Kayıtlı Stoklar</h3>
                 <div id="stokListesi"></div>
             </div>
         </div>
-
         <!-- Temizlemeye Gidecek Ürünler Tab -->
         <div id="temizleme" class="tab-content">
             <h2>🧽 Temizlemeye Gidecek Ürünler</h2>
@@ -858,13 +803,11 @@
                 <button type="submit" class="btn">💾 Temizleme Kaydını Kaydet</button>
             </form>
             <div id="temizlemeAlert"></div>
-
             <div id="temizlemeListesi">
                 <h3>📋 Temizlemeye Gidecek Ürünler Listesi</h3>
                 <div id="temizlemeKayitlari"></div>
             </div>
         </div>
-
         <!-- Sevke Hazır Ürünler Tab -->
         <div id="sevke-hazir" class="tab-content">
             <h2>📤 Sevke Hazır Ürünler</h2>
@@ -904,13 +847,11 @@
                 <button type="submit" class="btn">💾 Sevke Hazır Kaydını Kaydet</button>
             </form>
             <div id="sevkeHazirAlert"></div>
-
             <div id="sevkeHazirListesi">
                 <h3>📋 Sevke Hazır Ürünler Listesi</h3>
                 <div id="sevkeHazirKayitlari"></div>
             </div>
         </div>
-
         <!-- Sevk Edilen Ürünler Tab -->
         <div id="sevk-edilen" class="tab-content">
             <h2>🚚 Sevk Edilen Ürün Listesi</h2>
@@ -962,13 +903,11 @@
                 <button type="submit" class="btn">💾 Sevk Kaydını Kaydet</button>
             </form>
             <div id="sevkEdilenAlert"></div>
-
             <div id="sevkEdilenListesi">
                 <h3>📋 Sevk Edilen Ürünler Listesi</h3>
                 <div id="sevkEdilenKayitlari"></div>
             </div>
         </div>
-
         <!-- Yarı Mamül Stok Tab -->
         <div id="yari-mamul" class="tab-content">
             <h2>🔧 Yarı Mamül Stok</h2>
@@ -1008,13 +947,11 @@
                 <button type="submit" class="btn">💾 Yarı Mamül Kaydını Kaydet</button>
             </form>
             <div id="yariMamulAlert"></div>
-
             <div id="yariMamulListesi">
                 <h3>📋 Yarı Mamül Stok Listesi</h3>
                 <div id="yariMamulKayitlari"></div>
             </div>
         </div>
-
         <!-- Günlük Performans Tab -->
         <div id="gunluk-performans" class="tab-content">
             <h2>⚡ Günlük Performans Takibi</h2>
@@ -1053,7 +990,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="hata-container">
                     <h3>🏭 İşlem Performansları</h3>
                     <div class="form-grid">
@@ -1101,18 +1037,15 @@
                         </div>
                     </div>
                 </div>
-
                 <button type="submit" class="btn">💾 Performans Kaydını Kaydet</button>
             </form>
             <div id="performansAlert"></div>
-
             <!-- Son Performans Kayıtları -->
             <div id="performansKayitlariContainer">
                 <h3>📊 Son Performans Kayıtları</h3>
                 <div id="performansKayitlariListesi"></div>
             </div>
         </div>
-
         <!-- İstatistikler Tab -->
         <div id="istatistikler" class="tab-content">
             <h2>📈 İstatistikler</h2>
@@ -1142,23 +1075,19 @@
                     <p>Başarı Oranı</p>
                 </div>
             </div>
-
             <div style="background: white; padding: 25px; border-radius: 10px; border: 2px solid #e9ecef; margin-bottom: 20px;">
                 <h4 style="color: #2c3e50; margin-bottom: 15px; text-align: center; background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 12px; border-radius: 6px;">📊 Hata İstatistikleri</h4>
                 <div id="hataIstatistikleri"></div>
             </div>
-
             <div style="background: white; padding: 25px; border-radius: 10px; border: 2px solid #e9ecef; margin-bottom: 20px;">
                 <h4 style="color: #2c3e50; margin-bottom: 15px; text-align: center; background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 12px; border-radius: 6px;">⏱️ Performans İstatistikleri</h4>
                 <div id="performansIstatistikleri"></div>
             </div>
-
             <div style="background: white; padding: 25px; border-radius: 10px; border: 2px solid #e9ecef; margin-bottom: 20px;">
                 <h4 style="color: #2c3e50; margin-bottom: 15px; text-align: center; background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 12px; border-radius: 6px;">👥 Çalışan Bazlı İstatistikler</h4>
                 <div id="calisanIstatistikleri"></div>
             </div>
         </div>
-
         <!-- Veri Görüntüle Tab -->
         <div id="veri-goruntule" class="tab-content">
             <h2>📊 Veri Görüntüle</h2>
@@ -1191,7 +1120,6 @@
                 <button class="btn" onclick="exportCurrentData()">📥 Görüntülenen Verileri Excel'e Aktar</button>
             </div>
         </div>
-
         <!-- Raporlar Tab -->
         <div id="raporlar" class="tab-content">
             <h2>📋 Raporlar</h2>
@@ -1213,7 +1141,6 @@
                     <p>Stok Kalemi</p>
                 </div>
             </div>
-
             <div style="margin-top: 30px;">
                 <button class="btn" onclick="exportToExcel('kalite')">📥 Kalite Verilerini Excel'e Aktar</button>
                 <button class="btn btn-success" onclick="exportToExcel('performans')">📥 Performans Verilerini Excel'e Aktar</button>
@@ -1221,10 +1148,16 @@
                 <button class="btn btn-danger" onclick="exportToExcel('hepsi')">📥 Tüm Verileri Excel'e Aktar</button>
             </div>
         </div>
-
         <!-- Ayarlar Tab -->
         <div id="ayarlar" class="tab-content">
             <h2>⚙️ Sistem Ayarları</h2>
+            <div style="background: white; padding: 25px; border-radius: 10px; border: 2px solid #e9ecef; margin-bottom: 20px;">
+                <h4 style="color: #2c3e50; margin-bottom: 15px; text-align: center; background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 12px; border-radius: 6px;">📡 Firebase Durumu</h4>
+                <div id="firebaseStatus" style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 8px; margin-bottom: 20px;">
+                    <p id="firebaseConnectionStatus">🔄 Bağlanıyor...</p>
+                    <p id="lastSyncTime">Son Senkronizasyon: -</p>
+                </div>
+            </div>
             <div class="form-grid">
                 <div class="form-group">
                     <label>💾 Veri Yedekleme</label>
@@ -1235,12 +1168,15 @@
                     <input type="file" id="importFile" accept=".json" onchange="importData()">
                 </div>
                 <div class="form-group">
+                    <label>🔄 Senkronizasyon</label>
+                    <button class="btn" onclick="forceSyncAllData()">Tüm Verileri Senkronize Et</button>
+                </div>
+                <div class="form-group">
                     <label>🗑️ Veri Temizleme</label>
                     <button class="btn btn-danger" onclick="clearAllData()">Tüm Verileri Temizle</button>
                 </div>
             </div>
         </div>
-
         <!-- Modal for Editing -->
         <div id="editModal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
             <div style="background-color: white; margin: 5% auto; padding: 20px; border-radius: 10px; width: 90%; max-width: 800px; max-height: 80vh; overflow-y: auto;">
@@ -1251,39 +1187,370 @@
         </div>
     </div>
 
+    <!-- Firebase SDK'ları -->
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+        import { getDatabase, ref, set, get, child, onValue, push, remove, update, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-analytics.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDJYEEnWdlfzCVFg-w_IIWE5QbNFzN9hqA",
+            authDomain: "akgkalitekontrol.firebaseapp.com",
+            databaseURL: "https://akgkalitekontrol-default-rtdb.firebaseio.com",
+            projectId: "akgkalitekontrol",
+            storageBucket: "akgkalitekontrol.firebasestorage.app",
+            messagingSenderId: "315960243910",
+            appId: "1:315960243910:web:bb97b559d7d6648e5fc9c7",
+            measurementId: "G-BX4HH38KHE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const analytics = getAnalytics(app);
+        
+        // Firebase ve veritabanı erişimini global yapmak
+        window.firebaseDB = database;
+        window.firebaseRef = ref;
+        window.firebaseSet = set;
+        window.firebaseGet = get;
+        window.firebaseChild = child;
+        window.firebaseOnValue = onValue;
+        window.firebasePush = push;
+        window.firebaseRemove = remove;
+        window.firebaseUpdate = update;
+        window.firebaseServerTimestamp = serverTimestamp;
+
+        console.log('🔥 Firebase başarıyla başlatıldı!');
+        updateSyncStatus('connected', '✅ Bağlandı');
+
+        // Firebase bağlantı durumunu izle
+        const connectedRef = ref(database, '.info/connected');
+        onValue(connectedRef, (snapshot) => {
+            if (snapshot.val() === true) {
+                console.log('📡 Firebase bağlantısı aktif');
+                updateSyncStatus('connected', '✅ Bağlandı');
+                // İlk yüklemede verileri Firebase'den çek
+                loadAllDataFromFirebase();
+            } else {
+                console.log('📡 Firebase bağlantısı kesildi');
+                updateSyncStatus('error', '❌ Bağlantı Hatası');
+            }
+        });
+    </script>
+
     <script>
         // Global değişkenler
-        let kaliteKayitlari = JSON.parse(localStorage.getItem('kaliteKayitlari') || '[]');
-        let siparisHazirlikKayitlari = JSON.parse(localStorage.getItem('siparisHazirlikKayitlari') || '[]');
-        let performansKayitlari = JSON.parse(localStorage.getItem('performansKayitlari') || '[]');
-        let stokKayitlari = JSON.parse(localStorage.getItem('stokKayitlari') || '[]');
-        let temizlemeKayitlari = JSON.parse(localStorage.getItem('temizlemeKayitlari') || '[]');
-        let sevkeHazirKayitlari = JSON.parse(localStorage.getItem('sevkeHazirKayitlari') || '[]');
-        let sevkEdilenKayitlari = JSON.parse(localStorage.getItem('sevkEdilenKayitlari') || '[]');
-        let yariMamulKayitlari = JSON.parse(localStorage.getItem('yariMamulKayitlari') || '[]');
+        let kaliteKayitlari = [];
+        let siparisHazirlikKayitlari = [];
+        let performansKayitlari = [];
+        let stokKayitlari = [];
+        let temizlemeKayitlari = [];
+        let sevkeHazirKayitlari = [];
+        let sevkEdilenKayitlari = [];
+        let yariMamulKayitlari = [];
+        
+        let isFirebaseReady = false;
+        let syncInProgress = false;
+
+        // Sync durumu güncelleme fonksiyonu
+        function updateSyncStatus(status, message) {
+            const syncStatus = document.getElementById('syncStatus');
+            const firebaseStatus = document.getElementById('firebaseConnectionStatus');
+            const lastSyncElement = document.getElementById('lastSyncTime');
+            
+            if (syncStatus) {
+                syncStatus.className = `sync-status ${status}`;
+                syncStatus.textContent = message;
+            }
+            
+            if (firebaseStatus) {
+                firebaseStatus.textContent = message;
+            }
+            
+            if (status === 'connected' && lastSyncElement) {
+                lastSyncElement.textContent = `Son Senkronizasyon: ${new Date().toLocaleString('tr-TR')}`;
+            }
+            
+            isFirebaseReady = (status === 'connected');
+        }
+
+        // Firebase'den tüm verileri yükle
+        async function loadAllDataFromFirebase() {
+            if (!window.firebaseDB) return;
+            
+            updateSyncStatus('syncing', '🔄 Veriler yükleniyor...');
+            
+            try {
+                const dbRef = window.firebaseRef(window.firebaseDB);
+                const snapshot = await window.firebaseGet(window.firebaseChild(dbRef, 'data'));
+                
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    
+                    kaliteKayitlari = data.kaliteKayitlari ? Object.values(data.kaliteKayitlari) : [];
+                    siparisHazirlikKayitlari = data.siparisHazirlikKayitlari ? Object.values(data.siparisHazirlikKayitlari) : [];
+                    performansKayitlari = data.performansKayitlari ? Object.values(data.performansKayitlari) : [];
+                    stokKayitlari = data.stokKayitlari ? Object.values(data.stokKayitlari) : [];
+                    temizlemeKayitlari = data.temizlemeKayitlari ? Object.values(data.temizlemeKayitlari) : [];
+                    sevkeHazirKayitlari = data.sevkeHazirKayitlari ? Object.values(data.sevkeHazirKayitlari) : [];
+                    sevkEdilenKayitlari = data.sevkEdilenKayitlari ? Object.values(data.sevkEdilenKayitlari) : [];
+                    yariMamulKayitlari = data.yariMamulKayitlari ? Object.values(data.yariMamulKayitlari) : [];
+                    
+                    console.log('📥 Firebase\'den veriler yüklendi:', {
+                        kalite: kaliteKayitlari.length,
+                        siparis: siparisHazirlikKayitlari.length,
+                        performans: performansKayitlari.length,
+                        stok: stokKayitlari.length
+                    });
+                    
+                    // Tüm listeleri güncelle
+                    refreshAllLists();
+                }
+                
+                updateSyncStatus('connected', '✅ Veriler yüklendi');
+            } catch (error) {
+                console.error('Firebase veri yükleme hatası:', error);
+                updateSyncStatus('error', '❌ Yükleme hatası');
+                
+                // Hata durumunda localStorage'dan yükle
+                loadFromLocalStorage();
+            }
+        }
+
+        // LocalStorage'dan verileri yükle (fallback)
+        function loadFromLocalStorage() {
+            kaliteKayitlari = JSON.parse(localStorage.getItem('kaliteKayitlari') || '[]');
+            siparisHazirlikKayitlari = JSON.parse(localStorage.getItem('siparisHazirlikKayitlari') || '[]');
+            performansKayitlari = JSON.parse(localStorage.getItem('performansKayitlari') || '[]');
+            stokKayitlari = JSON.parse(localStorage.getItem('stokKayitlari') || '[]');
+            temizlemeKayitlari = JSON.parse(localStorage.getItem('temizlemeKayitlari') || '[]');
+            sevkeHazirKayitlari = JSON.parse(localStorage.getItem('sevkeHazirKayitlari') || '[]');
+            sevkEdilenKayitlari = JSON.parse(localStorage.getItem('sevkEdilenKayitlari') || '[]');
+            yariMamulKayitlari = JSON.parse(localStorage.getItem('yariMamulKayitlari') || '[]');
+            
+            refreshAllLists();
+            console.log('📱 LocalStorage\'dan veriler yüklendi');
+        }
+
+        // Tüm listeleri yenile
+        function refreshAllLists() {
+            loadKaliteKayitlari();
+            loadSiparislerListesi();
+            loadPerformansKayitlari();
+            loadStokListesi();
+            loadTemizlemeKayitlari();
+            loadSevkeHazirKayitlari();
+            loadSevkEdilenKayitlari();
+            loadYariMamulKayitlari();
+            loadStats();
+            loadIstatistikler();
+            loadVeriTablosu();
+            tumStoklariOzetGoster();
+        }
+
+        // Firebase'e veri kaydet
+        async function saveToFirebase(dataType, data, id = null) {
+            if (!window.firebaseDB || !isFirebaseReady) {
+                console.log('Firebase hazır değil, localStorage\'a kaydediliyor');
+                saveToLocalStorage(dataType, data);
+                return false;
+            }
+            
+            try {
+                updateSyncStatus('syncing', '🔄 Kaydediliyor...');
+                
+                let dataRef;
+                if (id) {
+                    dataRef = window.firebaseRef(window.firebaseDB, `data/${dataType}/${id}`);
+                } else {
+                    dataRef = window.firebasePush(window.firebaseRef(window.firebaseDB, `data/${dataType}`));
+                    data.firebaseId = dataRef.key;
+                }
+                
+                data.lastModified = window.firebaseServerTimestamp();
+                await window.firebaseSet(dataRef, data);
+                
+                // LocalStorage'a da kaydet (senkronizasyon için)
+                saveToLocalStorage(dataType, data);
+                
+                updateSyncStatus('connected', '✅ Kaydedildi');
+                console.log(`📤 ${dataType} Firebase'e kaydedildi:`, data);
+                return true;
+            } catch (error) {
+                console.error('Firebase kaydetme hatası:', error);
+                updateSyncStatus('error', '❌ Kaydetme hatası');
+                
+                // Hata durumunda localStorage'a kaydet
+                saveToLocalStorage(dataType, data);
+                return false;
+            }
+        }
+
+        // LocalStorage'a kaydet
+        function saveToLocalStorage(dataType, data) {
+            let currentData = [];
+            switch (dataType) {
+                case 'kaliteKayitlari':
+                    currentData = kaliteKayitlari;
+                    break;
+                case 'siparisHazirlikKayitlari':
+                    currentData = siparisHazirlikKayitlari;
+                    break;
+                case 'performansKayitlari':
+                    currentData = performansKayitlari;
+                    break;
+                case 'stokKayitlari':
+                    currentData = stokKayitlari;
+                    break;
+                case 'temizlemeKayitlari':
+                    currentData = temizlemeKayitlari;
+                    break;
+                case 'sevkeHazirKayitlari':
+                    currentData = sevkeHazirKayitlari;
+                    break;
+                case 'sevkEdilenKayitlari':
+                    currentData = sevkEdilenKayitlari;
+                    break;
+                case 'yariMamulKayitlari':
+                    currentData = yariMamulKayitlari;
+                    break;
+            }
+            
+            localStorage.setItem(dataType, JSON.stringify(currentData));
+        }
+
+        // Firebase'den veri sil
+        async function deleteFromFirebase(dataType, id) {
+            if (!window.firebaseDB || !isFirebaseReady) {
+                return false;
+            }
+            
+            try {
+                updateSyncStatus('syncing', '🔄 Siliniyor...');
+                
+                const dataRef = window.firebaseRef(window.firebaseDB, `data/${dataType}/${id}`);
+                await window.firebaseRemove(dataRef);
+                
+                updateSyncStatus('connected', '✅ Silindi');
+                console.log(`🗑️ ${dataType} Firebase'den silindi: ${id}`);
+                return true;
+            } catch (error) {
+                console.error('Firebase silme hatası:', error);
+                updateSyncStatus('error', '❌ Silme hatası');
+                return false;
+            }
+        }
+
+        // Tüm verileri Firebase'e senkronize et
+        async function forceSyncAllData() {
+            if (!window.firebaseDB || !isFirebaseReady) {
+                alert('Firebase bağlantısı yok!');
+                return;
+            }
+            
+            updateSyncStatus('syncing', '🔄 Tüm veriler senkronize ediliyor...');
+            
+            try {
+                const allData = {
+                    kaliteKayitlari: {},
+                    siparisHazirlikKayitlari: {},
+                    performansKayitlari: {},
+                    stokKayitlari: {},
+                    temizlemeKayitlari: {},
+                    sevkeHazirKayitlari: {},
+                    sevkEdilenKayitlari: {},
+                    yariMamulKayitlari: {},
+                    lastSync: window.firebaseServerTimestamp()
+                };
+
+                // Tüm veri türlerini Firebase formatına çevir
+                kaliteKayitlari.forEach(item => {
+                    allData.kaliteKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+                
+                siparisHazirlikKayitlari.forEach(item => {
+                    allData.siparisHazirlikKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+                
+                performansKayitlari.forEach(item => {
+                    allData.performansKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+                
+                stokKayitlari.forEach(item => {
+                    allData.stokKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+                
+                temizlemeKayitlari.forEach(item => {
+                    allData.temizlemeKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+                
+                sevkeHazirKayitlari.forEach(item => {
+                    allData.sevkeHazirKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+                
+                sevkEdilenKayitlari.forEach(item => {
+                    allData.sevkEdilenKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+                
+                yariMamulKayitlari.forEach(item => {
+                    allData.yariMamulKayitlari[item.id || item.firebaseId || Date.now()] = item;
+                });
+
+                // Firebase'e kaydet
+                const dataRef = window.firebaseRef(window.firebaseDB, 'data');
+                await window.firebaseSet(dataRef, allData);
+                
+                updateSyncStatus('connected', '✅ Senkronizasyon tamamlandı');
+                alert('Tüm veriler başarıyla Firebase\'e senkronize edildi!');
+                
+            } catch (error) {
+                console.error('Senkronizasyon hatası:', error);
+                updateSyncStatus('error', '❌ Senkronizasyon hatası');
+                alert('Senkronizasyon hatası: ' + error.message);
+            }
+        }
+
+        // Gerçek zamanlı dinleyici kurma
+        function setupRealtimeListeners() {
+            if (!window.firebaseDB) return;
+            
+            const dataRef = window.firebaseRef(window.firebaseDB, 'data');
+            window.firebaseOnValue(dataRef, (snapshot) => {
+                if (snapshot.exists() && !syncInProgress) {
+                    console.log('📡 Gerçek zamanlı güncelleme alındı');
+                    const data = snapshot.val();
+                    
+                    // Sadece başka bir cihazdan güncelleme geldiyse güncelle
+                    if (data.lastSync && data.lastSync !== localStorage.getItem('lastLocalSync')) {
+                        kaliteKayitlari = data.kaliteKayitlari ? Object.values(data.kaliteKayitlari) : [];
+                        siparisHazirlikKayitlari = data.siparisHazirlikKayitlari ? Object.values(data.siparisHazirlikKayitlari) : [];
+                        performansKayitlari = data.performansKayitlari ? Object.values(data.performansKayitlari) : [];
+                        stokKayitlari = data.stokKayitlari ? Object.values(data.stokKayitlari) : [];
+                        temizlemeKayitlari = data.temizlemeKayitlari ? Object.values(data.temizlemeKayitlari) : [];
+                        sevkeHazirKayitlari = data.sevkeHazirKayitlari ? Object.values(data.sevkeHazirKayitlari) : [];
+                        sevkEdilenKayitlari = data.sevkEdilenKayitlari ? Object.values(data.sevkEdilenKayitlari) : [];
+                        yariMamulKayitlari = data.yariMamulKayitlari ? Object.values(data.yariMamulKayitlari) : [];
+                        
+                        refreshAllLists();
+                        showAlert('globalAlert', '📡 Veriler başka bir cihazdan güncellendi!', 'success');
+                    }
+                }
+            });
+        }
 
         // Sayfa yüklendiğinde
         document.addEventListener('DOMContentLoaded', function() {
             const now = new Date();
             const nowString = now.toISOString().slice(0, 16);
             const today = now.toISOString().slice(0, 10);
-
+            
             document.getElementById('tarih').value = nowString;
             document.getElementById('hazirlikTarih').value = today;
             document.getElementById('performansTarih').value = today;
             document.getElementById('sevkTeslimTarih').value = today;
-
-            loadStats();
-            loadStokListesi();
-            loadKaliteKayitlari();
-            loadSiparislerListesi();
-            loadIstatistikler();
-            loadVeriTablosu();
-            tumStoklariOzetGoster();
-            loadTemizlemeKayitlari();
-            loadSevkeHazirKayitlari();
-            loadSevkEdilenKayitlari();
-            loadYariMamulKayitlari();
 
             // Stok formu için event listener
             document.getElementById('stokForm').addEventListener('submit', stokEkleGuncelle);
@@ -1299,11 +1566,28 @@
             document.getElementById('sevkeHazirForm').addEventListener('submit', sevkeHazirEkle);
             document.getElementById('sevkEdilenForm').addEventListener('submit', sevkEdilenEkle);
             document.getElementById('yariMamulForm').addEventListener('submit', yariMamulEkle);
+
+            // Firebase hazır olana kadar bekle, sonra gerçek zamanlı dinleyici kur
+            const checkFirebase = setInterval(() => {
+                if (window.firebaseDB && isFirebaseReady) {
+                    clearInterval(checkFirebase);
+                    setupRealtimeListeners();
+                    console.log('🔥 Firebase gerçek zamanlı dinleyiciler kuruldu');
+                }
+            }, 1000);
+
+            // Offline durumda localStorage'dan yükle
+            setTimeout(() => {
+                if (!isFirebaseReady) {
+                    loadFromLocalStorage();
+                }
+            }, 3000);
         });
 
         // Temizleme kayıtları fonksiyonları
-        function temizlemeEkle(e) {
+        async function temizlemeEkle(e) {
             e.preventDefault();
+            
             const formData = {
                 id: Date.now(),
                 siparisNo: document.getElementById('temizlemeSiparisNo').value.trim(),
@@ -1317,7 +1601,9 @@
             };
 
             temizlemeKayitlari.push(formData);
-            localStorage.setItem('temizlemeKayitlari', JSON.stringify(temizlemeKayitlari));
+            
+            // Firebase'e kaydet
+            await saveToFirebase('temizlemeKayitlari', formData);
             
             document.getElementById('temizlemeForm').reset();
             loadTemizlemeKayitlari();
@@ -1366,7 +1652,7 @@
 
             const modal = document.getElementById('editModal');
             const container = document.getElementById('editFormContainer');
-            
+
             container.innerHTML = `
                 <form id="editTemizlemeForm">
                     <div class="form-grid">
@@ -1404,7 +1690,7 @@
 
             modal.style.display = 'block';
 
-            document.getElementById('editTemizlemeForm').addEventListener('submit', function(e) {
+            document.getElementById('editTemizlemeForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 kayit.siparisNo = document.getElementById('editTemizlemeSiparisNo').value.trim();
@@ -1415,25 +1701,31 @@
                 kayit.toplamKg = parseFloat(document.getElementById('editTemizlemeToplamKg').value) || 0;
                 kayit.guncellemeTarihi = new Date().toISOString();
 
-                localStorage.setItem('temizlemeKayitlari', JSON.stringify(temizlemeKayitlari));
+                // Firebase'e güncelle
+                await saveToFirebase('temizlemeKayitlari', kayit, kayit.id);
+                
                 loadTemizlemeKayitlari();
                 modal.style.display = 'none';
                 showAlert('temizlemeAlert', 'Temizleme kaydı başarıyla güncellendi!', 'success');
             });
         }
 
-        function temizlemeSil(id) {
+        async function temizlemeSil(id) {
             if (confirm('Bu temizleme kaydını silmek istediğinizden emin misiniz?')) {
+                // Firebase'den sil
+                await deleteFromFirebase('temizlemeKayitlari', id);
+                
                 temizlemeKayitlari = temizlemeKayitlari.filter(k => k.id !== id);
-                localStorage.setItem('temizlemeKayitlari', JSON.stringify(temizlemeKayitlari));
+                saveToLocalStorage('temizlemeKayitlari', temizlemeKayitlari);
                 loadTemizlemeKayitlari();
                 showAlert('temizlemeAlert', 'Temizleme kaydı silindi!', 'success');
             }
         }
 
         // Sevke Hazır kayıtları fonksiyonları
-        function sevkeHazirEkle(e) {
+        async function sevkeHazirEkle(e) {
             e.preventDefault();
+            
             const formData = {
                 id: Date.now(),
                 siparisNo: document.getElementById('sevkeSiparisNo').value.trim(),
@@ -1445,7 +1737,9 @@
             };
 
             sevkeHazirKayitlari.push(formData);
-            localStorage.setItem('sevkeHazirKayitlari', JSON.stringify(sevkeHazirKayitlari));
+            
+            // Firebase'e kaydet
+            await saveToFirebase('sevkeHazirKayitlari', formData);
             
             document.getElementById('sevkeHazirForm').reset();
             loadSevkeHazirKayitlari();
@@ -1492,7 +1786,7 @@
 
             const modal = document.getElementById('editModal');
             const container = document.getElementById('editFormContainer');
-            
+
             container.innerHTML = `
                 <form id="editSevkeHazirForm">
                     <div class="form-grid">
@@ -1522,7 +1816,7 @@
 
             modal.style.display = 'block';
 
-            document.getElementById('editSevkeHazirForm').addEventListener('submit', function(e) {
+            document.getElementById('editSevkeHazirForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 kayit.siparisNo = document.getElementById('editSevkeSiparisNo').value.trim();
@@ -1531,25 +1825,31 @@
                 kayit.koliAdet = parseInt(document.getElementById('editSevkeKoliAdet').value) || 0;
                 kayit.guncellemeTarihi = new Date().toISOString();
 
-                localStorage.setItem('sevkeHazirKayitlari', JSON.stringify(sevkeHazirKayitlari));
+                // Firebase'e güncelle
+                await saveToFirebase('sevkeHazirKayitlari', kayit, kayit.id);
+                
                 loadSevkeHazirKayitlari();
                 modal.style.display = 'none';
                 showAlert('sevkeHazirAlert', 'Sevke hazır kaydı başarıyla güncellendi!', 'success');
             });
         }
 
-        function sevkeHazirSil(id) {
+        async function sevkeHazirSil(id) {
             if (confirm('Bu sevke hazır kaydını silmek istediğinizden emin misiniz?')) {
+                // Firebase'den sil
+                await deleteFromFirebase('sevkeHazirKayitlari', id);
+                
                 sevkeHazirKayitlari = sevkeHazirKayitlari.filter(k => k.id !== id);
-                localStorage.setItem('sevkeHazirKayitlari', JSON.stringify(sevkeHazirKayitlari));
+                saveToLocalStorage('sevkeHazirKayitlari', sevkeHazirKayitlari);
                 loadSevkeHazirKayitlari();
                 showAlert('sevkeHazirAlert', 'Sevke hazır kaydı silindi!', 'success');
             }
         }
 
         // Sevk Edilen kayıtları fonksiyonları
-        function sevkEdilenEkle(e) {
+        async function sevkEdilenEkle(e) {
             e.preventDefault();
+            
             const formData = {
                 id: Date.now(),
                 siparisNo: document.getElementById('sevkSiparisNo').value.trim(),
@@ -1564,7 +1864,9 @@
             };
 
             sevkEdilenKayitlari.push(formData);
-            localStorage.setItem('sevkEdilenKayitlari', JSON.stringify(sevkEdilenKayitlari));
+            
+            // Firebase'e kaydet
+            await saveToFirebase('sevkEdilenKayitlari', formData);
             
             document.getElementById('sevkEdilenForm').reset();
             const today = new Date().toISOString().slice(0, 10);
@@ -1616,7 +1918,7 @@
 
             const modal = document.getElementById('editModal');
             const container = document.getElementById('editFormContainer');
-            
+
             container.innerHTML = `
                 <form id="editSevkEdilenForm">
                     <div class="form-grid">
@@ -1658,7 +1960,7 @@
 
             modal.style.display = 'block';
 
-            document.getElementById('editSevkEdilenForm').addEventListener('submit', function(e) {
+            document.getElementById('editSevkEdilenForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 kayit.siparisNo = document.getElementById('editSevkSiparisNo').value.trim();
@@ -1670,25 +1972,31 @@
                 kayit.depoIrsaliye = document.getElementById('editSevkDepoIrsaliye').value.trim();
                 kayit.guncellemeTarihi = new Date().toISOString();
 
-                localStorage.setItem('sevkEdilenKayitlari', JSON.stringify(sevkEdilenKayitlari));
+                // Firebase'e güncelle
+                await saveToFirebase('sevkEdilenKayitlari', kayit, kayit.id);
+                
                 loadSevkEdilenKayitlari();
                 modal.style.display = 'none';
                 showAlert('sevkEdilenAlert', 'Sevk edilen kaydı başarıyla güncellendi!', 'success');
             });
         }
 
-        function sevkEdilenSil(id) {
+        async function sevkEdilenSil(id) {
             if (confirm('Bu sevk edilen kaydını silmek istediğinizden emin misiniz?')) {
+                // Firebase'den sil
+                await deleteFromFirebase('sevkEdilenKayitlari', id);
+                
                 sevkEdilenKayitlari = sevkEdilenKayitlari.filter(k => k.id !== id);
-                localStorage.setItem('sevkEdilenKayitlari', JSON.stringify(sevkEdilenKayitlari));
+                saveToLocalStorage('sevkEdilenKayitlari', sevkEdilenKayitlari);
                 loadSevkEdilenKayitlari();
                 showAlert('sevkEdilenAlert', 'Sevk edilen kaydı silindi!', 'success');
             }
         }
 
         // Yarı Mamül kayıtları fonksiyonları
-        function yariMamulEkle(e) {
+        async function yariMamulEkle(e) {
             e.preventDefault();
+            
             const formData = {
                 id: Date.now(),
                 urunAdi: document.getElementById('yariMamulUrunAdi').value.trim(),
@@ -1700,7 +2008,9 @@
             };
 
             yariMamulKayitlari.push(formData);
-            localStorage.setItem('yariMamulKayitlari', JSON.stringify(yariMamulKayitlari));
+            
+            // Firebase'e kaydet
+            await saveToFirebase('yariMamulKayitlari', formData);
             
             document.getElementById('yariMamulForm').reset();
             loadYariMamulKayitlari();
@@ -1747,7 +2057,7 @@
 
             const modal = document.getElementById('editModal');
             const container = document.getElementById('editFormContainer');
-            
+
             container.innerHTML = `
                 <form id="editYariMamulForm">
                     <div class="form-grid">
@@ -1777,7 +2087,7 @@
 
             modal.style.display = 'block';
 
-            document.getElementById('editYariMamulForm').addEventListener('submit', function(e) {
+            document.getElementById('editYariMamulForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 kayit.urunAdi = document.getElementById('editYariMamulUrunAdi').value.trim();
@@ -1786,27 +2096,35 @@
                 kayit.not = document.getElementById('editYariMamulNot').value.trim();
                 kayit.guncellemeTarihi = new Date().toISOString();
 
-                localStorage.setItem('yariMamulKayitlari', JSON.stringify(yariMamulKayitlari));
+                // Firebase'e güncelle
+                await saveToFirebase('yariMamulKayitlari', kayit, kayit.id);
+                
                 loadYariMamulKayitlari();
                 modal.style.display = 'none';
                 showAlert('yariMamulAlert', 'Yarı mamül kaydı başarıyla güncellendi!', 'success');
             });
         }
 
-        function yariMamulSil(id) {
+        async function yariMamulSil(id) {
             if (confirm('Bu yarı mamül kaydını silmek istediğinizden emin misiniz?')) {
+                // Firebase'den sil
+                await deleteFromFirebase('yariMamulKayitlari', id);
+                
                 yariMamulKayitlari = yariMamulKayitlari.filter(k => k.id !== id);
-                localStorage.setItem('yariMamulKayitlari', JSON.stringify(yariMamulKayitlari));
+                saveToLocalStorage('yariMamulKayitlari', yariMamulKayitlari);
                 loadYariMamulKayitlari();
                 showAlert('yariMamulAlert', 'Yarı mamül kaydı silindi!', 'success');
             }
         }
 
         // Kalite kontrol kaydı silme fonksiyonu
-        function kaliteKaydiSil(id) {
+        async function kaliteKaydiSil(id) {
             if (confirm('Bu kalite kontrol kaydını silmek istediğinizden emin misiniz?')) {
+                // Firebase'den sil
+                await deleteFromFirebase('kaliteKayitlari', id);
+                
                 kaliteKayitlari = kaliteKayitlari.filter(k => k.id !== id);
-                localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
+                saveToLocalStorage('kaliteKayitlari', kaliteKayitlari);
                 loadKaliteKayitlari();
                 loadStats();
                 showAlert('kaliteAlert', 'Kalite kontrol kaydı silindi!', 'success');
@@ -1814,10 +2132,13 @@
         }
 
         // Performans kaydı silme fonksiyonu
-        function performansKaydiSil(id) {
+        async function performansKaydiSil(id) {
             if (confirm('Bu performans kaydını silmek istediğinizden emin misiniz?')) {
+                // Firebase'den sil
+                await deleteFromFirebase('performansKayitlari', id);
+                
                 performansKayitlari = performansKayitlari.filter(k => k.id !== id);
-                localStorage.setItem('performansKayitlari', JSON.stringify(performansKayitlari));
+                saveToLocalStorage('performansKayitlari', performansKayitlari);
                 loadPerformansKayitlari();
                 loadStats();
                 showAlert('performansAlert', 'Performans kaydı silindi!', 'success');
@@ -1870,7 +2191,7 @@
             kaliteKayitlari.slice().reverse().forEach((kayit, index) => {
                 const toplamIskarta = kayit.hatalar.reduce((total, hata) => total + hata.iskartaAdet, 0);
                 const toplamGeriDonen = kayit.hatalar.reduce((total, hata) => total + hata.geriGidenAdet, 0);
-
+                
                 html += `<tr style="background: ${index % 2 === 0 ? '#f8f9fa' : 'white'}; border-bottom: 1px solid #dee2e6;">`;
                 html += `<td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: center; white-space: nowrap; font-size: 12px;">${new Date(kayit.tarih).toLocaleString('tr-TR')}</td>`;
                 html += `<td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: center; font-weight: 600;">${kayit.operator}</td>`;
@@ -1893,7 +2214,6 @@
                         html += `<td style="padding: 10px 8px; border: 1px solid #dee2e6; text-align: center; color: #999;">-</td>`;
                     }
                 });
-
                 html += '</tr>';
             });
 
@@ -1901,9 +2221,9 @@
 
             // Özet bilgi
             const toplamKayit = kaliteKayitlari.length;
-            const genelToplamIskarta = kaliteKayitlari.reduce((total, kayit) => 
+            const genelToplamIskarta = kaliteKayitlari.reduce((total, kayit) =>
                 total + kayit.hatalar.reduce((hataTotal, hata) => hataTotal + hata.iskartaAdet, 0), 0);
-            const genelToplamGeriDonen = kaliteKayitlari.reduce((total, kayit) => 
+            const genelToplamGeriDonen = kaliteKayitlari.reduce((total, kayit) =>
                 total + kayit.hatalar.reduce((hataTotal, hata) => hataTotal + hata.geriGidenAdet, 0), 0);
             const genelToplamUretim = kaliteKayitlari.reduce((total, kayit) => total + kayit.toplamAdet, 0);
 
@@ -1923,9 +2243,9 @@
         }
 
         // Stok ekleme/güncelleme fonksiyonu
-        function stokEkleGuncelle(e) {
+        async function stokEkleGuncelle(e) {
             if (e) e.preventDefault();
-
+            
             const malzemeTuru = document.getElementById('stokMalzemeTuru').value;
             const urunAdi = document.getElementById('stokUrunAdi').value.trim();
             const olculeri = document.getElementById('stokOlculeri').value.trim();
@@ -1938,9 +2258,9 @@
             }
 
             // Aynı ürün var mı kontrol et
-            const existingIndex = stokKayitlari.findIndex(stok => 
-                stok.malzemeTuru === malzemeTuru && 
-                stok.urunAdi.toLowerCase() === urunAdi.toLowerCase() && 
+            const existingIndex = stokKayitlari.findIndex(stok =>
+                stok.malzemeTuru === malzemeTuru &&
+                stok.urunAdi.toLowerCase() === urunAdi.toLowerCase() &&
                 stok.olculeri === olculeri
             );
 
@@ -1956,13 +2276,14 @@
 
             if (existingIndex !== -1) {
                 stokKayitlari[existingIndex] = yeniStok;
+                await saveToFirebase('stokKayitlari', yeniStok, yeniStok.id);
                 showAlert('stokAlert', 'Stok başarıyla güncellendi!', 'success');
             } else {
                 stokKayitlari.push(yeniStok);
+                await saveToFirebase('stokKayitlari', yeniStok);
                 showAlert('stokAlert', 'Stok başarıyla eklendi!', 'success');
             }
 
-            localStorage.setItem('stokKayitlari', JSON.stringify(stokKayitlari));
             loadStokListesi();
             tumStoklariOzetGoster();
             temizleStokFormu();
@@ -2031,34 +2352,34 @@
         }
 
         // Stok miktarı arttır
-        function stokArttir(id) {
+        async function stokArttir(id) {
             const stok = stokKayitlari.find(s => s.id === id);
             if (stok) {
                 stok.mevcutAdet++;
                 stok.sonGuncelleme = new Date().toISOString();
-                localStorage.setItem('stokKayitlari', JSON.stringify(stokKayitlari));
+                await saveToFirebase('stokKayitlari', stok, stok.id);
                 loadStokListesi();
                 tumStoklariOzetGoster();
             }
         }
 
         // Stok miktarı azalt
-        function stokAzalt(id) {
+        async function stokAzalt(id) {
             const stok = stokKayitlari.find(s => s.id === id);
             if (stok && stok.mevcutAdet > 0) {
                 stok.mevcutAdet--;
                 stok.sonGuncelleme = new Date().toISOString();
-                localStorage.setItem('stokKayitlari', JSON.stringify(stokKayitlari));
+                await saveToFirebase('stokKayitlari', stok, stok.id);
                 loadStokListesi();
                 tumStoklariOzetGoster();
             }
         }
 
         // Stok güncelle
-        function stokGuncelle(id) {
+        async function stokGuncelle(id) {
             const input = document.getElementById(`adet-${id}`);
             const yeniAdet = parseInt(input.value);
-
+            
             if (isNaN(yeniAdet) || yeniAdet < 0) {
                 alert('Lütfen geçerli bir adet giriniz!');
                 return;
@@ -2068,7 +2389,7 @@
             if (stok) {
                 stok.mevcutAdet = yeniAdet;
                 stok.sonGuncelleme = new Date().toISOString();
-                localStorage.setItem('stokKayitlari', JSON.stringify(stokKayitlari));
+                await saveToFirebase('stokKayitlari', stok, stok.id);
                 loadStokListesi();
                 tumStoklariOzetGoster();
                 showAlert('stokAlert', 'Stok başarıyla güncellendi!', 'success');
@@ -2084,17 +2405,17 @@
                 document.getElementById('stokOlculeri').value = stok.olculeri;
                 document.getElementById('stokMevcut').value = stok.mevcutAdet;
                 document.getElementById('stokEkleyen').value = stok.ekleyen;
-
                 // Form'un en üstüne scroll
                 document.getElementById('stokForm').scrollIntoView({ behavior: 'smooth' });
             }
         }
 
         // Stok sil
-        function stokSil(id) {
+        async function stokSil(id) {
             if (confirm('Bu stok kaydını silmek istediğinizden emin misiniz?')) {
+                await deleteFromFirebase('stokKayitlari', id);
                 stokKayitlari = stokKayitlari.filter(s => s.id !== id);
-                localStorage.setItem('stokKayitlari', JSON.stringify(stokKayitlari));
+                saveToLocalStorage('stokKayitlari', stokKayitlari);
                 loadStokListesi();
                 tumStoklariOzetGoster();
                 showAlert('stokAlert', 'Stok kaydı silindi!', 'success');
@@ -2109,10 +2430,16 @@
         }
 
         // Tüm stokları sıfırla
-        function tumStoklariSifirla() {
+        async function tumStoklariSifirla() {
             if (confirm('Tüm stok kayıtlarını silmek istediğinizden emin misiniz? Bu işlem geri alınamaz!')) {
+                // Firebase'den tüm stokları sil
+                if (window.firebaseDB && isFirebaseReady) {
+                    const stokRef = window.firebaseRef(window.firebaseDB, 'data/stokKayitlari');
+                    await window.firebaseRemove(stokRef);
+                }
+                
                 stokKayitlari = [];
-                localStorage.setItem('stokKayitlari', JSON.stringify(stokKayitlari));
+                saveToLocalStorage('stokKayitlari', stokKayitlari);
                 loadStokListesi();
                 tumStoklariOzetGoster();
                 showAlert('stokAlert', 'Tüm stok kayıtları silindi!', 'success');
@@ -2142,7 +2469,7 @@
             Object.keys(stokGruplari).forEach(tur => {
                 const turStoklar = stokGruplari[tur];
                 const toplamAdet = turStoklar.reduce((total, stok) => total + stok.mevcutAdet, 0);
-
+                
                 html += `
                     <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 2px solid #e9ecef;">
                         <h4 style="color: #2c3e50; margin-bottom: 10px; text-transform: uppercase; background: #3498db; color: white; padding: 8px; border-radius: 4px; text-align: center;">
@@ -2150,7 +2477,7 @@
                         </h4>
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
                 `;
-
+                
                 turStoklar.forEach(stok => {
                     html += `
                         <div style="display: flex; justify-content: space-between; padding: 8px; background: #f8f9fa; border-radius: 4px; border-left: 4px solid ${stok.mevcutAdet > 0 ? '#27ae60' : '#e74c3c'};">
@@ -2159,7 +2486,7 @@
                         </div>
                     `;
                 });
-
+                
                 html += '</div></div>';
             });
 
@@ -2178,7 +2505,6 @@
 
             // Seçilen tab'i göster
             document.getElementById(tabName).classList.add('active');
-
             // Tıklanan tab butonuna active class ekle
             event.target.classList.add('active');
 
@@ -2212,15 +2538,16 @@
 
             const alertClass = type === 'success' ? 'alert-success' : 'alert-error';
             container.innerHTML = `<div class="alert ${alertClass}">${message}</div>`;
+            
             setTimeout(() => {
                 container.innerHTML = '';
             }, 5000);
         }
 
         // Kalite kontrol form submit
-        document.getElementById('kaliteForm').addEventListener('submit', function(e) {
+        document.getElementById('kaliteForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
+            
             const formData = {
                 id: Date.now(),
                 tarih: document.getElementById('tarih').value,
@@ -2241,6 +2568,7 @@
 
                 if (iskartaAdet > 0 || geriGidenAdet > 0) {
                     let hataTuru = checkbox.value;
+                    
                     // Diğer seçenegi için açıklama ekle
                     if (hataTuru === 'Diğer') {
                         const digerAciklama = document.getElementById('digerHataAciklama').value.trim();
@@ -2264,7 +2592,7 @@
 
             // Kaydet
             kaliteKayitlari.push(formData);
-            localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
+            await saveToFirebase('kaliteKayitlari', formData);
 
             // Form temizle
             document.getElementById('kaliteForm').reset();
@@ -2281,9 +2609,9 @@
         });
 
         // Sipariş ekleme form submit
-        document.getElementById('siparisEkleForm').addEventListener('submit', function(e) {
+        document.getElementById('siparisEkleForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
+            
             const formData = {
                 id: Date.now(),
                 tarih: document.getElementById('hazirlikTarih').value,
@@ -2304,7 +2632,7 @@
             };
 
             siparisHazirlikKayitlari.push(formData);
-            localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
+            await saveToFirebase('siparisHazirlikKayitlari', formData);
 
             // Form temizle
             document.getElementById('siparisEkleForm').reset();
@@ -2330,7 +2658,7 @@
             siparisHazirlikKayitlari.slice().reverse().forEach(siparis => {
                 const durumRenk = siparis.durum === 'tamamlandı' ? '#27ae60' : siparis.durum === 'hazirlanıyor' ? '#f39c12' : '#e74c3c';
                 const durumIcon = siparis.durum === 'tamamlandı' ? '✅' : siparis.durum === 'hazirlanıyor' ? '🔄' : '⏸️';
-
+                
                 html += `
                     <div class="kayit-item">
                         <div class="kayit-header">
@@ -2384,19 +2712,18 @@
                     </div>
                 `;
             });
-
             container.innerHTML = html;
         }
 
         // Checkbox durumu güncelle
-        function updateCheckbox(siparisId, checkboxType, isChecked) {
+        async function updateCheckbox(siparisId, checkboxType, isChecked) {
             const siparis = siparisHazirlikKayitlari.find(s => s.id === siparisId);
             if (siparis) {
                 if (!siparis.checkboxDurum) {
                     siparis.checkboxDurum = {};
                 }
                 siparis.checkboxDurum[checkboxType] = isChecked;
-                localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
+                await saveToFirebase('siparisHazirlikKayitlari', siparis, siparis.id);
             }
         }
 
@@ -2426,7 +2753,6 @@
                                 <option value="Melisa" ${siparis.operator === 'Melisa' ? 'selected' : ''}>Melisa</option>
                                 <option value="Evrim" ${siparis.operator === 'Evrim' ? 'selected' : ''}>Evrim</option>
                                 <option value="Koray" ${siparis.operator === 'Koray' ? 'selected' : ''}>Koray</option>
-
                             </select>
                         </div>
                         <div class="form-group">
@@ -2459,9 +2785,9 @@
 
             modal.style.display = 'block';
 
-            document.getElementById('editSiparisForm').addEventListener('submit', function(e) {
+            document.getElementById('editSiparisForm').addEventListener('submit', async function(e) {
                 e.preventDefault();
-
+                
                 siparis.tarih = document.getElementById('editTarih').value;
                 siparis.operator = document.getElementById('editOperator').value;
                 siparis.siparisNo = document.getElementById('editSiparisNo').value.trim();
@@ -2470,7 +2796,7 @@
                 siparis.durum = document.getElementById('editDurum').value;
                 siparis.guncellemeTarihi = new Date().toISOString();
 
-                localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
+                await saveToFirebase('siparisHazirlikKayitlari', siparis, siparis.id);
                 loadSiparislerListesi();
                 loadStats();
                 modal.style.display = 'none';
@@ -2479,10 +2805,11 @@
         }
 
         // Sipariş sil
-        function siparisSil(id) {
+        async function siparisSil(id) {
             if (confirm('Bu siparişi silmek istediğinizden emin misiniz?')) {
+                await deleteFromFirebase('siparisHazirlikKayitlari', id);
                 siparisHazirlikKayitlari = siparisHazirlikKayitlari.filter(s => s.id !== id);
-                localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
+                saveToLocalStorage('siparisHazirlikKayitlari', siparisHazirlikKayitlari);
                 loadSiparislerListesi();
                 loadStats();
                 showAlert('siparisEkleAlert', 'Sipariş silindi!', 'success');
@@ -2490,9 +2817,9 @@
         }
 
         // Performans form submit
-        document.getElementById('performansForm').addEventListener('submit', function(e) {
+        document.getElementById('performansForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
+            
             const performansData = {
                 id: Date.now(),
                 tarih: document.getElementById('performansTarih').value,
@@ -2534,7 +2861,7 @@
             }
 
             performansKayitlari.push(performansData);
-            localStorage.setItem('performansKayitlari', JSON.stringify(performansKayitlari));
+            await saveToFirebase('performansKayitlari', performansData);
 
             document.getElementById('performansForm').reset();
             const today = new Date().toISOString().slice(0, 10);
@@ -2560,7 +2887,7 @@
                 const toplamIslem = kayit.islemler.length;
                 const ortalamaSure = kayit.islemler.reduce((total, islem) => total + islem.sure, 0) / toplamIslem;
                 const toplamAdet = kayit.islemler.reduce((total, islem) => total + islem.adet, 0);
-
+                
                 html += `
                     <div class="kayit-item">
                         <div class="kayit-header">
@@ -2580,7 +2907,7 @@
                         </div>
                         <div class="kayit-details">
                 `;
-
+                
                 kayit.islemler.forEach(islem => {
                     html += `
                         <div style="background: white; padding: 10px; border-radius: 6px; border: 2px solid #e9ecef;">
@@ -2591,10 +2918,9 @@
                         </div>
                     `;
                 });
-
+                
                 html += '</div></div>';
             });
-
             container.innerHTML = html;
         }
 
@@ -2648,6 +2974,7 @@
                     const islem = performansIstatistikleri[islemAdi];
                     const ortalamaSure = Math.round(islem.sure / islem.sayac);
                     const ortalamaHiz = Math.round((islem.adet / islem.sure) * 60 * 100) / 100;
+                    
                     performansHtml += `
                         <div style="display: flex; justify-content: space-between; padding: 10px; margin-bottom: 8px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #27ae60;">
                             <span style="font-weight: 600;">${islemAdi}</span>
@@ -2662,7 +2989,7 @@
             const calisanIstatContainer = document.getElementById('calisanIstatistikleri');
             if (calisanIstatContainer) {
                 const calisanIstatistikleri = {};
-
+                
                 // Kalite kontrol verilerinden çalışan istatistikleri
                 kaliteKayitlari.forEach(kayit => {
                     if (!calisanIstatistikleri[kayit.operator]) {
@@ -2685,6 +3012,7 @@
                 Object.keys(calisanIstatistikleri).forEach(calisanAdi => {
                     const calisan = calisanIstatistikleri[calisanAdi];
                     const basariOrani = calisan.toplamUretim > 0 ? Math.round((1 - calisan.toplamHata / calisan.toplamUretim) * 100) : 0;
+                    
                     calisanHtml += `
                         <div style="padding: 15px; margin-bottom: 10px; background: white; border-radius: 8px; border: 2px solid #e9ecef;">
                             <h5 style="color: #2c3e50; margin-bottom: 10px;">👤 ${calisanAdi}</h5>
@@ -2707,12 +3035,11 @@
             const veriTuru = document.getElementById('veriTuru').value;
             const tarihFiltre = document.getElementById('tarihFiltre').value;
             const container = document.getElementById('veriTablosuContainer');
-
             if (!container) return;
 
             let veri = [];
             let baslik = '';
-
+            
             switch (veriTuru) {
                 case 'kalite':
                     veri = kaliteKayitlari;
@@ -2816,7 +3143,6 @@
                         `;
                     });
                     break;
-
                 case 'siparis':
                     html += `
                         <thead style="background: #f8f9fa;">
@@ -2845,7 +3171,6 @@
                         `;
                     });
                     break;
-
                 case 'performans':
                     html += `
                         <thead style="background: #f8f9fa;">
@@ -2875,7 +3200,6 @@
                         `;
                     });
                     break;
-
                 case 'stok':
                     html += `
                         <thead style="background: #f8f9fa;">
@@ -2895,7 +3219,7 @@
                             <tr style="background: ${index % 2 === 0 ? '#f8f9fa' : 'white'};">
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.malzemeTuru}</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.urunAdi}</td>
-                                <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.olculeri || '-'}</td>
+                                <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.olculeri || 'Belirtilmemiş'}</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center; color: ${kayit.mevcutAdet > 0 ? '#27ae60' : '#e74c3c'}; font-weight: bold;">${kayit.mevcutAdet}</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.ekleyen}</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${new Date(kayit.sonGuncelleme).toLocaleString('tr-TR')}</td>
@@ -2903,18 +3227,18 @@
                         `;
                     });
                     break;
-
                 case 'temizleme':
                     html += `
                         <thead style="background: #f8f9fa;">
                             <tr>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Sipariş No</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Ürün Kodu</th>
-                                <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Sipariş Adet</th>
+                                <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Sipariş Adeti</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Gelen Adet</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Adet KG</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Toplam KG</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Ekleyen</th>
+                                <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Tarih</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -2929,11 +3253,11 @@
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.adetKg}</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.toplamKg}</td>
                                 <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${kayit.ekleyen}</td>
+                                <td style="padding: 10px; border: 1px solid #dee2e6; text-align: center;">${new Date(kayit.tarih).toLocaleString('tr-TR')}</td>
                             </tr>
                         `;
                     });
                     break;
-
                 case 'sevkeHazir':
                     html += `
                         <thead style="background: #f8f9fa;">
@@ -2961,7 +3285,6 @@
                         `;
                     });
                     break;
-
                 case 'sevkEdilen':
                     html += `
                         <thead style="background: #f8f9fa;">
@@ -2970,9 +3293,9 @@
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Ürün Türü</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Ürün No</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Teslim Tarihi</th>
-                                <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Teslim Adet</th>
+                                <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Teslim Adeti</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Teslim Alan</th>
-                                <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">İrsaliye</th>
+                                <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Depo İrsaliye</th>
                                 <th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Ekleyen</th>
                             </tr>
                         </thead>
@@ -2993,7 +3316,6 @@
                         `;
                     });
                     break;
-
                 case 'yariMamul':
                     html += `
                         <thead style="background: #f8f9fa;">
@@ -3027,39 +3349,21 @@
             container.innerHTML = html;
         }
 
-        // İstatistikleri yükle
+        // İstatistik verilerini yükle
         function loadStats() {
-            document.getElementById('toplamKaliteKayit').textContent = kaliteKayitlari.length;
-            document.getElementById('toplamSiparisKayit').textContent = siparisHazirlikKayitlari.length;
-            document.getElementById('toplamPerformansKayit').textContent = performansKayitlari.length;
-
-            const tamamlananSiparisCount = siparisHazirlikKayitlari.filter(s => s.durum === 'tamamlandı').length;
-            document.getElementById('tamamlananSiparis').textContent = tamamlananSiparisCount;
-
-            const toplamHataAdet = kaliteKayitlari.reduce((total, kayit) => {
-                return total + kayit.hatalar.reduce((hataTotal, hata) => hataTotal + hata.iskartaAdet + hata.geriGidenAdet, 0);
-            }, 0);
-            document.getElementById('toplamHataAdet').textContent = toplamHataAdet;
-
-            const toplamUretim = kaliteKayitlari.reduce((total, kayit) => total + kayit.toplamAdet, 0);
-            const basariOrani = toplamUretim > 0 ? Math.round((1 - toplamHataAdet / toplamUretim) * 100) : 0;
-            document.getElementById('basariOrani').textContent = basariOrani + '%';
-
-            // Raporlar sayfası için
-            if (document.getElementById('toplamKayit')) {
-                document.getElementById('toplamKayit').textContent = kaliteKayitlari.length;
-                document.getElementById('toplamSiparis').textContent = siparisHazirlikKayitlari.length;
-                document.getElementById('toplamPerformans').textContent = performansKayitlari.length;
-                document.getElementById('stokSayisi').textContent = stokKayitlari.length;
-            }
+            // Genel istatistikler
+            document.getElementById('toplamKayit').textContent = kaliteKayitlari.length;
+            document.getElementById('toplamSiparis').textContent = siparisHazirlikKayitlari.length;
+            document.getElementById('toplamPerformans').textContent = performansKayitlari.length;
+            document.getElementById('stokSayisi').textContent = stokKayitlari.length;
         }
 
-        // Excel'e veri aktarma
-        function exportToExcel(tur) {
+        // Excel'e aktarma fonksiyonları
+        function exportToExcel(tip) {
             let data = [];
             let filename = '';
-
-            switch (tur) {
+            
+            switch (tip) {
                 case 'kalite':
                     data = kaliteKayitlari.map(kayit => ({
                         'Tarih': new Date(kayit.tarih).toLocaleString('tr-TR'),
@@ -3067,7 +3371,8 @@
                         'Ürün Kodu': kayit.urunKodu,
                         'Toplam Adet': kayit.toplamAdet,
                         'Sipariş No': kayit.siparisNo,
-                        'Hata Sayısı': kayit.hatalar.reduce((total, hata) => total + hata.iskartaAdet + hata.geriGidenAdet, 0)
+                        'Toplam İskarta': kayit.hatalar.reduce((total, hata) => total + hata.iskartaAdet, 0),
+                        'Toplam Geri Dönen': kayit.hatalar.reduce((total, hata) => total + hata.geriGidenAdet, 0)
                     }));
                     filename = 'kalite_kontrol_verileri';
                     break;
@@ -3088,115 +3393,150 @@
                         'Operatör': kayit.operator,
                         'Sipariş No': kayit.siparisNo,
                         'Ürün Kodu': kayit.urunKodu,
-                        'Adet': kayit.siparisAdet,
-                        'Durum': kayit.durum
+                        'Sipariş Adedi': kayit.siparisAdet,
+                        'Durum': kayit.durum,
+                        'Oluşturulma Tarihi': new Date(kayit.olusturmaTarihi).toLocaleString('tr-TR')
                     }));
                     filename = 'siparis_verileri';
                     break;
                 case 'hepsi':
-                    // Tüm verileri tek Excel'de farklı sheet'lerde topla
-                    const kaliteData = kaliteKayitlari.map(kayit => ({
-                        'Tarih': new Date(kayit.tarih).toLocaleString('tr-TR'),
-                        'Operatör': kayit.operator,
-                        'Ürün Kodu': kayit.urunKodu,
-                        'Toplam Adet': kayit.toplamAdet,
-                        'Sipariş No': kayit.siparisNo,
-                        'Hata Sayısı': kayit.hatalar.reduce((total, hata) => total + hata.iskartaAdet + hata.geriGidenAdet, 0)
-                    }));
+                    // Tüm verileri tek dosyada
+                    const tumVeriler = {
+                        'Kalite Kontrol': kaliteKayitlari,
+                        'Sipariş Hazırlık': siparisHazirlikKayitlari,
+                        'Performans': performansKayitlari,
+                        'Stok': stokKayitlari,
+                        'Temizleme': temizlemeKayitlari,
+                        'Sevke Hazır': sevkeHazirKayitlari,
+                        'Sevk Edilen': sevkEdilenKayitlari,
+                        'Yarı Mamül': yariMamulKayitlari
+                    };
                     
-                    const performansData = performansKayitlari.map(kayit => ({
-                        'Tarih': new Date(kayit.tarih).toLocaleDateString('tr-TR'),
-                        'Çalışan': kayit.calisan,
-                        'Ekleyen': kayit.ekleyen,
-                        'İşlem Sayısı': kayit.islemler.length,
-                        'Toplam Adet': kayit.islemler.reduce((total, islem) => total + islem.adet, 0),
-                        'Toplam Süre (dk)': kayit.islemler.reduce((total, islem) => total + islem.sure, 0)
-                    }));
-
-                    const siparisData = siparisHazirlikKayitlari.map(kayit => ({
-                        'Tarih': new Date(kayit.tarih).toLocaleDateString('tr-TR'),
-                        'Operatör': kayit.operator,
-                        'Sipariş No': kayit.siparisNo,
-                        'Ürün Kodu': kayit.urunKodu,
-                        'Adet': kayit.siparisAdet,
-                        'Durum': kayit.durum
-                    }));
-
-                    const stokData = stokKayitlari.map(kayit => ({
-                        'Malzeme Türü': kayit.malzemeTuru,
-                        'Ürün Adı': kayit.urunAdi,
-                        'Ölçüler': kayit.olculeri || '-',
-                        'Mevcut Adet': kayit.mevcutAdet,
-                        'Ekleyen': kayit.ekleyen,
-                        'Son Güncelleme': new Date(kayit.sonGuncelleme).toLocaleString('tr-TR')
-                    }));
-
-                    // Tüm verileri CSV formatında birleştir
-                    let csvContent = "KALITE KONTROL VERİLERİ\n";
-                    csvContent += convertToCSV(kaliteData) + "\n\n";
-                    
-                    csvContent += "PERFORMANS VERİLERİ\n";
-                    csvContent += convertToCSV(performansData) + "\n\n";
-                    
-                    csvContent += "SİPARİŞ VERİLERİ\n";
-                    csvContent += convertToCSV(siparisData) + "\n\n";
-                    
-                    csvContent += "STOK VERİLERİ\n";
-                    csvContent += convertToCSV(stokData) + "\n\n";
-
-                    downloadCSV(csvContent, 'tum_veriler.csv');
+                    const jsonStr = JSON.stringify(tumVeriler, null, 2);
+                    const blob = new Blob([jsonStr], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `tum_veriler_${new Date().toISOString().slice(0, 10)}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
                     return;
             }
 
             if (data.length === 0) {
-                alert('Aktarılacak veri bulunamadı!');
+                alert('Dışa aktarılacak veri bulunamadı!');
                 return;
             }
 
-            const csvContent = convertToCSV(data);
-            downloadCSV(csvContent, `${filename}.csv`);
+            // CSV formatında veri oluştur
+            const headers = Object.keys(data[0]);
+            let csvContent = headers.join(',') + '\n';
+            
+            data.forEach(row => {
+                const values = headers.map(header => {
+                    let value = row[header] || '';
+                    // Virgül ve çift tırnak karakterlerini escape et
+                    if (typeof value === 'string' && (value.includes(',') || value.includes('"'))) {
+                        value = '"' + value.replace(/"/g, '""') + '"';
+                    }
+                    return value;
+                });
+                csvContent += values.join(',') + '\n';
+            });
+
+            // CSV dosyasını indir
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${filename}_${new Date().toISOString().slice(0, 10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
         }
 
-        // CSV formatına dönüştür
-        function convertToCSV(data) {
-            if (data.length === 0) return '';
-
-            const headers = Object.keys(data[0]);
-            const csvRows = [];
-
-            // Başlıkları ekle
-            csvRows.push(headers.join(','));
-
-            // Verileri ekle
-            for (const row of data) {
-                const values = headers.map(header => {
-                    const value = row[header];
-                    return `"${value}"`;
-                });
-                csvRows.push(values.join(','));
+        // Görüntülenen verileri Excel'e aktar
+        function exportCurrentData() {
+            const veriTuru = document.getElementById('veriTuru').value;
+            const tarihFiltre = document.getElementById('tarihFiltre').value;
+            
+            let veri = [];
+            let filename = '';
+            
+            switch (veriTuru) {
+                case 'kalite':
+                    veri = kaliteKayitlari;
+                    filename = 'kalite_kontrol_verileri';
+                    break;
+                case 'siparis':
+                    veri = siparisHazirlikKayitlari;
+                    filename = 'siparis_verileri';
+                    break;
+                case 'performans':
+                    veri = performansKayitlari;
+                    filename = 'performans_verileri';
+                    break;
+                case 'stok':
+                    veri = stokKayitlari;
+                    filename = 'stok_verileri';
+                    break;
+                case 'temizleme':
+                    veri = temizlemeKayitlari;
+                    filename = 'temizleme_verileri';
+                    break;
+                case 'sevkeHazir':
+                    veri = sevkeHazirKayitlari;
+                    filename = 'sevke_hazir_verileri';
+                    break;
+                case 'sevkEdilen':
+                    veri = sevkEdilenKayitlari;
+                    filename = 'sevk_edilen_verileri';
+                    break;
+                case 'yariMamul':
+                    veri = yariMamulKayitlari;
+                    filename = 'yari_mamul_verileri';
+                    break;
             }
 
-            return csvRows.join('\n');
-        }
+            // Tarih filtresi uygula
+            if (tarihFiltre !== 'hepsi') {
+                const bugün = new Date();
+                veri = veri.filter(kayit => {
+                    const kayitTarihi = new Date(kayit.tarih || kayit.sonGuncelleme || kayit.olusturmaTarihi);
+                    switch (tarihFiltre) {
+                        case 'bugun':
+                            return kayitTarihi.toDateString() === bugün.toDateString();
+                        case 'bu-hafta':
+                            const haftaOnce = new Date(bugün.getTime() - 7 * 24 * 60 * 60 * 1000);
+                            return kayitTarihi >= haftaOnce;
+                        case 'bu-ay':
+                            return kayitTarihi.getMonth() === bugün.getMonth() && kayitTarihi.getFullYear() === bugün.getFullYear();
+                        default:
+                            return true;
+                    }
+                });
+            }
 
-        // CSV dosyasını indir
-        function downloadCSV(csvContent, filename) {
-            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
+            if (veri.length === 0) {
+                alert('Dışa aktarılacak veri bulunamadı!');
+                return;
+            }
+
+            // JSON formatında veriyi indir
+            const jsonStr = JSON.stringify(veri, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', filename);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            showAlert('exportAlert', `${filename} başarıyla indirildi!`, 'success');
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${filename}_${tarihFiltre}_${new Date().toISOString().slice(0, 10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showAlert('globalAlert', 'Veriler başarıyla dışa aktarıldı!', 'success');
         }
 
-        // Tüm verileri yedekle (JSON formatında)
+        // Tüm verileri dışa aktar
         function exportAllData() {
-            const allData = {
+            const tumVeriler = {
                 kaliteKayitlari: kaliteKayitlari,
                 siparisHazirlikKayitlari: siparisHazirlikKayitlari,
                 performansKayitlari: performansKayitlari,
@@ -3205,25 +3545,25 @@
                 sevkeHazirKayitlari: sevkeHazirKayitlari,
                 sevkEdilenKayitlari: sevkEdilenKayitlari,
                 yariMamulKayitlari: yariMamulKayitlari,
-                exportDate: new Date().toISOString()
+                exportDate: new Date().toISOString(),
+                version: '1.0'
             };
 
-            const dataStr = JSON.stringify(allData, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(dataBlob);
-            link.download = `uretim_sistemi_yedek_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
+            const jsonStr = JSON.stringify(tumVeriler, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `akg_kalite_kontrol_yedek_${new Date().toISOString().slice(0, 10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
 
             alert('Tüm veriler başarıyla yedeklendi!');
         }
 
-        // Verileri geri yükle
+        // Veri geri yükleme
         function importData() {
-            const fileInput = document.getElementById('importFile');
-            const file = fileInput.files[0];
-
+            const file = document.getElementById('importFile').files[0];
             if (!file) {
                 alert('Lütfen bir dosya seçin!');
                 return;
@@ -3232,52 +3572,71 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
-                    const importedData = JSON.parse(e.target.result);
+                    const data = JSON.parse(e.target.result);
                     
-                    if (confirm('Mevcut tüm veriler silinecek ve yedekten geri yüklenecek. Devam etmek istediğinizden emin misiniz?')) {
-                        // Verileri geri yükle
-                        kaliteKayitlari = importedData.kaliteKayitlari || [];
-                        siparisHazirlikKayitlari = importedData.siparisHazirlikKayitlari || [];
-                        performansKayitlari = importedData.performansKayitlari || [];
-                        stokKayitlari = importedData.stokKayitlari || [];
-                        temizlemeKayitlari = importedData.temizlemeKayitlari || [];
-                        sevkeHazirKayitlari = importedData.sevkeHazirKayitlari || [];
-                        sevkEdilenKayitlari = importedData.sevkEdilenKayitlari || [];
-                        yariMamulKayitlari = importedData.yariMamulKayitlari || [];
-
-                        // LocalStorage'a kaydet
-                        localStorage.setItem('kaliteKayitlari', JSON.stringify(kaliteKayitlari));
-                        localStorage.setItem('siparisHazirlikKayitlari', JSON.stringify(siparisHazirlikKayitlari));
-                        localStorage.setItem('performansKayitlari', JSON.stringify(performansKayitlari));
-                        localStorage.setItem('stokKayitlari', JSON.stringify(stokKayitlari));
-                        localStorage.setItem('temizlemeKayitlari', JSON.stringify(temizlemeKayitlari));
-                        localStorage.setItem('sevkeHazirKayitlari', JSON.stringify(sevkeHazirKayitlari));
-                        localStorage.setItem('sevkEdilenKayitlari', JSON.stringify(sevkEdilenKayitlari));
-                        localStorage.setItem('yariMamulKayitlari', JSON.stringify(yariMamulKayitlari));
-
-                        // Sayfayı yenile
-                        location.reload();
-                        
-                        alert('Veriler başarıyla geri yüklendi!');
+                    // Veri formatını kontrol et
+                    if (data.kaliteKayitlari) {
+                        kaliteKayitlari = data.kaliteKayitlari || [];
                     }
+                    if (data.siparisHazirlikKayitlari) {
+                        siparisHazirlikKayitlari = data.siparisHazirlikKayitlari || [];
+                    }
+                    if (data.performansKayitlari) {
+                        performansKayitlari = data.performansKayitlari || [];
+                    }
+                    if (data.stokKayitlari) {
+                        stokKayitlari = data.stokKayitlari || [];
+                    }
+                    if (data.temizlemeKayitlari) {
+                        temizlemeKayitlari = data.temizlemeKayitlari || [];
+                    }
+                    if (data.sevkeHazirKayitlari) {
+                        sevkeHazirKayitlari = data.sevkeHazirKayitlari || [];
+                    }
+                    if (data.sevkEdilenKayitlari) {
+                        sevkEdilenKayitlari = data.sevkEdilenKayitlari || [];
+                    }
+                    if (data.yariMamulKayitlari) {
+                        yariMamulKayitlari = data.yariMamulKayitlari || [];
+                    }
+
+                    // Verileri localStorage'a kaydet
+                    saveToLocalStorage('kaliteKayitlari', kaliteKayitlari);
+                    saveToLocalStorage('siparisHazirlikKayitlari', siparisHazirlikKayitlari);
+                    saveToLocalStorage('performansKayitlari', performansKayitlari);
+                    saveToLocalStorage('stokKayitlari', stokKayitlari);
+                    saveToLocalStorage('temizlemeKayitlari', temizlemeKayitlari);
+                    saveToLocalStorage('sevkeHazirKayitlari', sevkeHazirKayitlari);
+                    saveToLocalStorage('sevkEdilenKayitlari', sevkEdilenKayitlari);
+                    saveToLocalStorage('yariMamulKayitlari', yariMamulKayitlari);
+
+                    // Firebase'e senkronize et
+                    forceSyncAllData();
+
+                    // Tüm listeleri yenile
+                    refreshAllLists();
+
+                    alert('Veriler başarıyla geri yüklendi!');
+                    document.getElementById('importFile').value = '';
                 } catch (error) {
-                    alert('Dosya formatı geçersiz! Lütfen geçerli bir yedek dosyası seçin.');
-                    console.error('Import error:', error);
+                    alert('Dosya formatı hatalı! Lütfen geçerli bir JSON dosyası seçin.');
+                    console.error('Veri geri yükleme hatası:', error);
                 }
             };
-
             reader.readAsText(file);
-            fileInput.value = ''; // Input'u temizle
         }
 
         // Tüm verileri temizle
-        function clearAllData() {
-            if (confirm('TÜM VERİLER SİLİNECEK! Bu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?')) {
-                if (confirm('SON UYARI: Bu işlem tüm kalite kontrol, sipariş, performans, stok ve diğer tüm verileri kalıcı olarak silecek. Gerçekten devam etmek istiyor musunuz?')) {
-                    // Tüm verileri temizle
-                    localStorage.clear();
-                    
-                    // Global değişkenleri sıfırla
+        async function clearAllData() {
+            if (confirm('TÜM VERİLERİ SİLMEK İSTEDİĞİNİZDEN EMİN MİSİNİZ?\n\nBu işlem GERİ ALINAMAZ!')) {
+                if (confirm('Son kez soruyoruz: Gerçekten tüm verileri silmek istiyor musunuz?')) {
+                    // Firebase'den tüm verileri sil
+                    if (window.firebaseDB && isFirebaseReady) {
+                        const dataRef = window.firebaseRef(window.firebaseDB, 'data');
+                        await window.firebaseRemove(dataRef);
+                    }
+
+                    // Local verileri temizle
                     kaliteKayitlari = [];
                     siparisHazirlikKayitlari = [];
                     performansKayitlari = [];
@@ -3287,334 +3646,83 @@
                     sevkEdilenKayitlari = [];
                     yariMamulKayitlari = [];
 
-                    // Sayfayı yenile
-                    location.reload();
-                    
-                    alert('Tüm veriler başarıyla temizlendi!');
+                    // LocalStorage'ı temizle
+                    localStorage.removeItem('kaliteKayitlari');
+                    localStorage.removeItem('siparisHazirlikKayitlari');
+                    localStorage.removeItem('performansKayitlari');
+                    localStorage.removeItem('stokKayitlari');
+                    localStorage.removeItem('temizlemeKayitlari');
+                    localStorage.removeItem('sevkeHazirKayitlari');
+                    localStorage.removeItem('sevkEdilenKayitlari');
+                    localStorage.removeItem('yariMamulKayitlari');
+
+                    // Tüm listeleri yenile
+                    refreshAllLists();
+
+                    alert('Tüm veriler başarıyla silindi!');
                 }
             }
         }
 
-        // Veri türü seçimi değiştiğinde tabloyu güncelle
-        document.addEventListener('change', function(e) {
-            if (e.target.id === 'veriTuru' || e.target.id === 'tarihFiltre') {
-                loadVeriTablosu();
-            }
-        });
+        // Filtreleme ve arama fonksiyonları
+        function applyFilter() {
+            loadVeriTablosu();
+        }
 
-        // Modal kapatma için escape tuşu
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.getElementById('editModal').style.display = 'none';
-            }
-        });
-
-        // Modal dışına tıklayınca kapat
-        document.getElementById('editModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.style.display = 'none';
-            }
-        });
-
-        // Form validation ve user experience iyileştirmeleri
-        function validateForm(formId) {
-            const form = document.getElementById(formId);
-            const requiredFields = form.querySelectorAll('[required]');
-            let isValid = true;
-
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.style.borderColor = '#e74c3c';
-                    isValid = false;
+        // Sayfa başlangıcında gerekli fonksiyonları çağır
+        window.addEventListener('load', function() {
+            // İlk tab'i aktif yap
+            showTab('kalite');
+            
+            // Verileri yükle
+            setTimeout(() => {
+                if (isFirebaseReady) {
+                    loadAllDataFromFirebase();
                 } else {
-                    field.style.borderColor = '#ddd';
+                    loadFromLocalStorage();
                 }
-            });
-
-            return isValid;
-        }
-
-        // Auto-save functionality (5 dakikada bir otomatik kaydet)
-        setInterval(() => {
-            const hasData = kaliteKayitlari.length > 0 || 
-                          siparisHazirlikKayitlari.length > 0 || 
-                          performansKayitlari.length > 0 || 
-                          stokKayitlari.length > 0;
-            
-            if (hasData) {
-                console.log('Auto-save: Veriler otomatik olarak kaydedildi.', new Date().toLocaleTimeString('tr-TR'));
-            }
-        }, 300000); // 5 dakika
-
-        // Sayfa kapatılırken uyarı (eğer kaydedilmemiş veri varsa)
-        window.addEventListener('beforeunload', function(e) {
-            // Bu özellik artık pek çok tarayıcıda çalışmaz, ama yine de ekleyelim
-            const hasUnsavedData = false; // Gerçek uygulamada bunu kontrol edebilirsiniz
-            
-            if (hasUnsavedData) {
-                e.preventDefault();
-                e.returnValue = '';
-                return '';
-            }
+                loadStats();
+                loadIstatistikler();
+                loadVeriTablosu();
+            }, 1000);
         });
 
-        // Responsive table için yardımcı fonksiyon
-        function makeTablesResponsive() {
-            const tables = document.querySelectorAll('table');
-            tables.forEach(table => {
-                const wrapper = document.createElement('div');
-                wrapper.style.overflowX = 'auto';
-                table.parentNode.insertBefore(wrapper, table);
-                wrapper.appendChild(table);
-            });
-        }
-
-        // Dark mode toggle (opsiyonel)
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDarkMode.toString());
-        }
-
-        // Dark mode durumunu yükle
-        document.addEventListener('DOMContentLoaded', function() {
-            const isDarkMode = localStorage.getItem('darkMode') === 'true';
-            if (isDarkMode) {
-                document.body.classList.add('dark-mode');
-            }
-        });
-
-        // Arama/filtreleme fonksiyonu
-        function searchData(searchTerm, dataArray) {
-            if (!searchTerm) return dataArray;
-            
-            return dataArray.filter(item => {
-                const searchFields = Object.values(item).join(' ').toLowerCase();
-                return searchFields.includes(searchTerm.toLowerCase());
-            });
-        }
-
-        // Toplam hesaplama yardımcı fonksiyonu
-        function calculateTotals() {
-            const totals = {
-                kaliteKayitlari: kaliteKayitlari.length,
-                siparisHazirlikKayitlari: siparisHazirlikKayitlari.length,
-                performansKayitlari: performansKayitlari.length,
-                stokKayitlari: stokKayitlari.length,
-                temizlemeKayitlari: temizlemeKayitlari.length,
-                sevkeHazirKayitlari: sevkeHazirKayitlari.length,
-                sevkEdilenKayitlari: sevkEdilenKayitlari.length,
-                yariMamulKayitlari: yariMamulKayitlari.length,
-                toplamUretim: kaliteKayitlari.reduce((total, kayit) => total + kayit.toplamAdet, 0),
-                toplamHata: kaliteKayitlari.reduce((total, kayit) => 
-                    total + kayit.hatalar.reduce((hataTotal, hata) => 
-                        hataTotal + hata.iskartaAdet + hata.geriGidenAdet, 0), 0),
-                tamamlananSiparisler: siparisHazirlikKayitlari.filter(s => s.durum === 'tamamlandı').length
-            };
-
-            totals.basariOrani = totals.toplamUretim > 0 ? 
-                Math.round((1 - totals.toplamHata / totals.toplamUretim) * 100) : 0;
-
-            return totals;
-        }
-
-        // Grafik gösterimi için basit chart oluşturma (Chart.js olmadan)
-        function createSimpleChart(data, containerId) {
-            const container = document.getElementById(containerId);
-            if (!container) return;
-
-            let html = '<div class="simple-chart">';
-            const maxValue = Math.max(...data.values);
-            
-            data.labels.forEach((label, index) => {
-                const value = data.values[index];
-                const percentage = (value / maxValue) * 100;
-                
-                html += `
-                    <div class="chart-bar" style="margin-bottom: 10px;">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                            <span style="font-weight: 600;">${label}</span>
-                            <span style="font-weight: bold; color: #3498db;">${value}</span>
-                        </div>
-                        <div style="background: #ecf0f1; height: 20px; border-radius: 10px; overflow: hidden;">
-                            <div style="background: linear-gradient(90deg, #3498db, #2980b9); height: 100%; width: ${percentage}%; border-radius: 10px; transition: width 0.3s ease;"></div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        // Print özelliği
-        function printReport(sectionId) {
-            const printContent = document.getElementById(sectionId).innerHTML;
-            const originalContent = document.body.innerHTML;
-            
-            document.body.innerHTML = `
-                <html>
-                <head>
-                    <title>Üretim Sistemi Raporu</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; margin: 20px; }
-                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-                        th { background-color: #f8f9fa; }
-                        .no-print { display: none; }
-                    </style>
-                </head>
-                <body>
-                    <h1>Üretim Sistemi Raporu</h1>
-                    <p>Tarih: ${new Date().toLocaleString('tr-TR')}</p>
-                    ${printContent}
-                </body>
-                </html>
+        // Global alert gösterme
+        function showGlobalAlert(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert ${type === 'success' ? 'alert-success' : 'alert-error'}`;
+            alertDiv.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                padding: 15px 20px;
+                border-radius: 8px;
+                font-weight: 600;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                animation: slideIn 0.3s ease;
             `;
-            
-            window.print();
-            document.body.innerHTML = originalContent;
-            
-            // Event listener'ları yeniden yükle
-            location.reload();
+            alertDiv.textContent = message;
+
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 4000);
         }
 
-        // Sistem durum kontrolü
-        function checkSystemHealth() {
-            const health = {
-                localStorage: typeof(Storage) !== "undefined",
-                dataIntegrity: true,
-                lastBackup: localStorage.getItem('lastBackup') || 'Hiç yedeklenmemiş',
-                totalRecords: calculateTotals()
-            };
-
-            // Veri bütünlüğü kontrolü
-            try {
-                JSON.parse(localStorage.getItem('kaliteKayitlari') || '[]');
-                JSON.parse(localStorage.getItem('siparisHazirlikKayitlari') || '[]');
-                JSON.parse(localStorage.getItem('performansKayitlari') || '[]');
-            } catch (e) {
-                health.dataIntegrity = false;
-            }
-
-            return health;
-        }
-
-        // Hata logları
-        function logError(error, context) {
-            const errorLog = {
-                timestamp: new Date().toISOString(),
-                error: error.toString(),
-                context: context,
-                userAgent: navigator.userAgent,
-                url: window.location.href
-            };
-
-            // Local storage'da hata logları tut (maksimum 100 adet)
-            let errorLogs = JSON.parse(localStorage.getItem('errorLogs') || '[]');
-            errorLogs.unshift(errorLog);
-            
-            if (errorLogs.length > 100) {
-                errorLogs = errorLogs.slice(0, 100);
-            }
-            
-            localStorage.setItem('errorLogs', JSON.stringify(errorLogs));
-            console.error('System Error:', errorLog);
-        }
-
-        // Global error handler
-        window.addEventListener('error', function(e) {
-            logError(e.error, 'Global Error Handler');
-        });
-
-        // Performans metrikleri
-        function trackPerformance() {
-            if (performance && performance.timing) {
-                const perfData = performance.timing;
-                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-                console.log(`Sayfa yükleme süresi: ${pageLoadTime}ms`);
-            }
-        }
-
-        // Sayfa yüklendiğinde performans takibi
-        window.addEventListener('load', trackPerformance);
-
-        // Kullanıcı aktivite takibi (basit)
-        let userActivity = {
-            lastActive: Date.now(),
-            sessionStart: Date.now(),
-            actionsCount: 0
-        };
-
-        document.addEventListener('click', function() {
-            userActivity.lastActive = Date.now();
-            userActivity.actionsCount++;
-        });
-
-        document.addEventListener('keypress', function() {
-            userActivity.lastActive = Date.now();
-            userActivity.actionsCount++;
-        });
-
-        // Oturum süresi kontrolü (1 saat)
-        setInterval(function() {
-            const now = Date.now();
-            const inactiveTime = now - userActivity.lastActive;
-            
-            if (inactiveTime > 3600000) { // 1 saat
-                console.log('Kullanıcı uzun süredir aktif değil');
-                // Burada oturum sonu işlemleri yapılabilir
-            }
-        }, 60000); // Her dakika kontrol et
-
-        // Veri analizi fonksiyonları
-        function getProductivityStats() {
-            const now = new Date();
-            const thisWeek = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-            const thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-
-            const weeklyData = kaliteKayitlari.filter(k => new Date(k.tarih) >= thisWeek);
-            const monthlyData = kaliteKayitlari.filter(k => new Date(k.tarih) >= thisMonth);
-
-            return {
-                weekly: {
-                    totalProduction: weeklyData.reduce((total, k) => total + k.toplamAdet, 0),
-                    totalErrors: weeklyData.reduce((total, k) => total + k.hatalar.reduce((ht, h) => ht + h.iskartaAdet + h.geriGidenAdet, 0), 0),
-                    recordCount: weeklyData.length
-                },
-                monthly: {
-                    totalProduction: monthlyData.reduce((total, k) => total + k.toplamAdet, 0),
-                    totalErrors: monthlyData.reduce((total, k) => total + k.hatalar.reduce((ht, h) => ht + h.iskartaAdet + h.geriGidenAdet, 0), 0),
-                    recordCount: monthlyData.length
+        // CSS animasyonu ekle
+        if (!document.getElementById('customStyles')) {
+            const style = document.createElement('style');
+            style.id = 'customStyles';
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
                 }
-            };
+            `;
+            document.head.appendChild(style);
         }
-
-        // Sistem bilgileri topla
-        function getSystemInfo() {
-            return {
-                timestamp: new Date().toISOString(),
-                userAgent: navigator.userAgent,
-                screen: {
-                    width: screen.width,
-                    height: screen.height
-                },
-                window: {
-                    width: window.innerWidth,
-                    height: window.innerHeight
-                },
-                localStorage: {
-                    available: typeof(Storage) !== "undefined",
-                    used: JSON.stringify(localStorage).length,
-                    keys: Object.keys(localStorage).length
-                },
-                performance: getProductivityStats(),
-                health: checkSystemHealth()
-            };
-        }
-
-        console.log('🏭 Üretim Takip Sistemi başarıyla yüklendi!');
-        console.log('📊 Sistem Bilgileri:', getSystemInfo());
     </script>
 </body>
 </html>
