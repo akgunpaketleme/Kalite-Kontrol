@@ -292,6 +292,7 @@
             <button class="tab" onclick="showTab('siparis-hazirlik')">📦 Sipariş Hazırlığı</button>
             <button class="tab" onclick="showTab('siparisler')">🛒 Siparişler</button>
             <button class="tab" onclick="showTab('stok')">📊 Stok Yönetimi</button>
+            <button class="tab" onclick="showTab('veri-aktar')" style="background: linear-gradient(135deg, #e67e22, #d35400);">🔄 Veri Aktar</button>
         </div>
 
         <!-- Güncel İşler Tab -->
@@ -391,6 +392,12 @@
             </form>
             <div id="siparisEkleAlert"></div>
 
+            <!-- Sipariş Hazırlık Özeti -->
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 25px 0; border: 2px solid #e9ecef;">
+                <h3 style="color: #2c3e50; margin-bottom: 20px; text-align: center; background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 12px; border-radius: 8px;">📊 Sipariş Hazırlık Özeti</h3>
+                <div id="siparisHazirlikOzeti"></div>
+            </div>
+
             <div id="siparislerContainer">
                 <h3>📋 Mevcut Siparişler</h3>
                 <div id="siparislerListesi"></div>
@@ -438,6 +445,12 @@
                 <button type="submit" class="btn">➕ Sipariş Ekle</button>
             </form>
             <div id="siparisAlert"></div>
+
+            <!-- Sipariş Özeti -->
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 25px 0; border: 2px solid #e9ecef;">
+                <h3 style="color: #2c3e50; margin-bottom: 20px; text-align: center; background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 12px; border-radius: 8px;">📊 Sipariş Özeti</h3>
+                <div id="urunSiparisOzeti"></div>
+            </div>
 
             <div style="margin: 20px 0;">
                 <label style="font-weight: 600; margin-right: 10px;">Filtre:</label>
@@ -503,9 +516,81 @@
             </form>
             <div id="stokAlert"></div>
 
+            <!-- Stok Özeti -->
+            <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 25px 0; border: 2px solid #e9ecef;">
+                <h3 style="color: #2c3e50; margin-bottom: 20px; text-align: center; background: linear-gradient(135deg, #27ae60, #2ecc71); color: white; padding: 12px; border-radius: 8px;">📦 Tüm Stoklar Özeti</h3>
+                <div id="stokOzeti"></div>
+            </div>
+
             <div id="stokListesiContainer">
-                <h3>📋 Kayıtlı Stoklar</h3>
+                <h3>📋 Detaylı Stok Listesi</h3>
                 <div id="stokListesi"></div>
+            </div>
+        </div>
+
+        <!-- Veri Aktar Tab (YENİ) -->
+        <div id="veri-aktar" class="tab-content">
+            <h2>🔄 Veri Aktarma</h2>
+            
+            <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 10px; padding: 20px; margin-bottom: 30px;">
+                <h3 style="color: #856404; margin-bottom: 15px;">⚠️ Önemli Bilgilendirme</h3>
+                <p style="color: #856404; line-height: 1.6;">
+                    Bu araç, eski sisteminizden (LocalStorage) verileri Firebase'e aktarmanız için kullanılır.<br>
+                    <strong>Not:</strong> Veri aktarımı mevcut Firebase verilerinin üzerine EKLER, silmez.
+                </p>
+            </div>
+
+            <div class="kayit-item">
+                <div class="kayit-header">
+                    <div><strong>📤 Adım 1: Eski Sistemden Veri Çıkarma</strong></div>
+                </div>
+                <div style="padding: 20px;">
+                    <ol style="line-height: 2;">
+                        <li><strong>Eski HTML dosyanızı</strong> tarayıcıda açın (verilerinizin kayıtlı olduğu dosya)</li>
+                        <li>Aynı tarayıcı penceresinde <strong>yeni bir sekme</strong> açın</li>
+                        <li>Yeni sekmede <strong>"veri-cikarma-araci.html"</strong> dosyasını açın</li>
+                        <li><strong>"Verileri Kontrol Et"</strong> butonuna tıklayın</li>
+                        <li>Verilerinizi <strong>JSON dosyası olarak</strong> indirin</li>
+                    </ol>
+                    <a href="veri-cikarma-araci.html" target="_blank" class="btn" style="display: inline-block; text-decoration: none; margin-top: 10px;">
+                        🔗 Veri Çıkarma Aracını Aç
+                    </a>
+                </div>
+            </div>
+
+            <div class="kayit-item">
+                <div class="kayit-header">
+                    <div><strong>📥 Adım 2: Firebase'e Veri Yükleme</strong></div>
+                </div>
+                <div style="padding: 20px;">
+                    <p style="margin-bottom: 15px;">İndirdiğiniz JSON dosyasını buradan yükleyin:</p>
+                    <input type="file" id="importFile" accept=".json" style="padding: 10px; border: 2px solid #3498db; border-radius: 8px; width: 100%; margin-bottom: 15px;">
+                    <button class="btn btn-success" onclick="verileriYukle()">📤 Verileri Firebase'e Aktar</button>
+                </div>
+            </div>
+
+            <div id="importStatus"></div>
+
+            <div class="kayit-item" style="margin-top: 30px;">
+                <div class="kayit-header" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">
+                    <div><strong>📥 JSON Veri İndirme</strong></div>
+                </div>
+                <div style="padding: 20px;">
+                    <p style="margin-bottom: 15px;">Tüm Firebase verilerinizi JSON dosyası olarak bilgisayarınıza indirin (yedek amaçlı).</p>
+                    <button class="btn btn-success" onclick="firebaseVerileriniIndir()">📥 Tüm Verileri JSON Olarak İndir</button>
+                </div>
+            </div>
+
+            <div class="kayit-item" style="margin-top: 30px;">
+                <div class="kayit-header" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                    <div><strong>🗑️ Tehlikeli Alan: Tüm Firebase Verilerini Sil</strong></div>
+                </div>
+                <div style="padding: 20px;">
+                    <p style="color: #721c24; margin-bottom: 15px; font-weight: 600;">
+                        ⚠️ Bu işlem Firebase'deki TÜM verileri kalıcı olarak siler. Bu işlem geri alınamaz!
+                    </p>
+                    <button class="btn btn-danger" onclick="tumFirebaseVerileriniSil()">🗑️ Tüm Firebase Verilerini Sil</button>
+                </div>
             </div>
         </div>
     </div>
@@ -633,6 +718,7 @@
                             <div style="display: flex; gap: 10px; align-items: center;">
                                 <span class="aciliyet-badge ${aciliyetClass}">${aciliyetText}</span>
                                 ${gorev.atanan ? `<span style="background: #3498db; color: white; padding: 4px 10px; border-radius: 12px; font-size: 12px;">👤 ${gorev.atanan}</span>` : ''}
+                                <button class="btn-edit" onclick="gorevDuzenle('${gorev.id}')">✏️</button>
                                 <button class="btn-delete" onclick="gorevSil('${gorev.id}')" style="padding: 5px 10px;">🗑️</button>
                             </div>
                         </div>
@@ -778,6 +864,9 @@
             const container = document.getElementById('siparislerListesi');
             if (!container) return;
 
+            // Özet güncelle
+            guncelleSiparisHazirlikOzeti(siparisler);
+
             if (siparisler.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">Henüz sipariş bulunmuyor.</p>';
                 return;
@@ -785,25 +874,505 @@
 
             let html = '';
             siparisler.slice().reverse().forEach(siparis => {
+                const gonderilenAdet = siparis.gonderilenAdet || 0;
+                const kalanAdet = siparis.siparisAdet - gonderilenAdet;
+                
                 html += `
                     <div class="kayit-item">
                         <div class="kayit-header">
                             <div><strong>🔢 ${siparis.siparisNo} - 📦 ${siparis.urunKodu}</strong></div>
-                            <div>
-                                <button class="btn-delete" onclick="siparisSil('${siparis.id}')" style="margin-left: 5px;">🗑️</button>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-edit" onclick="siparisHazirlikDuzenle('${siparis.id}')">✏️</button>
+                                <button class="btn-delete" onclick="siparisSil('${siparis.id}')">🗑️</button>
                             </div>
                         </div>
                         <div class="kayit-details">
                             <div><strong>📅 Tarih:</strong> ${new Date(siparis.tarih).toLocaleDateString('tr-TR')}</div>
                             <div><strong>👤 Operatör:</strong> ${siparis.operator}</div>
                             <div><strong>📊 Sipariş Adedi:</strong> ${siparis.siparisAdet}</div>
+                            <div><strong>📤 Gönderilen:</strong> <span style="color: #27ae60; font-weight: bold;">${gonderilenAdet}</span></div>
+                            <div><strong>📉 Kalan:</strong> <span style="color: ${kalanAdet > 0 ? '#e74c3c' : '#27ae60'}; font-weight: bold;">${kalanAdet}</span></div>
                             <div><strong>📊 Durum:</strong> ${siparis.durum === 'tamamlandi' ? '✅ Tamamlandı' : '⏳ Beklemede'}</div>
                             ${siparis.notlar ? `<div style="grid-column: 1/-1;"><strong>📝 Notlar:</strong> ${siparis.notlar}</div>` : ''}
+                        </div>
+                        
+                        <!-- Gönderilen Adet Ekleme -->
+                        <div style="margin-top: 15px; padding: 15px; background: #e8f5e9; border-radius: 8px; border: 2px solid #27ae60;">
+                            <label style="font-weight: 600; display: block; margin-bottom: 8px; color: #27ae60;">📤 Gönderilen Adet Ekle</label>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="number" 
+                                       id="gonderilen-${siparis.id}" 
+                                       placeholder="Gönderilen adet" 
+                                       min="1" 
+                                       max="${kalanAdet}"
+                                       style="flex: 1; padding: 10px; border: 2px solid #27ae60; border-radius: 6px; font-weight: bold;">
+                                <button class="btn btn-success" 
+                                        onclick="gonderilenAdetEkle('${siparis.id}')" 
+                                        style="padding: 10px 20px; white-space: nowrap;">
+                                    ➕ Ekle
+                                </button>
+                            </div>
+                            ${kalanAdet <= 0 ? '<div style="margin-top: 8px; color: #27ae60; font-weight: 600;">✅ Sipariş tamamen gönderildi!</div>' : ''}
                         </div>
                     </div>
                 `;
             });
             container.innerHTML = html;
+        }
+
+        function guncelleSiparisHazirlikOzeti(siparisler) {
+            const container = document.getElementById('siparisHazirlikOzeti');
+            if (!container) return;
+
+            const beklemede = siparisler.filter(s => s.durum === 'beklemede').length;
+            const tamamlandi = siparisler.filter(s => s.durum === 'tamamlandi').length;
+            
+            const toplamSiparisAdet = siparisler.reduce((sum, s) => sum + (s.siparisAdet || 0), 0);
+            const toplamGonderilen = siparisler.reduce((sum, s) => sum + (s.gonderilenAdet || 0), 0);
+            const toplamKalan = toplamSiparisAdet - toplamGonderilen;
+
+            let html = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #f39c12;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #f39c12;">${beklemede}</div>
+                        <div style="color: #666; margin-top: 5px;">⏳ Beklemede</div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #27ae60;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #27ae60;">${tamamlandi}</div>
+                        <div style="color: #666; margin-top: 5px;">✅ Tamamlandı</div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #3498db;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #3498db;">${toplamSiparisAdet}</div>
+                        <div style="color: #666; margin-top: 5px;">📦 Toplam Sipariş</div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #27ae60;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #27ae60;">${toplamGonderilen}</div>
+                        <div style="color: #666; margin-top: 5px;">📤 Gönderilen</div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #e74c3c;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #e74c3c;">${toplamKalan}</div>
+                        <div style="color: #666; margin-top: 5px;">📉 Kalan</div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        function gonderilenAdetEkle(id) {
+            const input = document.getElementById(`gonderilen-${id}`);
+            const eklenecekAdet = parseInt(input.value);
+            
+            if (isNaN(eklenecekAdet) || eklenecekAdet <= 0) {
+                alert('Lütfen geçerli bir adet giriniz!');
+                return;
+            }
+
+            database.ref('siparisHazirlik/' + id).once('value').then((snapshot) => {
+                const siparis = snapshot.val();
+                const mevcutGonderilen = siparis.gonderilenAdet || 0;
+                const yeniGonderilen = mevcutGonderilen + eklenecekAdet;
+                const kalanAdet = siparis.siparisAdet - yeniGonderilen;
+                
+                if (yeniGonderilen > siparis.siparisAdet) {
+                    alert('Gönderilen adet sipariş adetini aşamaz!');
+                    return;
+                }
+
+                database.ref('siparisHazirlik/' + id).update({
+                    gonderilenAdet: yeniGonderilen,
+                    sonGuncelleme: new Date().toISOString()
+                }).then(() => {
+                    input.value = '';
+                    showAlert('siparisEkleAlert', `✅ ${eklenecekAdet} adet eklendi! Toplam gönderilen: ${yeniGonderilen}, Kalan: ${kalanAdet}`, 'success');
+                });
+            });
+        }
+
+        // ==================== DÜZENLEME FONKSİYONLARI ====================
+        function gorevDuzenle(id) {
+            database.ref('gorevler/' + id).once('value').then((snapshot) => {
+                const gorev = snapshot.val();
+                if (!gorev) return;
+
+                const modal = document.getElementById('editModal');
+                const container = document.getElementById('editFormContainer');
+                
+                container.innerHTML = `
+                    <form id="editGorevForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>📝 Görev Başlığı</label>
+                                <input type="text" id="editGorevBaslik" value="${gorev.baslik}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>⚠️ Aciliyet</label>
+                                <select id="editGorevAciliyet" required>
+                                    <option value="acil" ${gorev.aciliyet === 'acil' ? 'selected' : ''}>🔴 Acil</option>
+                                    <option value="normal" ${gorev.aciliyet === 'normal' ? 'selected' : ''}>🔵 Normal</option>
+                                    <option value="dusuk" ${gorev.aciliyet === 'dusuk' ? 'selected' : ''}>⚪ Düşük</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>👤 Atanan Kişi</label>
+                                <select id="editGorevAtanan">
+                                    <option value="">Herkes</option>
+                                    <option value="Esat" ${gorev.atanan === 'Esat' ? 'selected' : ''}>Esat</option>
+                                    <option value="Ahmet" ${gorev.atanan === 'Ahmet' ? 'selected' : ''}>Ahmet</option>
+                                    <option value="Emre" ${gorev.atanan === 'Emre' ? 'selected' : ''}>Emre</option>
+                                    <option value="Gökay" ${gorev.atanan === 'Gökay' ? 'selected' : ''}>Gökay</option>
+                                    <option value="Berke" ${gorev.atanan === 'Berke' ? 'selected' : ''}>Berke</option>
+                                    <option value="Melisa" ${gorev.atanan === 'Melisa' ? 'selected' : ''}>Melisa</option>
+                                    <option value="Evrim" ${gorev.atanan === 'Evrim' ? 'selected' : ''}>Evrim</option>
+                                    <option value="Koray" ${gorev.atanan === 'Koray' ? 'selected' : ''}>Koray</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>📄 Açıklama</label>
+                                <textarea id="editGorevAciklama" rows="3">${gorev.aciklama || ''}</textarea>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button type="submit" class="btn">💾 Güncelle</button>
+                            <button type="button" class="btn btn-danger" onclick="closeModal()" style="margin-left: 10px;">❌ İptal</button>
+                        </div>
+                    </form>
+                `;
+                
+                modal.style.display = 'block';
+                
+                document.getElementById('editGorevForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    database.ref('gorevler/' + id).update({
+                        baslik: document.getElementById('editGorevBaslik').value.trim(),
+                        aciliyet: document.getElementById('editGorevAciliyet').value,
+                        atanan: document.getElementById('editGorevAtanan').value,
+                        aciklama: document.getElementById('editGorevAciklama').value.trim()
+                    }).then(() => {
+                        closeModal();
+                        showAlert('gorevAlert', 'Görev başarıyla güncellendi!', 'success');
+                    });
+                });
+            });
+        }
+
+        function siparisHazirlikDuzenle(id) {
+            database.ref('siparisHazirlik/' + id).once('value').then((snapshot) => {
+                const siparis = snapshot.val();
+                if (!siparis) return;
+
+                const modal = document.getElementById('editModal');
+                const container = document.getElementById('editFormContainer');
+                
+                container.innerHTML = `
+                    <form id="editSiparisForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>📅 Tarih</label>
+                                <input type="date" id="editSiparisTarih" value="${siparis.tarih}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>👤 Operatör</label>
+                                <select id="editSiparisOperator" required>
+                                    <option value="Esat" ${siparis.operator === 'Esat' ? 'selected' : ''}>Esat</option>
+                                    <option value="Ahmet" ${siparis.operator === 'Ahmet' ? 'selected' : ''}>Ahmet</option>
+                                    <option value="Emre" ${siparis.operator === 'Emre' ? 'selected' : ''}>Emre</option>
+                                    <option value="Gökay" ${siparis.operator === 'Gökay' ? 'selected' : ''}>Gökay</option>
+                                    <option value="Berke" ${siparis.operator === 'Berke' ? 'selected' : ''}>Berke</option>
+                                    <option value="Melisa" ${siparis.operator === 'Melisa' ? 'selected' : ''}>Melisa</option>
+                                    <option value="Evrim" ${siparis.operator === 'Evrim' ? 'selected' : ''}>Evrim</option>
+                                    <option value="Koray" ${siparis.operator === 'Koray' ? 'selected' : ''}>Koray</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>🔢 Sipariş No</label>
+                                <input type="text" id="editSiparisNo" value="${siparis.siparisNo}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>📦 Ürün Kodu</label>
+                                <input type="text" id="editUrunKodu" value="${siparis.urunKodu}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>📊 Sipariş Adedi</label>
+                                <input type="number" id="editSiparisAdet" value="${siparis.siparisAdet}" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>📤 Gönderilen Adet</label>
+                                <input type="number" id="editGonderilenAdet" value="${siparis.gonderilenAdet || 0}" min="0">
+                            </div>
+                            <div class="form-group" style="grid-column: 1/-1;">
+                                <label>📝 Notlar</label>
+                                <textarea id="editSiparisNotlar" rows="3">${siparis.notlar || ''}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>📊 Durum</label>
+                                <select id="editSiparisDurum">
+                                    <option value="beklemede" ${siparis.durum === 'beklemede' ? 'selected' : ''}>⏳ Beklemede</option>
+                                    <option value="tamamlandi" ${siparis.durum === 'tamamlandi' ? 'selected' : ''}>✅ Tamamlandı</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button type="submit" class="btn">💾 Güncelle</button>
+                            <button type="button" class="btn btn-danger" onclick="closeModal()" style="margin-left: 10px;">❌ İptal</button>
+                        </div>
+                    </form>
+                `;
+                
+                modal.style.display = 'block';
+                
+                document.getElementById('editSiparisForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    database.ref('siparisHazirlik/' + id).update({
+                        tarih: document.getElementById('editSiparisTarih').value,
+                        operator: document.getElementById('editSiparisOperator').value,
+                        siparisNo: document.getElementById('editSiparisNo').value.trim(),
+                        urunKodu: document.getElementById('editUrunKodu').value.trim(),
+                        siparisAdet: parseInt(document.getElementById('editSiparisAdet').value) || 0,
+                        gonderilenAdet: parseInt(document.getElementById('editGonderilenAdet').value) || 0,
+                        notlar: document.getElementById('editSiparisNotlar').value.trim(),
+                        durum: document.getElementById('editSiparisDurum').value,
+                        sonGuncelleme: new Date().toISOString()
+                    }).then(() => {
+                        closeModal();
+                        showAlert('siparisEkleAlert', 'Sipariş başarıyla güncellendi!', 'success');
+                    });
+                });
+            });
+        }
+
+        function urunSiparisDuzenle(id) {
+            database.ref('urunSiparisler/' + id).once('value').then((snapshot) => {
+                const siparis = snapshot.val();
+                if (!siparis) return;
+
+                const modal = document.getElementById('editModal');
+                const container = document.getElementById('editFormContainer');
+                
+                container.innerHTML = `
+                    <form id="editUrunSiparisForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>📦 Ürün Adı</label>
+                                <input type="text" id="editUrunAdi" value="${siparis.urunAdi}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>📊 Adet / Miktar</label>
+                                <input type="text" id="editAdetMiktar" value="${siparis.adetMiktar}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>📏 Ölçü</label>
+                                <input type="text" id="editOlcu" value="${siparis.olcu || ''}">
+                            </div>
+                            <div class="form-group">
+                                <label>👤 Talep Eden</label>
+                                <select id="editTalepEden" required>
+                                    <option value="Esat" ${siparis.talepEden === 'Esat' ? 'selected' : ''}>Esat</option>
+                                    <option value="Ahmet" ${siparis.talepEden === 'Ahmet' ? 'selected' : ''}>Ahmet</option>
+                                    <option value="Emre" ${siparis.talepEden === 'Emre' ? 'selected' : ''}>Emre</option>
+                                    <option value="Gökay" ${siparis.talepEden === 'Gökay' ? 'selected' : ''}>Gökay</option>
+                                    <option value="Berke" ${siparis.talepEden === 'Berke' ? 'selected' : ''}>Berke</option>
+                                    <option value="Melisa" ${siparis.talepEden === 'Melisa' ? 'selected' : ''}>Melisa</option>
+                                    <option value="Evrim" ${siparis.talepEden === 'Evrim' ? 'selected' : ''}>Evrim</option>
+                                    <option value="Koray" ${siparis.talepEden === 'Koray' ? 'selected' : ''}>Koray</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="grid-column: 1/-1;">
+                                <label>📝 Açıklama / Not</label>
+                                <textarea id="editSiparisAciklama" rows="3">${siparis.aciklama || ''}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>📊 Durum</label>
+                                <select id="editUrunSiparisDurum">
+                                    <option value="bekleniyor" ${siparis.durum === 'bekleniyor' ? 'selected' : ''}>⏳ Bekleniyor</option>
+                                    <option value="geldi" ${siparis.durum === 'geldi' ? 'selected' : ''}>✅ Geldi</option>
+                                    <option value="iptal" ${siparis.durum === 'iptal' ? 'selected' : ''}>❌ İptal</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>✅ Gelen Adet</label>
+                                <input type="text" id="editGelenAdet" value="${siparis.gelenAdet || ''}">
+                            </div>
+                            <div class="form-group" style="grid-column: 1/-1;">
+                                <label>📌 Gelen Notlar</label>
+                                <textarea id="editGelenNotlar" rows="2">${siparis.gelenNotlar || ''}</textarea>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button type="submit" class="btn">💾 Güncelle</button>
+                            <button type="button" class="btn btn-danger" onclick="closeModal()" style="margin-left: 10px;">❌ İptal</button>
+                        </div>
+                    </form>
+                `;
+                
+                modal.style.display = 'block';
+                
+                document.getElementById('editUrunSiparisForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    database.ref('urunSiparisler/' + id).update({
+                        urunAdi: document.getElementById('editUrunAdi').value.trim(),
+                        adetMiktar: document.getElementById('editAdetMiktar').value.trim(),
+                        olcu: document.getElementById('editOlcu').value.trim(),
+                        talepEden: document.getElementById('editTalepEden').value,
+                        aciklama: document.getElementById('editSiparisAciklama').value.trim(),
+                        durum: document.getElementById('editUrunSiparisDurum').value,
+                        gelenAdet: document.getElementById('editGelenAdet').value.trim(),
+                        gelenNotlar: document.getElementById('editGelenNotlar').value.trim()
+                    }).then(() => {
+                        closeModal();
+                        showAlert('siparisAlert', 'Ürün siparişi başarıyla güncellendi!', 'success');
+                    });
+                });
+            });
+        }
+
+        function stokDuzenle(id) {
+            database.ref('stok/' + id).once('value').then((snapshot) => {
+                const stok = snapshot.val();
+                if (!stok) return;
+
+                const modal = document.getElementById('editModal');
+                const container = document.getElementById('editFormContainer');
+                
+                container.innerHTML = `
+                    <form id="editStokForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>🔧 Malzeme Türü</label>
+                                <select id="editMalzemeTuru" required>
+                                    <option value="izolasyon" ${stok.malzemeTuru === 'izolasyon' ? 'selected' : ''}>İzolasyon</option>
+                                    <option value="koli" ${stok.malzemeTuru === 'koli' ? 'selected' : ''}>Koli</option>
+                                    <option value="kutu" ${stok.malzemeTuru === 'kutu' ? 'selected' : ''}>Kutu</option>
+                                    <option value="poset" ${stok.malzemeTuru === 'poset' ? 'selected' : ''}>Poşet</option>
+                                    <option value="tapa" ${stok.malzemeTuru === 'tapa' ? 'selected' : ''}>Tapa</option>
+                                    <option value="etiket" ${stok.malzemeTuru === 'etiket' ? 'selected' : ''}>Etiket</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>📦 Ürün Adı</label>
+                                <input type="text" id="editStokUrunAdi" value="${stok.urunAdi}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>📏 Ölçüler</label>
+                                <input type="text" id="editStokOlculeri" value="${stok.olculeri || ''}">
+                            </div>
+                            <div class="form-group">
+                                <label>📊 Mevcut Adet</label>
+                                <input type="number" id="editStokMevcutAdet" value="${stok.mevcutAdet}" required>
+                            </div>
+                            <div class="form-group">
+                                <label>👤 Ekleyen</label>
+                                <select id="editStokEkleyen" required>
+                                    <option value="Esat" ${stok.ekleyen === 'Esat' ? 'selected' : ''}>Esat</option>
+                                    <option value="Ahmet" ${stok.ekleyen === 'Ahmet' ? 'selected' : ''}>Ahmet</option>
+                                    <option value="Emre" ${stok.ekleyen === 'Emre' ? 'selected' : ''}>Emre</option>
+                                    <option value="Gökay" ${stok.ekleyen === 'Gökay' ? 'selected' : ''}>Gökay</option>
+                                    <option value="Berke" ${stok.ekleyen === 'Berke' ? 'selected' : ''}>Berke</option>
+                                    <option value="Melisa" ${stok.ekleyen === 'Melisa' ? 'selected' : ''}>Melisa</option>
+                                    <option value="Evrim" ${stok.ekleyen === 'Evrim' ? 'selected' : ''}>Evrim</option>
+                                    <option value="Koray" ${stok.ekleyen === 'Koray' ? 'selected' : ''}>Koray</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button type="submit" class="btn">💾 Güncelle</button>
+                            <button type="button" class="btn btn-danger" onclick="closeModal()" style="margin-left: 10px;">❌ İptal</button>
+                        </div>
+                    </form>
+                `;
+                
+                modal.style.display = 'block';
+                
+                document.getElementById('editStokForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    database.ref('stok/' + id).update({
+                        malzemeTuru: document.getElementById('editMalzemeTuru').value,
+                        urunAdi: document.getElementById('editStokUrunAdi').value.trim(),
+                        olculeri: document.getElementById('editStokOlculeri').value.trim(),
+                        mevcutAdet: parseInt(document.getElementById('editStokMevcutAdet').value) || 0,
+                        ekleyen: document.getElementById('editStokEkleyen').value,
+                        sonGuncelleme: new Date().toISOString()
+                    }).then(() => {
+                        closeModal();
+                        showAlert('stokAlert', 'Stok başarıyla güncellendi!', 'success');
+                    });
+                });
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // ==================== JSON İNDİRME ====================
+        function firebaseVerileriniIndir() {
+            const statusArea = document.getElementById('importStatus');
+            statusArea.innerHTML = '<div class="alert" style="background: #d1ecf1; color: #0c5460;">🔄 Veriler Firebase\'den çekiliyor...</div>';
+
+            const promises = [
+                database.ref('gorevler').once('value'),
+                database.ref('siparisHazirlik').once('value'),
+                database.ref('urunSiparisler').once('value'),
+                database.ref('stok').once('value')
+            ];
+
+            Promise.all(promises).then(([gorevSnap, siparisSnap, urunSnap, stokSnap]) => {
+                const exportData = {
+                    exportDate: new Date().toISOString(),
+                    gorevler: [],
+                    siparisHazirlik: [],
+                    urunSiparisler: [],
+                    stok: []
+                };
+
+                // Görevleri topla
+                gorevSnap.forEach((child) => {
+                    exportData.gorevler.push(child.val());
+                });
+
+                // Siparişleri topla
+                siparisSnap.forEach((child) => {
+                    exportData.siparisHazirlik.push(child.val());
+                });
+
+                // Ürün siparişlerini topla
+                urunSnap.forEach((child) => {
+                    exportData.urunSiparisler.push(child.val());
+                });
+
+                // Stokları topla
+                stokSnap.forEach((child) => {
+                    exportData.stok.push(child.val());
+                });
+
+                // JSON dosyası oluştur ve indir
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `akg_firebase_yedek_${new Date().toISOString().slice(0, 10)}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                const toplam = exportData.gorevler.length + exportData.siparisHazirlik.length + 
+                              exportData.urunSiparisler.length + exportData.stok.length;
+
+                statusArea.innerHTML = `
+                    <div class="alert alert-success">
+                        ✅ Veriler başarıyla indirildi!<br><br>
+                        📋 Güncel İşler: ${exportData.gorevler.length} kayıt<br>
+                        📦 Sipariş Hazırlık: ${exportData.siparisHazirlik.length} kayıt<br>
+                        🛒 Ürün Siparişleri: ${exportData.urunSiparisler.length} kayıt<br>
+                        📊 Stok: ${exportData.stok.length} kayıt<br><br>
+                        <strong>Toplam: ${toplam} kayıt</strong>
+                    </div>
+                `;
+            }).catch((error) => {
+                statusArea.innerHTML = `<div class="alert alert-error">❌ Hata: ${error.message}</div>`;
+            });
         }
 
         function siparisSil(id) {
@@ -857,6 +1426,9 @@
             const container = document.getElementById('urunSiparislerListesi');
             if (!container) return;
 
+            // Özet güncelle
+            guncelleUrunSiparisOzeti(siparisler);
+
             let filtrelenmissiparisler = siparisler;
             if (currentSiparisFilter !== 'hepsi') {
                 filtrelenmissiparisler = siparisler.filter(s => s.durum === currentSiparisFilter);
@@ -878,6 +1450,7 @@
                             <div><strong>📦 ${siparis.urunAdi}</strong></div>
                             <div style="display: flex; gap: 10px; align-items: center;">
                                 <span class="durum-badge ${siparis.durum}">${durumText}</span>
+                                <button class="btn-edit" onclick="urunSiparisDuzenle('${siparis.id}')">✏️</button>
                                 <button class="btn-delete" onclick="urunSiparisSil('${siparis.id}')">🗑️</button>
                             </div>
                         </div>
@@ -900,6 +1473,38 @@
                 `;
             });
             html += '</div>';
+            container.innerHTML = html;
+        }
+
+        function guncelleUrunSiparisOzeti(siparisler) {
+            const container = document.getElementById('urunSiparisOzeti');
+            if (!container) return;
+
+            const bekleniyor = siparisler.filter(s => s.durum === 'bekleniyor').length;
+            const geldi = siparisler.filter(s => s.durum === 'geldi').length;
+            const iptal = siparisler.filter(s => s.durum === 'iptal').length;
+
+            let html = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #f39c12;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #f39c12;">${bekleniyor}</div>
+                        <div style="color: #666; margin-top: 5px;">⏳ Bekleniyor</div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #27ae60;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #27ae60;">${geldi}</div>
+                        <div style="color: #666; margin-top: 5px;">✅ Geldi</div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #95a5a6;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #95a5a6;">${iptal}</div>
+                        <div style="color: #666; margin-top: 5px;">❌ İptal</div>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; border-left: 4px solid #3498db;">
+                        <div style="font-size: 2.5em; font-weight: bold; color: #3498db;">${siparisler.length}</div>
+                        <div style="color: #666; margin-top: 5px;">📦 Toplam</div>
+                    </div>
+                </div>
+            `;
+            
             container.innerHTML = html;
         }
 
@@ -1009,6 +1614,9 @@
             const container = document.getElementById('stokListesi');
             if (!container) return;
 
+            // Stok özeti güncelle
+            guncellleStokOzeti(stoklar);
+
             if (stoklar.length === 0) {
                 container.innerHTML = '<p style="text-align: center; color: #666; padding: 20px;">Henüz stok kaydı bulunmuyor.</p>';
                 return;
@@ -1064,11 +1672,58 @@
                         </div>
 
                         <div style="margin-top: 15px; text-align: center;">
+                            <button class="btn-edit" onclick="stokDuzenle('${stok.id}')" style="margin-right: 10px;">✏️ Düzenle</button>
                             <button class="btn-delete" onclick="stokSil('${stok.id}')">🗑️ Sil</button>
                         </div>
                     </div>
                 `;
             });
+            container.innerHTML = html;
+        }
+
+        function guncellleStokOzeti(stoklar) {
+            const container = document.getElementById('stokOzeti');
+            if (!container) return;
+
+            if (stoklar.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666;">Henüz stok kaydı bulunmuyor.</p>';
+                return;
+            }
+
+            // Stokları türe göre grupla
+            const stokGruplari = {};
+            stoklar.forEach(stok => {
+                if (!stokGruplari[stok.malzemeTuru]) {
+                    stokGruplari[stok.malzemeTuru] = [];
+                }
+                stokGruplari[stok.malzemeTuru].push(stok);
+            });
+
+            let html = '';
+            Object.keys(stokGruplari).sort().forEach(tur => {
+                const turStoklar = stokGruplari[tur];
+                const toplamAdet = turStoklar.reduce((total, stok) => total + stok.mevcutAdet, 0);
+                
+                html += `
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 2px solid #e9ecef;">
+                        <h4 style="color: #2c3e50; margin-bottom: 10px; text-transform: uppercase; background: #3498db; color: white; padding: 8px; border-radius: 4px; text-align: center;">
+                            📦 ${tur} (Toplam: ${toplamAdet} adet)
+                        </h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                `;
+                
+                turStoklar.forEach(stok => {
+                    html += `
+                        <div style="display: flex; justify-content: space-between; padding: 8px; background: #f8f9fa; border-radius: 4px; border-left: 4px solid ${stok.mevcutAdet > 0 ? '#27ae60' : stok.mevcutAdet < 0 ? '#e74c3c' : '#f39c12'};">
+                            <span style="font-weight: 600; font-size: 13px;">${stok.urunAdi}</span>
+                            <span style="font-weight: bold; color: ${stok.mevcutAdet > 0 ? '#27ae60' : stok.mevcutAdet < 0 ? '#e74c3c' : '#f39c12'};">${stok.mevcutAdet}</span>
+                        </div>
+                    `;
+                });
+                
+                html += '</div></div>';
+            });
+            
             container.innerHTML = html;
         }
 
@@ -1128,6 +1783,124 @@
 
         function temizleStokFormu() {
             document.getElementById('stokForm').reset();
+        }
+
+        // ==================== VERİ AKTARMA ====================
+        function verileriYukle() {
+            const fileInput = document.getElementById('importFile');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('Lütfen bir JSON dosyası seçin!');
+                return;
+            }
+
+            const statusArea = document.getElementById('importStatus');
+            statusArea.innerHTML = '<div class="alert" style="background: #d1ecf1; color: #0c5460;">🔄 Veriler yükleniyor...</div>';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const veriler = JSON.parse(e.target.result);
+                    
+                    if (!veriler.gorevler && !veriler.siparisHazirlik && !veriler.urunSiparisler && !veriler.stok) {
+                        throw new Error('Geçersiz veri formatı!');
+                    }
+
+                    let toplamEklenen = 0;
+                    const promises = [];
+
+                    // Görevleri aktar
+                    if (veriler.gorevler && veriler.gorevler.length > 0) {
+                        veriler.gorevler.forEach(gorev => {
+                            delete gorev.id; // Eski ID'yi kaldır, Firebase yenisini oluşturacak
+                            promises.push(
+                                database.ref('gorevler').push(gorev).then(() => toplamEklenen++)
+                            );
+                        });
+                    }
+
+                    // Sipariş Hazırlık verilerini aktar
+                    if (veriler.siparisHazirlik && veriler.siparisHazirlik.length > 0) {
+                        veriler.siparisHazirlik.forEach(siparis => {
+                            delete siparis.id;
+                            promises.push(
+                                database.ref('siparisHazirlik').push(siparis).then(() => toplamEklenen++)
+                            );
+                        });
+                    }
+
+                    // Ürün Siparişlerini aktar
+                    if (veriler.urunSiparisler && veriler.urunSiparisler.length > 0) {
+                        veriler.urunSiparisler.forEach(siparis => {
+                            delete siparis.id;
+                            promises.push(
+                                database.ref('urunSiparisler').push(siparis).then(() => toplamEklenen++)
+                            );
+                        });
+                    }
+
+                    // Stok verilerini aktar
+                    if (veriler.stok && veriler.stok.length > 0) {
+                        veriler.stok.forEach(stok => {
+                            delete stok.id;
+                            promises.push(
+                                database.ref('stok').push(stok).then(() => toplamEklenen++)
+                            );
+                        });
+                    }
+
+                    // Tüm işlemler tamamlandığında
+                    Promise.all(promises)
+                        .then(() => {
+                            statusArea.innerHTML = `
+                                <div class="alert alert-success">
+                                    ✅ Başarılı! Toplam ${toplamEklenen} kayıt Firebase'e aktarıldı!<br><br>
+                                    📋 Güncel İşler: ${veriler.gorevler ? veriler.gorevler.length : 0} kayıt<br>
+                                    📦 Sipariş Hazırlık: ${veriler.siparisHazirlik ? veriler.siparisHazirlik.length : 0} kayıt<br>
+                                    🛒 Ürün Siparişleri: ${veriler.urunSiparisler ? veriler.urunSiparisler.length : 0} kayıt<br>
+                                    📊 Stok: ${veriler.stok ? veriler.stok.length : 0} kayıt
+                                </div>
+                            `;
+                            fileInput.value = '';
+                        })
+                        .catch((error) => {
+                            statusArea.innerHTML = `<div class="alert alert-error">❌ Hata: ${error.message}</div>`;
+                        });
+
+                } catch (error) {
+                    statusArea.innerHTML = `<div class="alert alert-error">❌ Dosya okuma hatası: ${error.message}</div>`;
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function tumFirebaseVerileriniSil() {
+            if (!confirm('⚠️ TÜM FIREBASE VERİLERİ SİLİNECEK!\n\nBu işlem geri alınamaz. Emin misiniz?')) {
+                return;
+            }
+
+            if (!confirm('🚨 SON UYARI!\n\nGerçekten tüm verileri silmek istiyor musunuz?\n\nBu işlem:\n• Tüm görevleri\n• Tüm siparişleri\n• Tüm stokları\nkalıcı olarak silecek!')) {
+                return;
+            }
+
+            const statusArea = document.getElementById('importStatus');
+            statusArea.innerHTML = '<div class="alert" style="background: #f8d7da; color: #721c24;">🔄 Veriler siliniyor...</div>';
+
+            const promises = [
+                database.ref('gorevler').remove(),
+                database.ref('siparisHazirlik').remove(),
+                database.ref('urunSiparisler').remove(),
+                database.ref('stok').remove()
+            ];
+
+            Promise.all(promises)
+                .then(() => {
+                    statusArea.innerHTML = '<div class="alert alert-success">✅ Tüm Firebase verileri başarıyla silindi!</div>';
+                })
+                .catch((error) => {
+                    statusArea.innerHTML = `<div class="alert alert-error">❌ Hata: ${error.message}</div>`;
+                });
         }
 
         // ==================== GENEL FONKSİYONLAR ====================
