@@ -315,12 +315,46 @@
             border-radius: 6px; 
             font-weight: bold; 
         }
+
+        /* Malzeme Checkbox Stilleri */
+        .malzeme-checklist {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+        }
+        .malzeme-checklist label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: #2c3e50;
+            user-select: none;
+        }
+        .malzeme-checklist input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+        .malzeme-checklist input[type="checkbox"]:checked {
+            accent-color: #27ae60;
+        }
         
         @media (max-width: 768px) {
             .form-grid { grid-template-columns: 1fr; }
             .tabs { flex-direction: column; }
             .tab { width: 100%; margin-bottom: 5px; }
             .stok-bilgi { grid-template-columns: 1fr; }
+            .malzeme-checklist label {
+                display: flex;
+                margin-right: 0;
+            }
         }
     </style>
 </head>
@@ -573,7 +607,7 @@
             </div>
         </div>
 
-        <!-- Veri Aktar Tab (YENİ) -->
+        <!-- Veri Aktar Tab -->
         <div id="veri-aktar" class="tab-content">
             <h2>🔄 Veri Aktarma</h2>
             
@@ -901,7 +935,14 @@
                 siparisAdet: parseInt(document.getElementById('siparisAdet').value),
                 notlar: document.getElementById('siparisNotlar').value.trim(),
                 durum: 'beklemede',
-                olusturmaTarihi: new Date().toISOString()
+                olusturmaTarihi: new Date().toISOString(),
+                malzemeChecklist: {
+                    koli: false,
+                    kutu: false,
+                    izolasyon: false,
+                    tapa: false,
+                    poset: false
+                }
             };
 
             database.ref('siparisHazirlik').push(siparisData)
@@ -933,6 +974,15 @@
                 const gonderilenAdet = siparis.gonderilenAdet || 0;
                 const kalanAdet = siparis.siparisAdet - gonderilenAdet;
                 
+                // Malzeme checklist verilerini al (eski kayıtlar için default false)
+                const checklist = siparis.malzemeChecklist || {
+                    koli: false,
+                    kutu: false,
+                    izolasyon: false,
+                    tapa: false,
+                    poset: false
+                };
+                
                 html += `
                     <div class="kayit-item">
                         <div class="kayit-header">
@@ -950,6 +1000,30 @@
                             <div><strong>📉 Kalan:</strong> <span style="color: ${kalanAdet > 0 ? '#e74c3c' : '#27ae60'}; font-weight: bold;">${kalanAdet}</span></div>
                             <div><strong>📊 Durum:</strong> ${siparis.durum === 'tamamlandi' ? '✅ Tamamlandı' : '⏳ Beklemede'}</div>
                             ${siparis.notlar ? `<div style="grid-column: 1/-1;"><strong>📝 Notlar:</strong> ${siparis.notlar}</div>` : ''}
+                        </div>
+                        
+                        <!-- Malzeme Checklist -->
+                        <div class="malzeme-checklist">
+                            <label>
+                                <input type="checkbox" ${checklist.koli ? 'checked' : ''} onchange="toggleMalzeme('${siparis.id}', 'koli', this.checked)">
+                                📦 Koli
+                            </label>
+                            <label>
+                                <input type="checkbox" ${checklist.kutu ? 'checked' : ''} onchange="toggleMalzeme('${siparis.id}', 'kutu', this.checked)">
+                                📦 Kutu
+                            </label>
+                            <label>
+                                <input type="checkbox" ${checklist.izolasyon ? 'checked' : ''} onchange="toggleMalzeme('${siparis.id}', 'izolasyon', this.checked)">
+                                🧊 İzolasyon
+                            </label>
+                            <label>
+                                <input type="checkbox" ${checklist.tapa ? 'checked' : ''} onchange="toggleMalzeme('${siparis.id}', 'tapa', this.checked)">
+                                🔘 Tapa
+                            </label>
+                            <label>
+                                <input type="checkbox" ${checklist.poset ? 'checked' : ''} onchange="toggleMalzeme('${siparis.id}', 'poset', this.checked)">
+                                🛍️ Poşet
+                            </label>
                         </div>
                         
                         <!-- Gönderilen Adet Ekleme -->
@@ -974,6 +1048,17 @@
                 `;
             });
             container.innerHTML = html;
+        }
+
+        function toggleMalzeme(siparisId, malzeme, checked) {
+            database.ref('siparisHazirlik/' + siparisId + '/malzemeChecklist/' + malzeme).set(checked)
+                .then(() => {
+                    console.log(`${malzeme} durumu güncellendi: ${checked}`);
+                })
+                .catch((error) => {
+                    console.error('Malzeme durumu güncellenemedi:', error);
+                    showAlert('siparisEkleAlert', 'Hata: ' + error.message, 'error');
+                });
         }
 
         function guncelleSiparisHazirlikOzeti(siparisler) {
@@ -1030,7 +1115,7 @@
                 const yeniGonderilen = mevcutGonderilen + eklenecekAdet;
                 const kalanAdet = siparis.siparisAdet - yeniGonderilen;
                 
-                if (yeniGonderilen > siparis.siparisAdet) {
+               if (yeniGonderilen > siparis.siparisAdet) {
                     alert('Gönderilen adet sipariş adetini aşamaz!');
                     return;
                 }
@@ -1096,7 +1181,7 @@
                 `;
                 
                 modal.classList.add('active');
-                modal.classList.add('active'); modal.style.display = 'block';
+                modal.style.display = 'block';
                 
                 document.getElementById('editGorevForm').addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -1120,6 +1205,14 @@
 
                 const modal = document.getElementById('editModal');
                 const container = document.getElementById('editFormContainer');
+                
+                const checklist = siparis.malzemeChecklist || {
+                    koli: false,
+                    kutu: false,
+                    izolasyon: false,
+                    tapa: false,
+                    poset: false
+                };
                 
                 container.innerHTML = `
                     <form id="editSiparisForm">
@@ -1169,6 +1262,34 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        <!-- Malzeme Checklist -->
+                        <div style="margin-top: 20px;">
+                            <label style="font-weight: 600; display: block; margin-bottom: 10px;">📦 Malzeme Durumu:</label>
+                            <div class="malzeme-checklist">
+                                <label>
+                                    <input type="checkbox" id="editKoli" ${checklist.koli ? 'checked' : ''}>
+                                    📦 Koli
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="editKutu" ${checklist.kutu ? 'checked' : ''}>
+                                    📦 Kutu
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="editIzolasyon" ${checklist.izolasyon ? 'checked' : ''}>
+                                    🧊 İzolasyon
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="editTapa" ${checklist.tapa ? 'checked' : ''}>
+                                    🔘 Tapa
+                                </label>
+                                <label>
+                                    <input type="checkbox" id="editPoset" ${checklist.poset ? 'checked' : ''}>
+                                    🛍️ Poşet
+                                </label>
+                            </div>
+                        </div>
+                        
                         <div style="margin-top: 20px; text-align: center;">
                             <button type="submit" class="btn">💾 Güncelle</button>
                             <button type="button" class="btn btn-danger" onclick="closeEditModal()" style="margin-left: 10px;">❌ İptal</button>
@@ -1176,7 +1297,8 @@
                     </form>
                 `;
                 
-                modal.classList.add('active'); modal.style.display = 'block';
+                modal.classList.add('active');
+                modal.style.display = 'block';
                 
                 document.getElementById('editSiparisForm').addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -1189,6 +1311,13 @@
                         gonderilenAdet: parseInt(document.getElementById('editGonderilenAdet').value) || 0,
                         notlar: document.getElementById('editSiparisNotlar').value.trim(),
                         durum: document.getElementById('editSiparisDurum').value,
+                        malzemeChecklist: {
+                            koli: document.getElementById('editKoli').checked,
+                            kutu: document.getElementById('editKutu').checked,
+                            izolasyon: document.getElementById('editIzolasyon').checked,
+                            tapa: document.getElementById('editTapa').checked,
+                            poset: document.getElementById('editPoset').checked
+                        },
                         sonGuncelleme: new Date().toISOString()
                     }).then(() => {
                         closeEditModal();
@@ -1262,7 +1391,8 @@
                     </form>
                 `;
                 
-                modal.classList.add('active'); modal.style.display = 'block';
+                modal.classList.add('active');
+                modal.style.display = 'block';
                 
                 document.getElementById('editUrunSiparisForm').addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -1338,7 +1468,8 @@
                     </form>
                 `;
                 
-                modal.classList.add('active'); modal.style.display = 'block';
+                modal.classList.add('active');
+                modal.style.display = 'block';
                 
                 document.getElementById('editStokForm').addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -1504,7 +1635,7 @@
                                   siparis.durum === 'geldi' ? 'Geldi' : 'İptal';
                 
                 html += `
-                    <div class="kayit-item">
+                   <div class="kayit-item">
                         <div class="kayit-header">
                             <div><strong>📦 ${siparis.urunAdi}</strong></div>
                             <div style="display: flex; gap: 10px; align-items: center;">
@@ -1872,7 +2003,7 @@
                     // Görevleri aktar
                     if (veriler.gorevler && veriler.gorevler.length > 0) {
                         veriler.gorevler.forEach(gorev => {
-                            delete gorev.id; // Eski ID'yi kaldır, Firebase yenisini oluşturacak
+                            delete gorev.id;
                             promises.push(
                                 database.ref('gorevler').push(gorev).then(() => toplamEklenen++)
                             );
